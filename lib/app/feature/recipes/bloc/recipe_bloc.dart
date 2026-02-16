@@ -1,7 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter_template/app/core/networking/model/recipe_session.dart';
-import 'package:flutter_template/app/core/networking/repository/recipe_repository.dart';
+import 'package:flutter_template/app/app.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -11,7 +10,8 @@ part 'recipe_bloc.freezed.dart';
 part 'recipe_bloc.g.dart';
 
 /// {@template recipe_bloc}
-/// A [HydratedBloc] that manages recipe preferences, selections, and AI-generated suggestions.
+/// Manages recipe preferences and AI-generated suggestions with persistent
+/// storage.
 /// {@endtemplate}
 @singleton
 class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
@@ -24,7 +24,7 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
         fetchRecipeSuggestions: (value) => _fetchRecipeSuggestions(value, emit),
         toggleFavoriteRecipe: (value) => _toggleFavoriteRecipe(value, emit),
         toggleStrictIngredients: (value) =>
-            _toggleStrictIngredients(value, emit),
+            emit(state.copyWith(strictIngredients: !state.strictIngredients)),
         addCustomCuisine: (value) => _addCustomCuisine(value, emit),
         removeCustomCuisine: (value) => _removeCustomCuisine(value, emit),
         addCustomIngredient: (value) => _addCustomIngredient(value, emit),
@@ -83,24 +83,15 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
         strictIngredients: state.strictIngredients,
       );
 
-      // Update favorite status based on stored favorites
-      final updatedRecipes = recipes.map((recipe) {
-        return recipe.copyWith(
-          isFavorite: state.favoriteRecipeIds.contains(recipe.id),
-        );
-      }).toList();
-
-      // Create a new session
       final session = RecipeSession(
         id: const Uuid().v4(),
         createdAt: DateTime.now(),
         cuisines: List.from(state.selectedCuisines),
         ingredients: List.from(state.selectedIngredients),
         strictIngredients: state.strictIngredients,
-        recipes: updatedRecipes,
+        recipes: recipes,
       );
 
-      // Add to the beginning of the list (most recent first)
       final updatedSessions = [session, ...state.recipeSessions];
 
       emit(
@@ -120,13 +111,6 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
       );
       log(e.toString());
     }
-  }
-
-  void _toggleStrictIngredients(
-    ToggleStrictIngredients event,
-    Emitter<RecipeState> emit,
-  ) {
-    emit(state.copyWith(strictIngredients: !state.strictIngredients));
   }
 
   void _addCustomCuisine(
@@ -149,7 +133,6 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
     final updatedCustomCuisines = List<String>.from(state.customCuisines)
       ..remove(event.cuisine);
 
-    // Also remove from selected if it was selected
     final updatedSelectedCuisines = List<String>.from(state.selectedCuisines)
       ..remove(event.cuisine);
 
@@ -184,7 +167,6 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
     final updatedCustomIngredients = List<String>.from(state.customIngredients)
       ..remove(event.ingredient);
 
-    // Also remove from selected if it was selected
     final updatedSelectedIngredients = List<String>.from(
       state.selectedIngredients,
     )..remove(event.ingredient);
@@ -201,21 +183,18 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
     ToggleFavoriteRecipe event,
     Emitter<RecipeState> emit,
   ) {
-    final updatedFavorites = List<String>.from(state.favoriteRecipeIds);
+    final updatedFavorites = List<Recipe>.from(state.favoriteRecipes);
 
-    if (updatedFavorites.contains(event.recipeId)) {
-      updatedFavorites.remove(event.recipeId);
+    if (updatedFavorites.contains(event.recipe)) {
+      updatedFavorites.remove(event.recipe);
     } else {
-      updatedFavorites.add(event.recipeId);
+      updatedFavorites.add(event.recipe);
     }
 
-    // Update the favorite status in all recipe sessions
     final updatedSessions = state.recipeSessions.map((session) {
       final updatedRecipes = session.recipes.map((recipe) {
-        if (recipe.id == event.recipeId) {
-          return recipe.copyWith(isFavorite: !recipe.isFavorite);
-        }
-        return recipe;
+        final isFavorite = updatedFavorites.contains(recipe);
+        return recipe.copyWith(isFavorite: isFavorite);
       }).toList();
 
       return session.copyWith(recipes: updatedRecipes);
@@ -223,7 +202,7 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
 
     emit(
       state.copyWith(
-        favoriteRecipeIds: updatedFavorites,
+        favoriteRecipes: updatedFavorites,
         recipeSessions: updatedSessions,
       ),
     );
@@ -242,7 +221,7 @@ abstract class RecipeEvent with _$RecipeEvent {
   const factory RecipeEvent.toggleIngredient(String ingredient) =
       ToggleIngredient;
   const factory RecipeEvent.fetchRecipeSuggestions() = FetchRecipeSuggestions;
-  const factory RecipeEvent.toggleFavoriteRecipe(String recipeId) =
+  const factory RecipeEvent.toggleFavoriteRecipe(Recipe recipe) =
       ToggleFavoriteRecipe;
   const factory RecipeEvent.toggleStrictIngredients() = ToggleStrictIngredients;
   const factory RecipeEvent.addCustomCuisine(String cuisine) = AddCustomCuisine;
@@ -262,7 +241,7 @@ abstract class RecipeState with _$RecipeState {
     @Default([]) List<String> customCuisines,
     @Default([]) List<String> customIngredients,
     @Default([]) List<RecipeSession> recipeSessions,
-    @Default([]) List<String> favoriteRecipeIds,
+    @Default([]) List<Recipe> favoriteRecipes,
     @Default(false) bool strictIngredients,
     @Default(RecipeLoadingState.init)
     RecipeLoadingState suggestionsLoadingState,

@@ -12,9 +12,9 @@ import 'package:injectable/injectable.dart';
 @singleton
 class RecipeApi {
   /// {@macro recipe_api}
-  RecipeApi(this.client);
+  RecipeApi(this._client);
 
-  final RestClient client;
+  final RestClient _client;
 
   /// Fetches recipe suggestions from OpenAI based on user preferences.
   Future<Response<dynamic>> getRecipeSuggestions({
@@ -22,7 +22,7 @@ class RecipeApi {
     required List<String> ingredients,
     required bool strictIngredients,
   }) async {
-    return client.post(
+    return _client.post(
       Endpoints.recipe.suggestions,
       body: {
         'model': 'gpt-4o',
@@ -30,7 +30,8 @@ class RecipeApi {
         'messages': [
           {
             'role': 'system',
-            'content': 'You are a professional recipe creator. Generate diverse, detailed, and actionable recipes in JSON format only. Always return valid JSON with no markdown formatting or code blocks.',
+            'content':
+                'You are a professional recipe creator. Generate diverse, detailed, and actionable recipes in JSON format only. Always return valid JSON with no markdown formatting or code blocks.',
           },
           {
             'role': 'user',

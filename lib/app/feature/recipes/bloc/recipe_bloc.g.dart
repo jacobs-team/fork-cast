@@ -32,9 +32,9 @@ _RecipeState _$RecipeStateFromJson(Map<String, dynamic> json) => _RecipeState(
           ?.map((e) => RecipeSession.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const [],
-  favoriteRecipeIds:
-      (json['favoriteRecipeIds'] as List<dynamic>?)
-          ?.map((e) => e as String)
+  favoriteRecipes:
+      (json['favoriteRecipes'] as List<dynamic>?)
+          ?.map((e) => Recipe.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const [],
   strictIngredients: json['strictIngredients'] as bool? ?? false,
@@ -54,7 +54,7 @@ Map<String, dynamic> _$RecipeStateToJson(_RecipeState instance) =>
       'customCuisines': instance.customCuisines,
       'customIngredients': instance.customIngredients,
       'recipeSessions': instance.recipeSessions,
-      'favoriteRecipeIds': instance.favoriteRecipeIds,
+      'favoriteRecipes': instance.favoriteRecipes,
       'strictIngredients': instance.strictIngredients,
       'suggestionsLoadingState':
           _$RecipeLoadingStateEnumMap[instance.suggestionsLoadingState]!,

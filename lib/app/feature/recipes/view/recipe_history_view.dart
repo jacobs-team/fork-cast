@@ -7,7 +7,11 @@ import 'package:flutter_template/app/navigation/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+/// {@template recipe_results_view}
+/// Displays recipe generation history organized by session.
+/// {@endtemplate}
 class RecipeResultsView extends StatelessWidget {
+  /// {@macro recipe_results_view}
   const RecipeResultsView({super.key});
 
   @override
@@ -40,7 +44,6 @@ class RecipeResultsView extends StatelessWidget {
           );
         }
 
-        // Show sessions list
         return ListView.builder(
           padding: const EdgeInsets.all(16),
           itemCount: state.recipeSessions.length,
@@ -135,7 +138,7 @@ class RecipeResultsView extends StatelessWidget {
                               },
                               onFavorite: () {
                                 recipeBloc.add(
-                                  RecipeEvent.toggleFavoriteRecipe(recipe.id),
+                                  RecipeEvent.toggleFavoriteRecipe(recipe),
                                 );
                               },
                             );

@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:flutter_template/app/app.dart' as _i219;
 import 'package:flutter_template/app/core/core.dart' as _i483;
 import 'package:flutter_template/app/core/cubit/auth_cubit.dart' as _i669;
 import 'package:flutter_template/app/core/cubit/connectivity_cubit.dart'
@@ -60,8 +61,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.CoffeeApi>(
       () => _i361.CoffeeApi(gh<_i483.RestClient>()),
     );
+    gh.singleton<_i743.RecipeApi>(
+      () => _i743.RecipeApi(gh<_i483.RestClient>()),
+    );
     gh.singleton<_i700.CoffeeRepository>(
       () => _i700.CoffeeRepository(gh<_i483.CoffeeApi>()),
+    );
+    gh.singleton<_i1051.RecipeRepository>(
+      () => _i1051.RecipeRepository(gh<_i483.RecipeApi>()),
     );
     gh.singleton<_i720.CoffeeBloc>(
       () => _i720.CoffeeBloc(
@@ -69,14 +76,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i96.FileCacheService>(),
       ),
     );
-    gh.singleton<_i743.RecipeApi>(
-      () => _i743.RecipeApi(gh<_i483.RestClient>()),
-    );
-    gh.singleton<_i1051.RecipeRepository>(
-      () => _i1051.RecipeRepository(gh<_i743.RecipeApi>()),
-    );
     gh.singleton<_i259.RecipeBloc>(
-      () => _i259.RecipeBloc(gh<_i1051.RecipeRepository>()),
+      () => _i259.RecipeBloc(gh<_i219.RecipeRepository>()),
     );
     return this;
   }

@@ -3,7 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_template/app/core/dependencies/dependencies.dart';
 import 'package:flutter_template/app/feature/recipes/bloc/recipe_bloc.dart';
 
+/// {@template select_preferences_view}
+/// Allows users to select cuisine types and ingredients for recipe generation.
+/// {@endtemplate}
 class SelectPreferencesView extends StatelessWidget {
+  /// {@macro select_preferences_view}
   const SelectPreferencesView({super.key});
 
   static const _foodCategories = [

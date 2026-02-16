@@ -18,7 +18,6 @@ abstract class RecipeIngredient with _$RecipeIngredient {
 @freezed
 abstract class Recipe with _$Recipe {
   const factory Recipe({
-    required String id,
     required String name,
     required String cuisine,
     required List<String> mainIngredients,

@@ -143,13 +143,13 @@ return removeCustomIngredient(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String category)?  toggleCategory,TResult Function( String ingredient)?  toggleIngredient,TResult Function()?  fetchRecipeSuggestions,TResult Function( String recipeId)?  toggleFavoriteRecipe,TResult Function()?  toggleStrictIngredients,TResult Function( String cuisine)?  addCustomCuisine,TResult Function( String cuisine)?  removeCustomCuisine,TResult Function( String ingredient)?  addCustomIngredient,TResult Function( String ingredient)?  removeCustomIngredient,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String category)?  toggleCategory,TResult Function( String ingredient)?  toggleIngredient,TResult Function()?  fetchRecipeSuggestions,TResult Function( Recipe recipe)?  toggleFavoriteRecipe,TResult Function()?  toggleStrictIngredients,TResult Function( String cuisine)?  addCustomCuisine,TResult Function( String cuisine)?  removeCustomCuisine,TResult Function( String ingredient)?  addCustomIngredient,TResult Function( String ingredient)?  removeCustomIngredient,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ToggleCategory() when toggleCategory != null:
 return toggleCategory(_that.category);case ToggleIngredient() when toggleIngredient != null:
 return toggleIngredient(_that.ingredient);case FetchRecipeSuggestions() when fetchRecipeSuggestions != null:
 return fetchRecipeSuggestions();case ToggleFavoriteRecipe() when toggleFavoriteRecipe != null:
-return toggleFavoriteRecipe(_that.recipeId);case ToggleStrictIngredients() when toggleStrictIngredients != null:
+return toggleFavoriteRecipe(_that.recipe);case ToggleStrictIngredients() when toggleStrictIngredients != null:
 return toggleStrictIngredients();case AddCustomCuisine() when addCustomCuisine != null:
 return addCustomCuisine(_that.cuisine);case RemoveCustomCuisine() when removeCustomCuisine != null:
 return removeCustomCuisine(_that.cuisine);case AddCustomIngredient() when addCustomIngredient != null:
@@ -172,13 +172,13 @@ return removeCustomIngredient(_that.ingredient);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String category)  toggleCategory,required TResult Function( String ingredient)  toggleIngredient,required TResult Function()  fetchRecipeSuggestions,required TResult Function( String recipeId)  toggleFavoriteRecipe,required TResult Function()  toggleStrictIngredients,required TResult Function( String cuisine)  addCustomCuisine,required TResult Function( String cuisine)  removeCustomCuisine,required TResult Function( String ingredient)  addCustomIngredient,required TResult Function( String ingredient)  removeCustomIngredient,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String category)  toggleCategory,required TResult Function( String ingredient)  toggleIngredient,required TResult Function()  fetchRecipeSuggestions,required TResult Function( Recipe recipe)  toggleFavoriteRecipe,required TResult Function()  toggleStrictIngredients,required TResult Function( String cuisine)  addCustomCuisine,required TResult Function( String cuisine)  removeCustomCuisine,required TResult Function( String ingredient)  addCustomIngredient,required TResult Function( String ingredient)  removeCustomIngredient,}) {final _that = this;
 switch (_that) {
 case ToggleCategory():
 return toggleCategory(_that.category);case ToggleIngredient():
 return toggleIngredient(_that.ingredient);case FetchRecipeSuggestions():
 return fetchRecipeSuggestions();case ToggleFavoriteRecipe():
-return toggleFavoriteRecipe(_that.recipeId);case ToggleStrictIngredients():
+return toggleFavoriteRecipe(_that.recipe);case ToggleStrictIngredients():
 return toggleStrictIngredients();case AddCustomCuisine():
 return addCustomCuisine(_that.cuisine);case RemoveCustomCuisine():
 return removeCustomCuisine(_that.cuisine);case AddCustomIngredient():
@@ -200,13 +200,13 @@ return removeCustomIngredient(_that.ingredient);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String category)?  toggleCategory,TResult? Function( String ingredient)?  toggleIngredient,TResult? Function()?  fetchRecipeSuggestions,TResult? Function( String recipeId)?  toggleFavoriteRecipe,TResult? Function()?  toggleStrictIngredients,TResult? Function( String cuisine)?  addCustomCuisine,TResult? Function( String cuisine)?  removeCustomCuisine,TResult? Function( String ingredient)?  addCustomIngredient,TResult? Function( String ingredient)?  removeCustomIngredient,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String category)?  toggleCategory,TResult? Function( String ingredient)?  toggleIngredient,TResult? Function()?  fetchRecipeSuggestions,TResult? Function( Recipe recipe)?  toggleFavoriteRecipe,TResult? Function()?  toggleStrictIngredients,TResult? Function( String cuisine)?  addCustomCuisine,TResult? Function( String cuisine)?  removeCustomCuisine,TResult? Function( String ingredient)?  addCustomIngredient,TResult? Function( String ingredient)?  removeCustomIngredient,}) {final _that = this;
 switch (_that) {
 case ToggleCategory() when toggleCategory != null:
 return toggleCategory(_that.category);case ToggleIngredient() when toggleIngredient != null:
 return toggleIngredient(_that.ingredient);case FetchRecipeSuggestions() when fetchRecipeSuggestions != null:
 return fetchRecipeSuggestions();case ToggleFavoriteRecipe() when toggleFavoriteRecipe != null:
-return toggleFavoriteRecipe(_that.recipeId);case ToggleStrictIngredients() when toggleStrictIngredients != null:
+return toggleFavoriteRecipe(_that.recipe);case ToggleStrictIngredients() when toggleStrictIngredients != null:
 return toggleStrictIngredients();case AddCustomCuisine() when addCustomCuisine != null:
 return addCustomCuisine(_that.cuisine);case RemoveCustomCuisine() when removeCustomCuisine != null:
 return removeCustomCuisine(_that.cuisine);case AddCustomIngredient() when addCustomIngredient != null:
@@ -387,10 +387,10 @@ String toString() {
 
 
 class ToggleFavoriteRecipe implements RecipeEvent {
-  const ToggleFavoriteRecipe(this.recipeId);
+  const ToggleFavoriteRecipe(this.recipe);
   
 
- final  String recipeId;
+ final  Recipe recipe;
 
 /// Create a copy of RecipeEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -402,16 +402,16 @@ $ToggleFavoriteRecipeCopyWith<ToggleFavoriteRecipe> get copyWith => _$ToggleFavo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToggleFavoriteRecipe&&(identical(other.recipeId, recipeId) || other.recipeId == recipeId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToggleFavoriteRecipe&&(identical(other.recipe, recipe) || other.recipe == recipe));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,recipeId);
+int get hashCode => Object.hash(runtimeType,recipe);
 
 @override
 String toString() {
-  return 'RecipeEvent.toggleFavoriteRecipe(recipeId: $recipeId)';
+  return 'RecipeEvent.toggleFavoriteRecipe(recipe: $recipe)';
 }
 
 
@@ -422,11 +422,11 @@ abstract mixin class $ToggleFavoriteRecipeCopyWith<$Res> implements $RecipeEvent
   factory $ToggleFavoriteRecipeCopyWith(ToggleFavoriteRecipe value, $Res Function(ToggleFavoriteRecipe) _then) = _$ToggleFavoriteRecipeCopyWithImpl;
 @useResult
 $Res call({
- String recipeId
+ Recipe recipe
 });
 
 
-
+$RecipeCopyWith<$Res> get recipe;
 
 }
 /// @nodoc
@@ -439,14 +439,23 @@ class _$ToggleFavoriteRecipeCopyWithImpl<$Res>
 
 /// Create a copy of RecipeEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? recipeId = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? recipe = null,}) {
   return _then(ToggleFavoriteRecipe(
-null == recipeId ? _self.recipeId : recipeId // ignore: cast_nullable_to_non_nullable
-as String,
+null == recipe ? _self.recipe : recipe // ignore: cast_nullable_to_non_nullable
+as Recipe,
   ));
 }
 
-
+/// Create a copy of RecipeEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$RecipeCopyWith<$Res> get recipe {
+  
+  return $RecipeCopyWith<$Res>(_self.recipe, (value) {
+    return _then(_self.copyWith(recipe: value));
+  });
+}
 }
 
 /// @nodoc
@@ -749,7 +758,7 @@ as String,
 /// @nodoc
 mixin _$RecipeState {
 
- List<String> get selectedCuisines; List<String> get selectedIngredients; List<String> get customCuisines; List<String> get customIngredients; List<RecipeSession> get recipeSessions; List<String> get favoriteRecipeIds; bool get strictIngredients; RecipeLoadingState get suggestionsLoadingState; String? get suggestionsErrorMessage;
+ List<String> get selectedCuisines; List<String> get selectedIngredients; List<String> get customCuisines; List<String> get customIngredients; List<RecipeSession> get recipeSessions; List<Recipe> get favoriteRecipes; bool get strictIngredients; RecipeLoadingState get suggestionsLoadingState; String? get suggestionsErrorMessage;
 /// Create a copy of RecipeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -762,16 +771,16 @@ $RecipeStateCopyWith<RecipeState> get copyWith => _$RecipeStateCopyWithImpl<Reci
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RecipeState&&const DeepCollectionEquality().equals(other.selectedCuisines, selectedCuisines)&&const DeepCollectionEquality().equals(other.selectedIngredients, selectedIngredients)&&const DeepCollectionEquality().equals(other.customCuisines, customCuisines)&&const DeepCollectionEquality().equals(other.customIngredients, customIngredients)&&const DeepCollectionEquality().equals(other.recipeSessions, recipeSessions)&&const DeepCollectionEquality().equals(other.favoriteRecipeIds, favoriteRecipeIds)&&(identical(other.strictIngredients, strictIngredients) || other.strictIngredients == strictIngredients)&&(identical(other.suggestionsLoadingState, suggestionsLoadingState) || other.suggestionsLoadingState == suggestionsLoadingState)&&(identical(other.suggestionsErrorMessage, suggestionsErrorMessage) || other.suggestionsErrorMessage == suggestionsErrorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RecipeState&&const DeepCollectionEquality().equals(other.selectedCuisines, selectedCuisines)&&const DeepCollectionEquality().equals(other.selectedIngredients, selectedIngredients)&&const DeepCollectionEquality().equals(other.customCuisines, customCuisines)&&const DeepCollectionEquality().equals(other.customIngredients, customIngredients)&&const DeepCollectionEquality().equals(other.recipeSessions, recipeSessions)&&const DeepCollectionEquality().equals(other.favoriteRecipes, favoriteRecipes)&&(identical(other.strictIngredients, strictIngredients) || other.strictIngredients == strictIngredients)&&(identical(other.suggestionsLoadingState, suggestionsLoadingState) || other.suggestionsLoadingState == suggestionsLoadingState)&&(identical(other.suggestionsErrorMessage, suggestionsErrorMessage) || other.suggestionsErrorMessage == suggestionsErrorMessage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(selectedCuisines),const DeepCollectionEquality().hash(selectedIngredients),const DeepCollectionEquality().hash(customCuisines),const DeepCollectionEquality().hash(customIngredients),const DeepCollectionEquality().hash(recipeSessions),const DeepCollectionEquality().hash(favoriteRecipeIds),strictIngredients,suggestionsLoadingState,suggestionsErrorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(selectedCuisines),const DeepCollectionEquality().hash(selectedIngredients),const DeepCollectionEquality().hash(customCuisines),const DeepCollectionEquality().hash(customIngredients),const DeepCollectionEquality().hash(recipeSessions),const DeepCollectionEquality().hash(favoriteRecipes),strictIngredients,suggestionsLoadingState,suggestionsErrorMessage);
 
 @override
 String toString() {
-  return 'RecipeState(selectedCuisines: $selectedCuisines, selectedIngredients: $selectedIngredients, customCuisines: $customCuisines, customIngredients: $customIngredients, recipeSessions: $recipeSessions, favoriteRecipeIds: $favoriteRecipeIds, strictIngredients: $strictIngredients, suggestionsLoadingState: $suggestionsLoadingState, suggestionsErrorMessage: $suggestionsErrorMessage)';
+  return 'RecipeState(selectedCuisines: $selectedCuisines, selectedIngredients: $selectedIngredients, customCuisines: $customCuisines, customIngredients: $customIngredients, recipeSessions: $recipeSessions, favoriteRecipes: $favoriteRecipes, strictIngredients: $strictIngredients, suggestionsLoadingState: $suggestionsLoadingState, suggestionsErrorMessage: $suggestionsErrorMessage)';
 }
 
 
@@ -782,7 +791,7 @@ abstract mixin class $RecipeStateCopyWith<$Res>  {
   factory $RecipeStateCopyWith(RecipeState value, $Res Function(RecipeState) _then) = _$RecipeStateCopyWithImpl;
 @useResult
 $Res call({
- List<String> selectedCuisines, List<String> selectedIngredients, List<String> customCuisines, List<String> customIngredients, List<RecipeSession> recipeSessions, List<String> favoriteRecipeIds, bool strictIngredients, RecipeLoadingState suggestionsLoadingState, String? suggestionsErrorMessage
+ List<String> selectedCuisines, List<String> selectedIngredients, List<String> customCuisines, List<String> customIngredients, List<RecipeSession> recipeSessions, List<Recipe> favoriteRecipes, bool strictIngredients, RecipeLoadingState suggestionsLoadingState, String? suggestionsErrorMessage
 });
 
 
@@ -799,15 +808,15 @@ class _$RecipeStateCopyWithImpl<$Res>
 
 /// Create a copy of RecipeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? selectedCuisines = null,Object? selectedIngredients = null,Object? customCuisines = null,Object? customIngredients = null,Object? recipeSessions = null,Object? favoriteRecipeIds = null,Object? strictIngredients = null,Object? suggestionsLoadingState = null,Object? suggestionsErrorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? selectedCuisines = null,Object? selectedIngredients = null,Object? customCuisines = null,Object? customIngredients = null,Object? recipeSessions = null,Object? favoriteRecipes = null,Object? strictIngredients = null,Object? suggestionsLoadingState = null,Object? suggestionsErrorMessage = freezed,}) {
   return _then(_self.copyWith(
 selectedCuisines: null == selectedCuisines ? _self.selectedCuisines : selectedCuisines // ignore: cast_nullable_to_non_nullable
 as List<String>,selectedIngredients: null == selectedIngredients ? _self.selectedIngredients : selectedIngredients // ignore: cast_nullable_to_non_nullable
 as List<String>,customCuisines: null == customCuisines ? _self.customCuisines : customCuisines // ignore: cast_nullable_to_non_nullable
 as List<String>,customIngredients: null == customIngredients ? _self.customIngredients : customIngredients // ignore: cast_nullable_to_non_nullable
 as List<String>,recipeSessions: null == recipeSessions ? _self.recipeSessions : recipeSessions // ignore: cast_nullable_to_non_nullable
-as List<RecipeSession>,favoriteRecipeIds: null == favoriteRecipeIds ? _self.favoriteRecipeIds : favoriteRecipeIds // ignore: cast_nullable_to_non_nullable
-as List<String>,strictIngredients: null == strictIngredients ? _self.strictIngredients : strictIngredients // ignore: cast_nullable_to_non_nullable
+as List<RecipeSession>,favoriteRecipes: null == favoriteRecipes ? _self.favoriteRecipes : favoriteRecipes // ignore: cast_nullable_to_non_nullable
+as List<Recipe>,strictIngredients: null == strictIngredients ? _self.strictIngredients : strictIngredients // ignore: cast_nullable_to_non_nullable
 as bool,suggestionsLoadingState: null == suggestionsLoadingState ? _self.suggestionsLoadingState : suggestionsLoadingState // ignore: cast_nullable_to_non_nullable
 as RecipeLoadingState,suggestionsErrorMessage: freezed == suggestionsErrorMessage ? _self.suggestionsErrorMessage : suggestionsErrorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -895,10 +904,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<String> selectedCuisines,  List<String> selectedIngredients,  List<String> customCuisines,  List<String> customIngredients,  List<RecipeSession> recipeSessions,  List<String> favoriteRecipeIds,  bool strictIngredients,  RecipeLoadingState suggestionsLoadingState,  String? suggestionsErrorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<String> selectedCuisines,  List<String> selectedIngredients,  List<String> customCuisines,  List<String> customIngredients,  List<RecipeSession> recipeSessions,  List<Recipe> favoriteRecipes,  bool strictIngredients,  RecipeLoadingState suggestionsLoadingState,  String? suggestionsErrorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RecipeState() when $default != null:
-return $default(_that.selectedCuisines,_that.selectedIngredients,_that.customCuisines,_that.customIngredients,_that.recipeSessions,_that.favoriteRecipeIds,_that.strictIngredients,_that.suggestionsLoadingState,_that.suggestionsErrorMessage);case _:
+return $default(_that.selectedCuisines,_that.selectedIngredients,_that.customCuisines,_that.customIngredients,_that.recipeSessions,_that.favoriteRecipes,_that.strictIngredients,_that.suggestionsLoadingState,_that.suggestionsErrorMessage);case _:
   return orElse();
 
 }
@@ -916,10 +925,10 @@ return $default(_that.selectedCuisines,_that.selectedIngredients,_that.customCui
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<String> selectedCuisines,  List<String> selectedIngredients,  List<String> customCuisines,  List<String> customIngredients,  List<RecipeSession> recipeSessions,  List<String> favoriteRecipeIds,  bool strictIngredients,  RecipeLoadingState suggestionsLoadingState,  String? suggestionsErrorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<String> selectedCuisines,  List<String> selectedIngredients,  List<String> customCuisines,  List<String> customIngredients,  List<RecipeSession> recipeSessions,  List<Recipe> favoriteRecipes,  bool strictIngredients,  RecipeLoadingState suggestionsLoadingState,  String? suggestionsErrorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _RecipeState():
-return $default(_that.selectedCuisines,_that.selectedIngredients,_that.customCuisines,_that.customIngredients,_that.recipeSessions,_that.favoriteRecipeIds,_that.strictIngredients,_that.suggestionsLoadingState,_that.suggestionsErrorMessage);case _:
+return $default(_that.selectedCuisines,_that.selectedIngredients,_that.customCuisines,_that.customIngredients,_that.recipeSessions,_that.favoriteRecipes,_that.strictIngredients,_that.suggestionsLoadingState,_that.suggestionsErrorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -936,10 +945,10 @@ return $default(_that.selectedCuisines,_that.selectedIngredients,_that.customCui
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<String> selectedCuisines,  List<String> selectedIngredients,  List<String> customCuisines,  List<String> customIngredients,  List<RecipeSession> recipeSessions,  List<String> favoriteRecipeIds,  bool strictIngredients,  RecipeLoadingState suggestionsLoadingState,  String? suggestionsErrorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<String> selectedCuisines,  List<String> selectedIngredients,  List<String> customCuisines,  List<String> customIngredients,  List<RecipeSession> recipeSessions,  List<Recipe> favoriteRecipes,  bool strictIngredients,  RecipeLoadingState suggestionsLoadingState,  String? suggestionsErrorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _RecipeState() when $default != null:
-return $default(_that.selectedCuisines,_that.selectedIngredients,_that.customCuisines,_that.customIngredients,_that.recipeSessions,_that.favoriteRecipeIds,_that.strictIngredients,_that.suggestionsLoadingState,_that.suggestionsErrorMessage);case _:
+return $default(_that.selectedCuisines,_that.selectedIngredients,_that.customCuisines,_that.customIngredients,_that.recipeSessions,_that.favoriteRecipes,_that.strictIngredients,_that.suggestionsLoadingState,_that.suggestionsErrorMessage);case _:
   return null;
 
 }
@@ -951,7 +960,7 @@ return $default(_that.selectedCuisines,_that.selectedIngredients,_that.customCui
 @JsonSerializable()
 
 class _RecipeState implements RecipeState {
-  const _RecipeState({final  List<String> selectedCuisines = const [], final  List<String> selectedIngredients = const [], final  List<String> customCuisines = const [], final  List<String> customIngredients = const [], final  List<RecipeSession> recipeSessions = const [], final  List<String> favoriteRecipeIds = const [], this.strictIngredients = false, this.suggestionsLoadingState = RecipeLoadingState.init, this.suggestionsErrorMessage}): _selectedCuisines = selectedCuisines,_selectedIngredients = selectedIngredients,_customCuisines = customCuisines,_customIngredients = customIngredients,_recipeSessions = recipeSessions,_favoriteRecipeIds = favoriteRecipeIds;
+  const _RecipeState({final  List<String> selectedCuisines = const [], final  List<String> selectedIngredients = const [], final  List<String> customCuisines = const [], final  List<String> customIngredients = const [], final  List<RecipeSession> recipeSessions = const [], final  List<Recipe> favoriteRecipes = const [], this.strictIngredients = false, this.suggestionsLoadingState = RecipeLoadingState.init, this.suggestionsErrorMessage}): _selectedCuisines = selectedCuisines,_selectedIngredients = selectedIngredients,_customCuisines = customCuisines,_customIngredients = customIngredients,_recipeSessions = recipeSessions,_favoriteRecipes = favoriteRecipes;
   factory _RecipeState.fromJson(Map<String, dynamic> json) => _$RecipeStateFromJson(json);
 
  final  List<String> _selectedCuisines;
@@ -989,11 +998,11 @@ class _RecipeState implements RecipeState {
   return EqualUnmodifiableListView(_recipeSessions);
 }
 
- final  List<String> _favoriteRecipeIds;
-@override@JsonKey() List<String> get favoriteRecipeIds {
-  if (_favoriteRecipeIds is EqualUnmodifiableListView) return _favoriteRecipeIds;
+ final  List<Recipe> _favoriteRecipes;
+@override@JsonKey() List<Recipe> get favoriteRecipes {
+  if (_favoriteRecipes is EqualUnmodifiableListView) return _favoriteRecipes;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_favoriteRecipeIds);
+  return EqualUnmodifiableListView(_favoriteRecipes);
 }
 
 @override@JsonKey() final  bool strictIngredients;
@@ -1013,16 +1022,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RecipeState&&const DeepCollectionEquality().equals(other._selectedCuisines, _selectedCuisines)&&const DeepCollectionEquality().equals(other._selectedIngredients, _selectedIngredients)&&const DeepCollectionEquality().equals(other._customCuisines, _customCuisines)&&const DeepCollectionEquality().equals(other._customIngredients, _customIngredients)&&const DeepCollectionEquality().equals(other._recipeSessions, _recipeSessions)&&const DeepCollectionEquality().equals(other._favoriteRecipeIds, _favoriteRecipeIds)&&(identical(other.strictIngredients, strictIngredients) || other.strictIngredients == strictIngredients)&&(identical(other.suggestionsLoadingState, suggestionsLoadingState) || other.suggestionsLoadingState == suggestionsLoadingState)&&(identical(other.suggestionsErrorMessage, suggestionsErrorMessage) || other.suggestionsErrorMessage == suggestionsErrorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RecipeState&&const DeepCollectionEquality().equals(other._selectedCuisines, _selectedCuisines)&&const DeepCollectionEquality().equals(other._selectedIngredients, _selectedIngredients)&&const DeepCollectionEquality().equals(other._customCuisines, _customCuisines)&&const DeepCollectionEquality().equals(other._customIngredients, _customIngredients)&&const DeepCollectionEquality().equals(other._recipeSessions, _recipeSessions)&&const DeepCollectionEquality().equals(other._favoriteRecipes, _favoriteRecipes)&&(identical(other.strictIngredients, strictIngredients) || other.strictIngredients == strictIngredients)&&(identical(other.suggestionsLoadingState, suggestionsLoadingState) || other.suggestionsLoadingState == suggestionsLoadingState)&&(identical(other.suggestionsErrorMessage, suggestionsErrorMessage) || other.suggestionsErrorMessage == suggestionsErrorMessage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_selectedCuisines),const DeepCollectionEquality().hash(_selectedIngredients),const DeepCollectionEquality().hash(_customCuisines),const DeepCollectionEquality().hash(_customIngredients),const DeepCollectionEquality().hash(_recipeSessions),const DeepCollectionEquality().hash(_favoriteRecipeIds),strictIngredients,suggestionsLoadingState,suggestionsErrorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_selectedCuisines),const DeepCollectionEquality().hash(_selectedIngredients),const DeepCollectionEquality().hash(_customCuisines),const DeepCollectionEquality().hash(_customIngredients),const DeepCollectionEquality().hash(_recipeSessions),const DeepCollectionEquality().hash(_favoriteRecipes),strictIngredients,suggestionsLoadingState,suggestionsErrorMessage);
 
 @override
 String toString() {
-  return 'RecipeState(selectedCuisines: $selectedCuisines, selectedIngredients: $selectedIngredients, customCuisines: $customCuisines, customIngredients: $customIngredients, recipeSessions: $recipeSessions, favoriteRecipeIds: $favoriteRecipeIds, strictIngredients: $strictIngredients, suggestionsLoadingState: $suggestionsLoadingState, suggestionsErrorMessage: $suggestionsErrorMessage)';
+  return 'RecipeState(selectedCuisines: $selectedCuisines, selectedIngredients: $selectedIngredients, customCuisines: $customCuisines, customIngredients: $customIngredients, recipeSessions: $recipeSessions, favoriteRecipes: $favoriteRecipes, strictIngredients: $strictIngredients, suggestionsLoadingState: $suggestionsLoadingState, suggestionsErrorMessage: $suggestionsErrorMessage)';
 }
 
 
@@ -1033,7 +1042,7 @@ abstract mixin class _$RecipeStateCopyWith<$Res> implements $RecipeStateCopyWith
   factory _$RecipeStateCopyWith(_RecipeState value, $Res Function(_RecipeState) _then) = __$RecipeStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<String> selectedCuisines, List<String> selectedIngredients, List<String> customCuisines, List<String> customIngredients, List<RecipeSession> recipeSessions, List<String> favoriteRecipeIds, bool strictIngredients, RecipeLoadingState suggestionsLoadingState, String? suggestionsErrorMessage
+ List<String> selectedCuisines, List<String> selectedIngredients, List<String> customCuisines, List<String> customIngredients, List<RecipeSession> recipeSessions, List<Recipe> favoriteRecipes, bool strictIngredients, RecipeLoadingState suggestionsLoadingState, String? suggestionsErrorMessage
 });
 
 
@@ -1050,15 +1059,15 @@ class __$RecipeStateCopyWithImpl<$Res>
 
 /// Create a copy of RecipeState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? selectedCuisines = null,Object? selectedIngredients = null,Object? customCuisines = null,Object? customIngredients = null,Object? recipeSessions = null,Object? favoriteRecipeIds = null,Object? strictIngredients = null,Object? suggestionsLoadingState = null,Object? suggestionsErrorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? selectedCuisines = null,Object? selectedIngredients = null,Object? customCuisines = null,Object? customIngredients = null,Object? recipeSessions = null,Object? favoriteRecipes = null,Object? strictIngredients = null,Object? suggestionsLoadingState = null,Object? suggestionsErrorMessage = freezed,}) {
   return _then(_RecipeState(
 selectedCuisines: null == selectedCuisines ? _self._selectedCuisines : selectedCuisines // ignore: cast_nullable_to_non_nullable
 as List<String>,selectedIngredients: null == selectedIngredients ? _self._selectedIngredients : selectedIngredients // ignore: cast_nullable_to_non_nullable
 as List<String>,customCuisines: null == customCuisines ? _self._customCuisines : customCuisines // ignore: cast_nullable_to_non_nullable
 as List<String>,customIngredients: null == customIngredients ? _self._customIngredients : customIngredients // ignore: cast_nullable_to_non_nullable
 as List<String>,recipeSessions: null == recipeSessions ? _self._recipeSessions : recipeSessions // ignore: cast_nullable_to_non_nullable
-as List<RecipeSession>,favoriteRecipeIds: null == favoriteRecipeIds ? _self._favoriteRecipeIds : favoriteRecipeIds // ignore: cast_nullable_to_non_nullable
-as List<String>,strictIngredients: null == strictIngredients ? _self.strictIngredients : strictIngredients // ignore: cast_nullable_to_non_nullable
+as List<RecipeSession>,favoriteRecipes: null == favoriteRecipes ? _self._favoriteRecipes : favoriteRecipes // ignore: cast_nullable_to_non_nullable
+as List<Recipe>,strictIngredients: null == strictIngredients ? _self.strictIngredients : strictIngredients // ignore: cast_nullable_to_non_nullable
 as bool,suggestionsLoadingState: null == suggestionsLoadingState ? _self.suggestionsLoadingState : suggestionsLoadingState // ignore: cast_nullable_to_non_nullable
 as RecipeLoadingState,suggestionsErrorMessage: freezed == suggestionsErrorMessage ? _self.suggestionsErrorMessage : suggestionsErrorMessage // ignore: cast_nullable_to_non_nullable
 as String?,

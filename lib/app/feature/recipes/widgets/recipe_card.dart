@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/app/core/core.dart';
 
-/// A card widget displaying a recipe summary.
+/// {@template recipe_card}
+/// A card widget displaying a recipe summary with favorite toggle.
+/// {@endtemplate}
 class RecipeCard extends StatelessWidget {
-  /// Creates a recipe card.
+  /// {@macro recipe_card}
   const RecipeCard({
     required this.recipe,
     required this.onTap,
@@ -81,7 +83,6 @@ class RecipeCard extends StatelessWidget {
               ),
               const SizedBox(height: 12),
 
-              // Description
               Text(
                 recipe.description,
                 style: theme.textTheme.bodyMedium,
@@ -90,7 +91,6 @@ class RecipeCard extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // Metadata row
               Row(
                 children: [
                   const Icon(Icons.access_time, size: 16),

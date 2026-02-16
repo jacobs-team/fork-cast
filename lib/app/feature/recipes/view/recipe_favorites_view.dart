@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/app/core/core.dart';
 import 'package:flutter_template/app/core/dependencies/dependencies.dart';
 import 'package:flutter_template/app/feature/recipes/bloc/recipe_bloc.dart';
 import 'package:flutter_template/app/feature/recipes/widgets/recipe_card.dart';
 import 'package:flutter_template/app/navigation/routes.dart';
 import 'package:go_router/go_router.dart';
 
-/// View that displays all favorited recipes.
+/// {@template recipe_favorites_view}
+/// Displays all favorited recipes in a responsive grid.
+/// {@endtemplate}
 class RecipeFavoritesView extends StatelessWidget {
-  /// Creates a recipe favorites view.
+  /// {@macro recipe_favorites_view}
   const RecipeFavoritesView({super.key});
 
   @override
@@ -19,15 +20,8 @@ class RecipeFavoritesView extends StatelessWidget {
     return BlocBuilder<RecipeBloc, RecipeState>(
       bloc: recipeBloc,
       builder: (context, state) {
-        // Collect all favorite recipes from all sessions
-        final favoriteRecipes = <Recipe>[];
-        for (final session in state.recipeSessions) {
-          favoriteRecipes.addAll(
-            session.recipes.where((recipe) => recipe.isFavorite),
-          );
-        }
+        final favoriteRecipes = state.favoriteRecipes;
 
-        // Empty state
         if (favoriteRecipes.isEmpty) {
           return Center(
             child: Column(
@@ -51,7 +45,6 @@ class RecipeFavoritesView extends StatelessWidget {
           );
         }
 
-        // Show favorites grid
         return GridView.builder(
           padding: const EdgeInsets.all(16),
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -70,7 +63,7 @@ class RecipeFavoritesView extends StatelessWidget {
               },
               onFavorite: () {
                 recipeBloc.add(
-                  RecipeEvent.toggleFavoriteRecipe(recipe.id),
+                  RecipeEvent.toggleFavoriteRecipe(recipe),
                 );
               },
             );

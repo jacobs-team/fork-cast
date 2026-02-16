@@ -4,9 +4,12 @@ import 'package:flutter_template/app/core/core.dart';
 import 'package:flutter_template/app/core/dependencies/dependencies.dart';
 import 'package:flutter_template/app/feature/recipes/bloc/recipe_bloc.dart';
 
-/// View that displays full recipe details with instructions.
+/// {@template recipe_detail_view}
+/// A stateless widget that displays full recipe details including
+/// ingredients and instructions.
+/// {@endtemplate}
 class RecipeDetailView extends StatelessWidget {
-  /// Creates a recipe detail view.
+  /// {@macro recipe_detail_view}
   const RecipeDetailView({
     required this.recipe,
     super.key,
@@ -24,11 +27,10 @@ class RecipeDetailView extends StatelessWidget {
     return BlocBuilder<RecipeBloc, RecipeState>(
       bloc: recipeBloc,
       builder: (context, state) {
-        // Get the current favorite status from state by searching all sessions
         var currentRecipe = recipe;
         for (final session in state.recipeSessions) {
           final found = session.recipes
-              .where((r) => r.id == recipe.id)
+              .where((r) => r == recipe)
               .firstOrNull;
           if (found != null) {
             currentRecipe = found;
@@ -49,7 +51,7 @@ class RecipeDetailView extends StatelessWidget {
                 ),
                 onPressed: () {
                   recipeBloc.add(
-                    RecipeEvent.toggleFavoriteRecipe(currentRecipe.id),
+                    RecipeEvent.toggleFavoriteRecipe(currentRecipe),
                   );
                 },
               ),
@@ -60,7 +62,6 @@ class RecipeDetailView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header section
                 Row(
                   children: [
                     Chip(
@@ -73,14 +74,14 @@ class RecipeDetailView extends StatelessWidget {
                     const SizedBox(width: 8),
                     Chip(
                       label: Text(currentRecipe.difficulty),
-                      backgroundColor:
-                          _getDifficultyColor(currentRecipe.difficulty),
+                      backgroundColor: _getDifficultyColor(
+                        currentRecipe.difficulty,
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 16),
 
-                // Metadata
                 Row(
                   children: [
                     const Icon(Icons.access_time, size: 20),
@@ -94,7 +95,6 @@ class RecipeDetailView extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
 
-                // Description
                 Text(
                   'Description',
                   style: theme.textTheme.headlineSmall?.copyWith(
@@ -108,7 +108,6 @@ class RecipeDetailView extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
 
-                // Ingredients
                 Text(
                   'Ingredients',
                   style: theme.textTheme.headlineSmall?.copyWith(
@@ -182,7 +181,6 @@ class RecipeDetailView extends StatelessWidget {
                   ),
                 const SizedBox(height: 24),
 
-                // Instructions
                 Text(
                   'Instructions',
                   style: theme.textTheme.headlineSmall?.copyWith(
