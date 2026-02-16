@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(flutter_template LANGUAGES CXX)
+project(fork_cast LANGUAGES CXX)
 
-set(BINARY_NAME "flutter_template")
+set(BINARY_NAME "fork_cast")
 
 cmake_policy(SET CMP0063 NEW)
 

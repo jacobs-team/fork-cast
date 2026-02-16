@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/app/core/core.dart';
-import 'package:flutter_template/app/core/dependencies/dependencies.dart';
-import 'package:flutter_template/app/navigation/navigation.dart';
-import 'package:flutter_template/app/widgets/layout.dart';
-import 'package:flutter_template/l10n/l10n.dart';
+import 'package:fork_cast/app/core/core.dart';
+import 'package:fork_cast/app/core/dependencies/dependencies.dart';
+import 'package:fork_cast/app/navigation/navigation.dart';
+import 'package:fork_cast/app/widgets/layout.dart';
+import 'package:fork_cast/l10n/l10n.dart';
 import 'package:go_router/go_router.dart';
 
 /// {@template navigation_wrapper}

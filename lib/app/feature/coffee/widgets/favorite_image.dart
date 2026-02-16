@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_template/app/core/core.dart';
-import 'package:flutter_template/app/core/dependencies/dependencies.dart';
-import 'package:flutter_template/app/feature/coffee/coffee.dart';
+import 'package:fork_cast/app/core/core.dart';
+import 'package:fork_cast/app/core/dependencies/dependencies.dart';
+import 'package:fork_cast/app/feature/coffee/coffee.dart';
 import 'package:go_router/go_router.dart';
 
 /// {@template favorite_image}

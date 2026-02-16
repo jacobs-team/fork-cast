@@ -1,6 +1,6 @@
-import 'package:flutter_template/app/app.dart';
-import 'package:flutter_template/app/core/dependencies/dependencies.dart';
-import 'package:flutter_template/bootstrap.dart';
+import 'package:fork_cast/app/app.dart';
+import 'package:fork_cast/app/core/dependencies/dependencies.dart';
+import 'package:fork_cast/bootstrap.dart';
 import 'package:injectable/injectable.dart';
 
 Future<void> main() async {

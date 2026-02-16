@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:flutter_template/app/navigation/navigation.dart';
+import 'package:fork_cast/app/navigation/navigation.dart';
 
 /// {@template routes}
 /// A collection of static string constants representing

@@ -1,4 +1,4 @@
-name: flutter_template
+name: fork_cast
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -76,7 +76,7 @@ jobs:
         uses: schneegans/dynamic-badges-action@v1.7.0
         with:
           auth: ${{ secrets.GIST_TOKEN }}
-          gistID: ac78cd84ca1ae9a4bb0135c89100374a
+          gistID: 7641fab8ee287397da7464864366f32d
           filename: coverage.json
           label: Coverage
           message: ${{ steps.coverage_data.outputs.percent }}%

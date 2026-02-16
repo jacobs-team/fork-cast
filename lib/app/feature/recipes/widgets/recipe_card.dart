@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/app/core/core.dart';
+import 'package:fork_cast/app/core/core.dart';
 
 /// {@template recipe_card}
 /// A card widget displaying a recipe summary with favorite toggle.
@@ -51,7 +51,9 @@ class RecipeCard extends StatelessWidget {
                   ),
                   IconButton(
                     icon: Icon(
-                      recipe.isFavorite ? Icons.favorite : Icons.favorite_border,
+                      recipe.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
                       color: recipe.isFavorite ? Colors.red : null,
                     ),
                     onPressed: onFavorite,

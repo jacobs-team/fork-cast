@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_template/app/core/core.dart';
+import 'package:fork_cast/app/core/core.dart';
 import 'package:injectable/injectable.dart';
 
 /// {@template recipe_repository}
@@ -28,6 +28,6 @@ class RecipeRepository {
     final openAIResponse = mapJson(response.data, OpenAIApiResponse.fromJson);
     final messageContent = openAIResponse.choices.first.message.content;
     final jsonData = jsonDecode(messageContent) as Map<String, dynamic>;
-    return mapJsonList(jsonData, Recipe.fromJson);
+    return mapJsonList(jsonData['recipes'], Recipe.fromJson);
   }
 }

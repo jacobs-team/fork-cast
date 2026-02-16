@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/app/app.dart';
-import 'package:flutter_template/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fork_cast/app/app.dart';
+import 'package:fork_cast/l10n/l10n.dart';
 import 'package:get_it/get_it.dart';
 
 import 'helpers.dart';

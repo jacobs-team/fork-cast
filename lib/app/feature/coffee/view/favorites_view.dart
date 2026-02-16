@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/app/core/dependencies/dependencies.dart';
-import 'package:flutter_template/app/feature/coffee/coffee.dart';
-import 'package:flutter_template/l10n/l10n.dart';
+import 'package:fork_cast/app/core/dependencies/dependencies.dart';
+import 'package:fork_cast/app/feature/coffee/coffee.dart';
+import 'package:fork_cast/l10n/l10n.dart';
 
 /// {@template favorites_view}
 /// A stateless widget that displays a grid of favorited coffee images.

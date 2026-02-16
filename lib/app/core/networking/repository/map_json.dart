@@ -1,4 +1,4 @@
-import 'package:flutter_template/app/core/core.dart';
+import 'package:fork_cast/app/core/core.dart';
 
 /// Maps a [raw] dynamic value into a single object of type [T].
 ///

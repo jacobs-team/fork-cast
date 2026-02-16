@@ -1,9 +1,10 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/app/core/core.dart';
-import 'package:flutter_template/app/core/dependencies/dependencies.dart';
-import 'package:flutter_template/app/feature/coffee/bloc/coffee_bloc.dart';
+import 'package:fork_cast/app/core/core.dart';
+import 'package:fork_cast/app/core/dependencies/dependencies.dart';
+import 'package:fork_cast/app/feature/coffee/bloc/coffee_bloc.dart';
 
 /// {@template expanded_image}
 /// A view that displays a full-screen, interactive gallery of favorited images.

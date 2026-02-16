@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_template/app/core/core.dart';
-import 'package:flutter_template/app/feature/feature.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fork_cast/app/core/core.dart';
+import 'package:fork_cast/app/feature/feature.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../helpers/helpers.dart';

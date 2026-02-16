@@ -2,9 +2,9 @@
 // coverage:ignore-file
 
 import 'package:flutter/material.dart';
-import 'package:flutter_template/app/core/core.dart';
-import 'package:flutter_template/app/core/dependencies/dependencies.dart';
-import 'package:flutter_template/l10n/l10n.dart';
+import 'package:fork_cast/app/core/core.dart';
+import 'package:fork_cast/app/core/dependencies/dependencies.dart';
+import 'package:fork_cast/l10n/l10n.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});

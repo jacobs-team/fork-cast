@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter_template/app/app.dart';
+import 'package:fork_cast/app/app.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';

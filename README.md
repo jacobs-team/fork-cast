@@ -1,6 +1,6 @@
 # Flutter Template
 
-[![coverage][coverage_badge]](https://github.com/jcblol/flutter_template/actions)
+[![coverage][coverage_badge]](https://github.com/jacobs-team/fork-cast/actions)
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]
 
@@ -109,7 +109,7 @@ This project relies on [flutter_localizations][flutter_localizations_link] and f
 3. Use the new string
 
 ```dart
-import 'package:flutter_template/l10n/l10n.dart';
+import 'package:fork_cast/l10n/l10n.dart';
 
 @override
 Widget build(BuildContext context) {

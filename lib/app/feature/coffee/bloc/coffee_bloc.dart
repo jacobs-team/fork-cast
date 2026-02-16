@@ -3,8 +3,8 @@
 import 'dart:developer';
 import 'dart:math' as math;
 
-import 'package:flutter_template/app/core/networking/repository/coffee_repository.dart';
-import 'package:flutter_template/app/core/service/file_cache_service.dart';
+import 'package:fork_cast/app/core/networking/repository/coffee_repository.dart';
+import 'package:fork_cast/app/core/service/file_cache_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';

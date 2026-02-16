@@ -1,4 +1,4 @@
-package com.example.verygoodcore.flutter_template
+package com.example.verygoodcore.fork_cast
 
 import io.flutter.embedding.android.FlutterActivity
 

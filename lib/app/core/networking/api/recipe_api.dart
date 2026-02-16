@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_template/app/core/core.dart';
-import 'package:flutter_template/environment.dart';
+import 'package:fork_cast/app/core/core.dart';
+import 'package:fork_cast/environment.dart';
 import 'package:injectable/injectable.dart';
 
 /// {@template recipe_api}

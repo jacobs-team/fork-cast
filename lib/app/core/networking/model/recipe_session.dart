@@ -1,4 +1,4 @@
-import 'package:flutter_template/app/core/networking/model/recipe.dart';
+import 'package:fork_cast/app/core/networking/model/recipe.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'recipe_session.freezed.dart';

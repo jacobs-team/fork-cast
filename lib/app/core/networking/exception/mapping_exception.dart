@@ -1,6 +1,6 @@
 // coverage:ignore-file
 
-import 'package:flutter_template/app/core/core.dart';
+import 'package:fork_cast/app/core/core.dart';
 
 /// {@template mapping_exception}
 /// Exception thrown when an error occurs during data transformation or

@@ -9,32 +9,25 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter_template/app/app.dart' as _i219;
-import 'package:flutter_template/app/core/core.dart' as _i483;
-import 'package:flutter_template/app/core/cubit/auth_cubit.dart' as _i669;
-import 'package:flutter_template/app/core/cubit/connectivity_cubit.dart'
-    as _i313;
-import 'package:flutter_template/app/core/dependencies/modules/hydrated_bloc_module.dart'
-    as _i569;
-import 'package:flutter_template/app/core/networking/api/coffee_api.dart'
-    as _i361;
-import 'package:flutter_template/app/core/networking/api/recipe_api.dart'
-    as _i743;
-import 'package:flutter_template/app/core/networking/api/rest_client.dart'
-    as _i994;
-import 'package:flutter_template/app/core/networking/repository/coffee_repository.dart'
-    as _i700;
-import 'package:flutter_template/app/core/networking/repository/recipe_repository.dart'
-    as _i1051;
-import 'package:flutter_template/app/core/service/file_cache_service.dart'
-    as _i96;
-import 'package:flutter_template/app/feature/coffee/bloc/coffee_bloc.dart'
-    as _i720;
-import 'package:flutter_template/app/feature/dev_tools/cubit/dev_tools_cubit.dart'
-    as _i90;
-import 'package:flutter_template/app/feature/feature.dart' as _i701;
-import 'package:flutter_template/app/feature/recipes/bloc/recipe_bloc.dart'
-    as _i259;
+import 'package:fork_cast/app/app.dart' as _i609;
+import 'package:fork_cast/app/core/core.dart' as _i68;
+import 'package:fork_cast/app/core/cubit/auth_cubit.dart' as _i949;
+import 'package:fork_cast/app/core/cubit/connectivity_cubit.dart' as _i491;
+import 'package:fork_cast/app/core/dependencies/modules/hydrated_bloc_module.dart'
+    as _i329;
+import 'package:fork_cast/app/core/networking/api/coffee_api.dart' as _i974;
+import 'package:fork_cast/app/core/networking/api/recipe_api.dart' as _i907;
+import 'package:fork_cast/app/core/networking/api/rest_client.dart' as _i51;
+import 'package:fork_cast/app/core/networking/repository/coffee_repository.dart'
+    as _i915;
+import 'package:fork_cast/app/core/networking/repository/recipe_repository.dart'
+    as _i436;
+import 'package:fork_cast/app/core/service/file_cache_service.dart' as _i903;
+import 'package:fork_cast/app/feature/coffee/bloc/coffee_bloc.dart' as _i995;
+import 'package:fork_cast/app/feature/dev_tools/cubit/dev_tools_cubit.dart'
+    as _i956;
+import 'package:fork_cast/app/feature/feature.dart' as _i610;
+import 'package:fork_cast/app/feature/recipes/bloc/recipe_bloc.dart' as _i84;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:hydrated_bloc/hydrated_bloc.dart' as _i67;
 import 'package:injectable/injectable.dart' as _i526;
@@ -51,36 +44,32 @@ extension GetItInjectableX on _i174.GetIt {
       () => hydratedBlocModule.init(),
       preResolve: true,
     );
-    gh.singleton<_i669.AuthCubit>(() => _i669.AuthCubit());
-    gh.singleton<_i313.ConnectivityCubit>(() => _i313.ConnectivityCubit());
-    gh.singleton<_i96.FileCacheService>(() => _i96.FileCacheService());
-    gh.singleton<_i90.DevToolsCubit>(() => _i90.DevToolsCubit());
-    gh.singleton<_i994.RestClient>(
-      () => _i994.RestClient(gh<_i483.AuthCubit>(), gh<_i701.DevToolsCubit>()),
+    gh.singleton<_i949.AuthCubit>(() => _i949.AuthCubit());
+    gh.singleton<_i491.ConnectivityCubit>(() => _i491.ConnectivityCubit());
+    gh.singleton<_i903.FileCacheService>(() => _i903.FileCacheService());
+    gh.singleton<_i956.DevToolsCubit>(() => _i956.DevToolsCubit());
+    gh.singleton<_i51.RestClient>(
+      () => _i51.RestClient(gh<_i68.AuthCubit>(), gh<_i610.DevToolsCubit>()),
     );
-    gh.singleton<_i361.CoffeeApi>(
-      () => _i361.CoffeeApi(gh<_i483.RestClient>()),
+    gh.singleton<_i974.CoffeeApi>(() => _i974.CoffeeApi(gh<_i68.RestClient>()));
+    gh.singleton<_i907.RecipeApi>(() => _i907.RecipeApi(gh<_i68.RestClient>()));
+    gh.singleton<_i915.CoffeeRepository>(
+      () => _i915.CoffeeRepository(gh<_i68.CoffeeApi>()),
     );
-    gh.singleton<_i743.RecipeApi>(
-      () => _i743.RecipeApi(gh<_i483.RestClient>()),
-    );
-    gh.singleton<_i700.CoffeeRepository>(
-      () => _i700.CoffeeRepository(gh<_i483.CoffeeApi>()),
-    );
-    gh.singleton<_i1051.RecipeRepository>(
-      () => _i1051.RecipeRepository(gh<_i483.RecipeApi>()),
-    );
-    gh.singleton<_i720.CoffeeBloc>(
-      () => _i720.CoffeeBloc(
-        gh<_i700.CoffeeRepository>(),
-        gh<_i96.FileCacheService>(),
+    gh.singleton<_i995.CoffeeBloc>(
+      () => _i995.CoffeeBloc(
+        gh<_i915.CoffeeRepository>(),
+        gh<_i903.FileCacheService>(),
       ),
     );
-    gh.singleton<_i259.RecipeBloc>(
-      () => _i259.RecipeBloc(gh<_i219.RecipeRepository>()),
+    gh.singleton<_i436.RecipeRepository>(
+      () => _i436.RecipeRepository(gh<_i68.RecipeApi>()),
+    );
+    gh.singleton<_i84.RecipeBloc>(
+      () => _i84.RecipeBloc(gh<_i609.RecipeRepository>()),
     );
     return this;
   }
 }
 
-class _$HydratedBlocModule extends _i569.HydratedBlocModule {}
+class _$HydratedBlocModule extends _i329.HydratedBlocModule {}

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_template/app/core/core.dart';
+import 'package:fork_cast/app/core/core.dart';
 import 'package:injectable/injectable.dart';
 
 /// {@template coffee_api}

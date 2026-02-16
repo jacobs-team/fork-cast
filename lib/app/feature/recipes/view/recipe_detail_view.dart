@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/app/core/core.dart';
-import 'package:flutter_template/app/core/dependencies/dependencies.dart';
-import 'package:flutter_template/app/feature/recipes/bloc/recipe_bloc.dart';
+import 'package:fork_cast/app/core/core.dart';
+import 'package:fork_cast/app/core/dependencies/dependencies.dart';
+import 'package:fork_cast/app/feature/recipes/bloc/recipe_bloc.dart';
 
 /// {@template recipe_detail_view}
 /// A stateless widget that displays full recipe details including
@@ -29,9 +29,7 @@ class RecipeDetailView extends StatelessWidget {
       builder: (context, state) {
         var currentRecipe = recipe;
         for (final session in state.recipeSessions) {
-          final found = session.recipes
-              .where((r) => r == recipe)
-              .firstOrNull;
+          final found = session.recipes.where((r) => r == recipe).firstOrNull;
           if (found != null) {
             currentRecipe = found;
             break;

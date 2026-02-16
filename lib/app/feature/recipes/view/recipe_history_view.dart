@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/app/core/dependencies/dependencies.dart';
-import 'package:flutter_template/app/feature/recipes/bloc/recipe_bloc.dart';
-import 'package:flutter_template/app/feature/recipes/widgets/recipe_card.dart';
-import 'package:flutter_template/app/navigation/routes.dart';
+import 'package:fork_cast/app/core/dependencies/dependencies.dart';
+import 'package:fork_cast/app/feature/recipes/bloc/recipe_bloc.dart';
+import 'package:fork_cast/app/feature/recipes/widgets/recipe_card.dart';
+import 'package:fork_cast/app/navigation/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 

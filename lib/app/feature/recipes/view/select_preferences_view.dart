@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/app/core/dependencies/dependencies.dart';
-import 'package:flutter_template/app/feature/recipes/bloc/recipe_bloc.dart';
+import 'package:fork_cast/app/core/dependencies/dependencies.dart';
+import 'package:fork_cast/app/feature/recipes/bloc/recipe_bloc.dart';
 
 /// {@template select_preferences_view}
 /// Allows users to select cuisine types and ingredients for recipe generation.

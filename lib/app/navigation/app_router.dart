@@ -2,15 +2,15 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/app/core/networking/model/recipe.dart';
-import 'package:flutter_template/app/feature/feature.dart';
-import 'package:flutter_template/app/feature/recipes/view/recipe_detail_view.dart';
-import 'package:flutter_template/app/feature/recipes/view/recipe_favorites_view.dart';
-import 'package:flutter_template/app/feature/recipes/view/recipe_history_view.dart';
-import 'package:flutter_template/app/feature/recipes/view/select_preferences_view.dart';
-import 'package:flutter_template/app/navigation/navigation_wrapper.dart';
-import 'package:flutter_template/app/navigation/routes.dart';
-import 'package:flutter_template/l10n/l10n.dart';
+import 'package:fork_cast/app/core/networking/model/recipe.dart';
+import 'package:fork_cast/app/feature/feature.dart';
+import 'package:fork_cast/app/feature/recipes/view/recipe_detail_view.dart';
+import 'package:fork_cast/app/feature/recipes/view/recipe_favorites_view.dart';
+import 'package:fork_cast/app/feature/recipes/view/recipe_history_view.dart';
+import 'package:fork_cast/app/feature/recipes/view/select_preferences_view.dart';
+import 'package:fork_cast/app/navigation/navigation_wrapper.dart';
+import 'package:fork_cast/app/navigation/routes.dart';
+import 'package:fork_cast/l10n/l10n.dart';
 import 'package:go_router/go_router.dart';
 
 /// {@template app_router}

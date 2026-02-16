@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/app/core/dependencies/dependencies.dart';
-import 'package:flutter_template/app/feature/dev_tools/dev_tools.dart';
-import 'package:flutter_template/app/navigation/app_router.dart';
-import 'package:flutter_template/app/widgets/widgets.dart';
-import 'package:flutter_template/l10n/l10n.dart';
-import 'package:flutter_template/theme/app_theme.dart';
+import 'package:fork_cast/app/app.dart' show AppRouter, Layout;
+import 'package:fork_cast/app/core/dependencies/dependencies.dart';
+import 'package:fork_cast/app/feature/dev_tools/dev_tools.dart';
+import 'package:fork_cast/l10n/gen/app_localizations.dart'
+    show AppLocalizations;
+import 'package:fork_cast/l10n/l10n.dart';
+import 'package:fork_cast/theme/app_theme.dart' show AppTheme;
+import 'package:fork_cast/theme/app_theme.dart';
 
 /// {@template coffee_app}
 /// The root widget of the application.

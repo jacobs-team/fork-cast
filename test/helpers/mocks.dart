@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_template/app/app.dart';
+import 'package:fork_cast/app/app.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
