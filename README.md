@@ -1,4 +1,4 @@
-# Flutter Template
+# Fork Cast
 
 [![coverage][coverage_badge]](https://github.com/jacobs-team/fork-cast/actions)
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
@@ -42,7 +42,7 @@ To run the build_runner once, run:
 fvm dart run build_runner build --delete-conflicting-outputs
 ```
 
-_Flutter Template works on iOS, Android, Web, and Windows._
+_Fork Cast works on iOS, Android, Web, and Windows._
 
 ## Running Tests 🧪
 

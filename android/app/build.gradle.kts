@@ -60,17 +60,17 @@ android {
         create("production") {
             dimension = "default"
             applicationIdSuffix = ""
-            manifestPlaceholders["appName"] = "Flutter Template"
+            manifestPlaceholders["appName"] = "ForkCast"
         }
         create("staging") {
             dimension = "default"
             applicationIdSuffix = ".stg"
-            manifestPlaceholders["appName"] = "[STG] Flutter Template"
+            manifestPlaceholders["appName"] = "[STG] ForkCast"
         }
         create("development") {
             dimension = "default"
             applicationIdSuffix = ".dev"
-            manifestPlaceholders["appName"] = "[DEV] Flutter Template"
+            manifestPlaceholders["appName"] = "[DEV] ForkCast"
         }
     }
 

@@ -95,7 +95,7 @@ BEGIN
             VALUE "InternalName", "fork_cast" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.jakeb.fork-cast. All rights reserved." "\0"
             VALUE "OriginalFilename", "fork_cast.exe" "\0"
-            VALUE "ProductName", "Flutter Template" "\0"
+            VALUE "ProductName", "ForkCast" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
