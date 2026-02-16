@@ -28,7 +28,7 @@ class AppRouter {
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: Routes.selectPreferences,
+              path: Routes.preferences,
               pageBuilder: (context, state) {
                 return const NoTransitionPage(
                   child: SelectPreferencesView(),
@@ -40,9 +40,9 @@ class AppRouter {
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: Routes.recipeResults,
+              path: Routes.recipes,
               pageBuilder: (context, state) {
-                return const NoTransitionPage(child: RecipeResultsView());
+                return const NoTransitionPage(child: RecipesView());
               },
             ),
           ],
@@ -50,7 +50,7 @@ class AppRouter {
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: Routes.recipeFavorites,
+              path: Routes.favorites,
               pageBuilder: (context, state) {
                 return const NoTransitionPage(child: RecipeFavoritesView());
               },
@@ -70,6 +70,17 @@ class AppRouter {
         );
       },
     ),
+    // GoRoute(
+    //   path: Routes.recipeSuggestions,
+    //   pageBuilder: (context, state) {
+    //     final sessionId = state.extra! as String;
+    //     return NoTransitionPage(
+    //       child: RecipeBrowseView(
+    //         sessionId: sessionId,
+    //       ),
+    //     );
+    //   },
+    // ),
     if (kDebugMode)
       GoRoute(
         path: Routes.devTools,
@@ -100,7 +111,7 @@ class AppRouter {
 
   /// The global [GoRouter] instance used by the application.
   static GoRouter router = GoRouter(
-    initialLocation: Routes.selectPreferences,
+    initialLocation: Routes.preferences,
     // refreshListenable: getIt<AuthCubit>(),
     redirect: (context, state) {
       // final signedIn = getIt<AuthCubit>().state.signedIn;

@@ -7,7 +7,7 @@ import 'package:fork_cast/app/navigation/routes.dart';
 import 'package:go_router/go_router.dart';
 
 /// {@template recipe_favorites_view}
-/// Displays all favorited recipes in a responsive grid.
+/// Displays all favorited recipes in a list.
 /// {@endtemplate}
 class RecipeFavoritesView extends StatelessWidget {
   /// {@macro recipe_favorites_view}
@@ -37,7 +37,7 @@ class RecipeFavoritesView extends StatelessWidget {
                 const Text('Tap the heart icon on recipes you love'),
                 const SizedBox(height: 24),
                 FilledButton(
-                  onPressed: () => context.go(Routes.selectPreferences),
+                  onPressed: () => context.go(Routes.preferences),
                   child: const Text('Discover Recipes'),
                 ),
               ],
@@ -45,38 +45,41 @@ class RecipeFavoritesView extends StatelessWidget {
           );
         }
 
-        return GridView.builder(
-          padding: const EdgeInsets.all(16),
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: _getMaxCrossAxisExtent(context),
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-            childAspectRatio: 0.75,
-          ),
-          itemCount: favoriteRecipes.length,
-          itemBuilder: (context, index) {
-            final recipe = favoriteRecipes[index];
-            return RecipeCard(
-              recipe: recipe,
-              onTap: () {
-                context.push(Routes.recipeDetail, extra: recipe);
-              },
-              onFavorite: () {
-                recipeBloc.add(
-                  RecipeEvent.toggleFavoriteRecipe(recipe),
-                );
-              },
-            );
-          },
+        return CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.all(16),
+              sliver: SliverList.builder(
+                itemCount: favoriteRecipes.length,
+                itemBuilder: (context, index) {
+                  final recipe = favoriteRecipes[index];
+                  return RecipeCard(
+                    recipe: recipe,
+                    isFavorite: true,
+                    imagePath:
+                        state
+                            .recipeImagePaths['${recipe.cuisine}-${recipe.name}'
+                            .toLowerCase()],
+                    onTap: () {
+                      context.go(
+                        Routes.recipeDetail,
+                        extra: recipe,
+                      );
+                    },
+                    onFavorite: () {
+                      recipeBloc.add(
+                        RecipeEvent.toggleFavoriteRecipe(
+                          recipe,
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
         );
       },
     );
-  }
-
-  double _getMaxCrossAxisExtent(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    if (width < 600) return 400; // Mobile: single column
-    if (width < 900) return 350; // Tablet: 2 columns
-    return 320; // Desktop: 3+ columns
   }
 }

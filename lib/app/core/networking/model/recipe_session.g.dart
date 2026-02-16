@@ -20,6 +20,11 @@ _RecipeSession _$RecipeSessionFromJson(Map<String, dynamic> json) =>
       recipes: (json['recipes'] as List<dynamic>)
           .map((e) => Recipe.fromJson(e as Map<String, dynamic>))
           .toList(),
+      recipeTypes:
+          (json['recipeTypes'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$RecipeSessionToJson(_RecipeSession instance) =>
@@ -30,4 +35,5 @@ Map<String, dynamic> _$RecipeSessionToJson(_RecipeSession instance) =>
       'ingredients': instance.ingredients,
       'strictIngredients': instance.strictIngredients,
       'recipes': instance.recipes,
+      'recipeTypes': instance.recipeTypes,
     };

@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fork_cast/app/core/dependencies/dependencies.dart';
 import 'package:fork_cast/app/feature/recipes/bloc/recipe_bloc.dart';
+import 'package:fork_cast/app/feature/recipes/widgets/add_custom_item_dialog.dart';
+import 'package:fork_cast/app/feature/recipes/widgets/preference_chip_section.dart';
+import 'package:fork_cast/app/navigation/routes.dart';
+import 'package:go_router/go_router.dart';
 
 /// {@template select_preferences_view}
 /// Allows users to select cuisine types and ingredients for recipe generation.
@@ -46,283 +50,210 @@ class SelectPreferencesView extends StatelessWidget {
     'Avocado',
   ];
 
+  static const _recipeTypes = [
+    'Breakfast',
+    'Lunch',
+    'Dinner',
+    'Dessert',
+    'Appetizer',
+    'Soup',
+    'Salad',
+    'Snack',
+    'Side Dish',
+    'Beverage',
+  ];
+
   @override
   Widget build(BuildContext context) {
     final recipeBloc = getIt<RecipeBloc>();
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Strict Ingredients Toggle
-                BlocSelector<RecipeBloc, RecipeState, bool>(
-                  bloc: recipeBloc,
-                  selector: (state) => state.strictIngredients,
-                  builder: (context, strictIngredients) {
-                    return Card(
-                      child: SwitchListTile(
-                        title: const Text('Strict Ingredients Only'),
-                        subtitle: Text(
-                          strictIngredients
-                              ? 'Recipes will only use selected ingredients'
-                              : 'Recipes will use selected ingredients as a base',
+    return BlocListener<RecipeBloc, RecipeState>(
+      bloc: recipeBloc,
+      listenWhen: (previous, current) =>
+          previous.suggestionsLoadingState != RecipeLoadingState.success &&
+          current.suggestionsLoadingState == RecipeLoadingState.success,
+      listener: (context, state) {
+        if (state.recipeSessions.isNotEmpty) {
+          context.go(
+            Routes.recipes,
+            extra: state.recipeSessions.first.id,
+          );
+        }
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BlocSelector<RecipeBloc, RecipeState, bool>(
+                    bloc: recipeBloc,
+                    selector: (state) => state.strictIngredients,
+                    builder: (context, strictIngredients) {
+                      return Card(
+                        child: SwitchListTile(
+                          title: const Text('Strict Ingredients Only'),
+                          subtitle: Text(
+                            strictIngredients
+                                ? 'Recipes will only use selected ingredients'
+                                : 'Recipes will use selected '
+                                      'ingredients as a base',
+                          ),
+                          value: strictIngredients,
+                          onChanged: (_) {
+                            recipeBloc.add(
+                              const RecipeEvent.toggleStrictIngredients(),
+                            );
+                          },
                         ),
-                        value: strictIngredients,
-                        onChanged: (_) {
-                          recipeBloc.add(
-                            const RecipeEvent.toggleStrictIngredients(),
-                          );
-                        },
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  PreferenceChipSection(
+                    title: 'Cuisines',
+                    defaultItems: _foodCategories,
+                    selector: (state) => (
+                      selected: state.selectedCuisines,
+                      custom: state.customCuisines,
+                    ),
+                    onToggle: (item) => recipeBloc.add(
+                      RecipeEvent.toggleCategory(item),
+                    ),
+                    onClear: () => recipeBloc.add(
+                      const RecipeEvent.clearCuisines(),
+                    ),
+                    onAddCustom: (item) => recipeBloc.add(
+                      RecipeEvent.addCustomCuisine(item),
+                    ),
+                    onRemoveCustom: (item) => recipeBloc.add(
+                      RecipeEvent.removeCustomCuisine(item),
+                    ),
+                    dialogTitle: 'Add Custom Cuisine',
+                    dialogLabelText: 'Cuisine name',
+                    dialogHintText: 'e.g., Brazilian, Ethiopian',
+                  ),
+                  const SizedBox(height: 16),
+                  PreferenceChipSection(
+                    title: 'Ingredients',
+                    defaultItems: _popularIngredients,
+                    selector: (state) => (
+                      selected: state.selectedIngredients,
+                      custom: state.customIngredients,
+                    ),
+                    onToggle: (item) => recipeBloc.add(
+                      RecipeEvent.toggleIngredient(item),
+                    ),
+                    onClear: () => recipeBloc.add(
+                      const RecipeEvent.clearIngredients(),
+                    ),
+                    onAddCustom: (item) => recipeBloc.add(
+                      RecipeEvent.addCustomIngredient(item),
+                    ),
+                    onRemoveCustom: (item) => recipeBloc.add(
+                      RecipeEvent.removeCustomIngredient(
+                        item,
                       ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Cuisines',
-                      style: Theme.of(context).textTheme.headlineLarge,
                     ),
-                    IconButton.filled(
-                      onPressed: () =>
-                          _showAddCuisineDialog(context, recipeBloc),
-                      icon: const Icon(Icons.add),
-                      tooltip: 'Add custom cuisine',
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                BlocSelector<
-                  RecipeBloc,
-                  RecipeState,
-                  ({List<String> selected, List<String> custom})
-                >(
-                  bloc: recipeBloc,
-                  selector: (state) => (
-                    selected: state.selectedCuisines,
-                    custom: state.customCuisines,
+                    dialogTitle: 'Add Custom Ingredient',
+                    dialogLabelText: 'Ingredient name',
+                    dialogHintText: 'e.g., Quinoa, Kale',
                   ),
-                  builder: (context, data) {
-                    final allCuisines = [..._foodCategories, ...data.custom];
-                    return Wrap(
-                      spacing: 8,
-                      children: allCuisines.map((cuisine) {
-                        final isSelected = data.selected.contains(cuisine);
-
-                        final isCustom = data.custom.contains(cuisine);
-                        return FilterChip(
-                          label: Text(cuisine),
-                          selected: isSelected,
-                          onSelected: (_) {
-                            recipeBloc.add(
-                              RecipeEvent.toggleCategory(cuisine),
-                            );
-                          },
-                          deleteIcon: isCustom
-                              ? const Icon(Icons.close, size: 18)
-                              : null,
-                          onDeleted: isCustom
-                              ? () {
-                                  recipeBloc.add(
-                                    RecipeEvent.removeCustomCuisine(cuisine),
-                                  );
-                                }
-                              : null,
-                        );
-                      }).toList(),
-                    );
-                  },
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Ingredients',
-                      style: Theme.of(context).textTheme.headlineLarge,
+                  const SizedBox(height: 16),
+                  PreferenceChipSection(
+                    title: 'Recipe Types',
+                    defaultItems: _recipeTypes,
+                    selector: (state) => (
+                      selected: state.selectedRecipeTypes,
+                      custom: state.customRecipeTypes,
                     ),
-                    IconButton.filled(
-                      onPressed: () =>
-                          _showAddIngredientDialog(context, recipeBloc),
-                      icon: const Icon(Icons.add),
-                      tooltip: 'Add custom ingredient',
+                    onToggle: (item) => recipeBloc.add(
+                      RecipeEvent.toggleRecipeType(item),
                     ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                BlocSelector<
-                  RecipeBloc,
-                  RecipeState,
-                  ({List<String> selected, List<String> custom})
-                >(
-                  bloc: recipeBloc,
-                  selector: (state) => (
-                    selected: state.selectedIngredients,
-                    custom: state.customIngredients,
+                    onClear: () => recipeBloc.add(
+                      const RecipeEvent.clearRecipeTypes(),
+                    ),
+                    onAddCustom: (item) => recipeBloc.add(
+                      RecipeEvent.addCustomRecipeType(item),
+                    ),
+                    onRemoveCustom: (item) => recipeBloc.add(
+                      RecipeEvent.removeCustomRecipeType(
+                        item,
+                      ),
+                    ),
+                    dialogTitle: 'Add Custom Recipe Type',
+                    dialogLabelText: 'Recipe type',
+                    dialogHintText: 'e.g., Brunch, Smoothie',
                   ),
-                  builder: (context, data) {
-                    final allIngredients = [
-                      ..._popularIngredients,
-                      ...data.custom,
-                    ];
-                    return Wrap(
-                      spacing: 8,
-                      children: allIngredients.map((ingredient) {
-                        final isSelected = data.selected.contains(ingredient);
-                        final isCustom = data.custom.contains(ingredient);
-                        return FilterChip(
-                          label: Text(ingredient),
-                          selected: isSelected,
-                          onSelected: (_) {
-                            recipeBloc.add(
-                              RecipeEvent.toggleIngredient(ingredient),
-                            );
-                          },
-                          deleteIcon: isCustom
-                              ? const Icon(Icons.close, size: 18)
-                              : null,
-                          onDeleted: isCustom
-                              ? () {
-                                  recipeBloc.add(
-                                    RecipeEvent.removeCustomIngredient(
-                                      ingredient,
-                                    ),
-                                  );
-                                }
-                              : null,
-                        );
-                      }).toList(),
-                    );
-                  },
-                ),
-                const SizedBox(height: 24),
-              ],
+                  const SizedBox(height: 24),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: BlocBuilder<RecipeBloc, RecipeState>(
-        bloc: recipeBloc,
-        buildWhen: (previous, current) =>
-            previous.suggestionsLoadingState != current.suggestionsLoadingState,
-        builder: (context, state) {
-          final isLoading =
-              state.suggestionsLoadingState == RecipeLoadingState.loading;
+        bottomNavigationBar: BlocBuilder<RecipeBloc, RecipeState>(
+          bloc: recipeBloc,
+          buildWhen: (previous, current) =>
+              previous.suggestionsLoadingState !=
+              current.suggestionsLoadingState,
+          builder: (context, state) {
+            final isLoading =
+                state.suggestionsLoadingState == RecipeLoadingState.loading;
 
-          return SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FilledButton.icon(
-                onPressed: isLoading
-                    ? null
-                    : () {
-                        recipeBloc.add(
-                          const RecipeEvent.fetchRecipeSuggestions(),
-                        );
-                      },
-                icon: isLoading
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Colors.white,
-                        ),
-                      )
-                    : const Icon(Icons.restaurant),
-                label: Text(
-                  isLoading ? 'Generating...' : 'Get Recipe Suggestions',
-                ),
-                style: FilledButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 32,
-                    vertical: 16,
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: FilledButton.icon(
+                  onPressed: isLoading
+                      ? null
+                      : () {
+                          recipeBloc.add(
+                            const RecipeEvent.fetchRecipeSuggestions(),
+                          );
+                        },
+                  icon: isLoading
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: Colors.white,
+                          ),
+                        )
+                      : const Icon(Icons.restaurant),
+                  label: Text(
+                    isLoading ? 'Generating...' : 'Get Recipe Suggestions',
+                  ),
+                  style: FilledButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 16,
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
 
-  Future<void> _showAddCuisineDialog(
-    BuildContext context,
-    RecipeBloc recipeBloc,
-  ) async {
-    final controller = TextEditingController();
-    final result = await showDialog<String>(
+  Future<void> _showAddCustomDialog(
+    BuildContext context, {
+    required String title,
+    required String labelText,
+    required String hintText,
+    required void Function(String item) onAdd,
+  }) async {
+    final items = await AddCustomItemDialog.show(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Add Custom Cuisine'),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          decoration: const InputDecoration(
-            labelText: 'Cuisine name',
-            hintText: 'e.g., Brazilian, Ethiopian',
-          ),
-          textCapitalization: TextCapitalization.words,
-          onSubmitted: (value) => Navigator.of(context).pop(value),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(controller.text),
-            child: const Text('Add'),
-          ),
-        ],
-      ),
+      title: title,
+      labelText: labelText,
+      hintText: hintText,
     );
-
-    if (result != null && result.trim().isNotEmpty) {
-      recipeBloc.add(RecipeEvent.addCustomCuisine(result));
-    }
-  }
-
-  Future<void> _showAddIngredientDialog(
-    BuildContext context,
-    RecipeBloc recipeBloc,
-  ) async {
-    final controller = TextEditingController();
-    final result = await showDialog<String>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Add Custom Ingredient'),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          decoration: const InputDecoration(
-            labelText: 'Ingredient name',
-            hintText: 'e.g., Quinoa, Kale',
-          ),
-          textCapitalization: TextCapitalization.words,
-          onSubmitted: (value) => Navigator.of(context).pop(value),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(controller.text),
-            child: const Text('Add'),
-          ),
-        ],
-      ),
-    );
-
-    if (result != null && result.trim().isNotEmpty) {
-      recipeBloc.add(RecipeEvent.addCustomIngredient(result));
-    }
+    if (items == null) return;
+    items.forEach(onAdd);
   }
 }

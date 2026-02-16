@@ -410,6 +410,7 @@ Map<String, dynamic> toJson(MyState state) {
 4. **Responsive layouts** - Use `Layout` widget and `context.layout`
 5. **Dependency injection** - Never instantiate dependencies directly
 6. **Hydrated state** - For data that should persist
+7. **Widgets over builder functions** - Extract reusable UI into widget classes, never use local builder functions or static methods that return widgets
 
 ## Code Formatting
 

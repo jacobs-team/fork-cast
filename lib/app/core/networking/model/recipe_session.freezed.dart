@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RecipeSession {
 
- String get id; DateTime get createdAt; List<String> get cuisines; List<String> get ingredients; bool get strictIngredients; List<Recipe> get recipes;
+ String get id; DateTime get createdAt; List<String> get cuisines; List<String> get ingredients; bool get strictIngredients; List<Recipe> get recipes; List<String> get recipeTypes;
 /// Create a copy of RecipeSession
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $RecipeSessionCopyWith<RecipeSession> get copyWith => _$RecipeSessionCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RecipeSession&&(identical(other.id, id) || other.id == id)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other.cuisines, cuisines)&&const DeepCollectionEquality().equals(other.ingredients, ingredients)&&(identical(other.strictIngredients, strictIngredients) || other.strictIngredients == strictIngredients)&&const DeepCollectionEquality().equals(other.recipes, recipes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RecipeSession&&(identical(other.id, id) || other.id == id)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other.cuisines, cuisines)&&const DeepCollectionEquality().equals(other.ingredients, ingredients)&&(identical(other.strictIngredients, strictIngredients) || other.strictIngredients == strictIngredients)&&const DeepCollectionEquality().equals(other.recipes, recipes)&&const DeepCollectionEquality().equals(other.recipeTypes, recipeTypes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,createdAt,const DeepCollectionEquality().hash(cuisines),const DeepCollectionEquality().hash(ingredients),strictIngredients,const DeepCollectionEquality().hash(recipes));
+int get hashCode => Object.hash(runtimeType,id,createdAt,const DeepCollectionEquality().hash(cuisines),const DeepCollectionEquality().hash(ingredients),strictIngredients,const DeepCollectionEquality().hash(recipes),const DeepCollectionEquality().hash(recipeTypes));
 
 @override
 String toString() {
-  return 'RecipeSession(id: $id, createdAt: $createdAt, cuisines: $cuisines, ingredients: $ingredients, strictIngredients: $strictIngredients, recipes: $recipes)';
+  return 'RecipeSession(id: $id, createdAt: $createdAt, cuisines: $cuisines, ingredients: $ingredients, strictIngredients: $strictIngredients, recipes: $recipes, recipeTypes: $recipeTypes)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $RecipeSessionCopyWith<$Res>  {
   factory $RecipeSessionCopyWith(RecipeSession value, $Res Function(RecipeSession) _then) = _$RecipeSessionCopyWithImpl;
 @useResult
 $Res call({
- String id, DateTime createdAt, List<String> cuisines, List<String> ingredients, bool strictIngredients, List<Recipe> recipes
+ String id, DateTime createdAt, List<String> cuisines, List<String> ingredients, bool strictIngredients, List<Recipe> recipes, List<String> recipeTypes
 });
 
 
@@ -65,7 +65,7 @@ class _$RecipeSessionCopyWithImpl<$Res>
 
 /// Create a copy of RecipeSession
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? createdAt = null,Object? cuisines = null,Object? ingredients = null,Object? strictIngredients = null,Object? recipes = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? createdAt = null,Object? cuisines = null,Object? ingredients = null,Object? strictIngredients = null,Object? recipes = null,Object? recipeTypes = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
@@ -73,7 +73,8 @@ as DateTime,cuisines: null == cuisines ? _self.cuisines : cuisines // ignore: ca
 as List<String>,ingredients: null == ingredients ? _self.ingredients : ingredients // ignore: cast_nullable_to_non_nullable
 as List<String>,strictIngredients: null == strictIngredients ? _self.strictIngredients : strictIngredients // ignore: cast_nullable_to_non_nullable
 as bool,recipes: null == recipes ? _self.recipes : recipes // ignore: cast_nullable_to_non_nullable
-as List<Recipe>,
+as List<Recipe>,recipeTypes: null == recipeTypes ? _self.recipeTypes : recipeTypes // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 
@@ -158,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  DateTime createdAt,  List<String> cuisines,  List<String> ingredients,  bool strictIngredients,  List<Recipe> recipes)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  DateTime createdAt,  List<String> cuisines,  List<String> ingredients,  bool strictIngredients,  List<Recipe> recipes,  List<String> recipeTypes)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RecipeSession() when $default != null:
-return $default(_that.id,_that.createdAt,_that.cuisines,_that.ingredients,_that.strictIngredients,_that.recipes);case _:
+return $default(_that.id,_that.createdAt,_that.cuisines,_that.ingredients,_that.strictIngredients,_that.recipes,_that.recipeTypes);case _:
   return orElse();
 
 }
@@ -179,10 +180,10 @@ return $default(_that.id,_that.createdAt,_that.cuisines,_that.ingredients,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  DateTime createdAt,  List<String> cuisines,  List<String> ingredients,  bool strictIngredients,  List<Recipe> recipes)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  DateTime createdAt,  List<String> cuisines,  List<String> ingredients,  bool strictIngredients,  List<Recipe> recipes,  List<String> recipeTypes)  $default,) {final _that = this;
 switch (_that) {
 case _RecipeSession():
-return $default(_that.id,_that.createdAt,_that.cuisines,_that.ingredients,_that.strictIngredients,_that.recipes);case _:
+return $default(_that.id,_that.createdAt,_that.cuisines,_that.ingredients,_that.strictIngredients,_that.recipes,_that.recipeTypes);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +200,10 @@ return $default(_that.id,_that.createdAt,_that.cuisines,_that.ingredients,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  DateTime createdAt,  List<String> cuisines,  List<String> ingredients,  bool strictIngredients,  List<Recipe> recipes)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  DateTime createdAt,  List<String> cuisines,  List<String> ingredients,  bool strictIngredients,  List<Recipe> recipes,  List<String> recipeTypes)?  $default,) {final _that = this;
 switch (_that) {
 case _RecipeSession() when $default != null:
-return $default(_that.id,_that.createdAt,_that.cuisines,_that.ingredients,_that.strictIngredients,_that.recipes);case _:
+return $default(_that.id,_that.createdAt,_that.cuisines,_that.ingredients,_that.strictIngredients,_that.recipes,_that.recipeTypes);case _:
   return null;
 
 }
@@ -214,7 +215,7 @@ return $default(_that.id,_that.createdAt,_that.cuisines,_that.ingredients,_that.
 @JsonSerializable()
 
 class _RecipeSession implements RecipeSession {
-  const _RecipeSession({required this.id, required this.createdAt, required final  List<String> cuisines, required final  List<String> ingredients, required this.strictIngredients, required final  List<Recipe> recipes}): _cuisines = cuisines,_ingredients = ingredients,_recipes = recipes;
+  const _RecipeSession({required this.id, required this.createdAt, required final  List<String> cuisines, required final  List<String> ingredients, required this.strictIngredients, required final  List<Recipe> recipes, final  List<String> recipeTypes = const []}): _cuisines = cuisines,_ingredients = ingredients,_recipes = recipes,_recipeTypes = recipeTypes;
   factory _RecipeSession.fromJson(Map<String, dynamic> json) => _$RecipeSessionFromJson(json);
 
 @override final  String id;
@@ -241,6 +242,13 @@ class _RecipeSession implements RecipeSession {
   return EqualUnmodifiableListView(_recipes);
 }
 
+ final  List<String> _recipeTypes;
+@override@JsonKey() List<String> get recipeTypes {
+  if (_recipeTypes is EqualUnmodifiableListView) return _recipeTypes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_recipeTypes);
+}
+
 
 /// Create a copy of RecipeSession
 /// with the given fields replaced by the non-null parameter values.
@@ -255,16 +263,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RecipeSession&&(identical(other.id, id) || other.id == id)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other._cuisines, _cuisines)&&const DeepCollectionEquality().equals(other._ingredients, _ingredients)&&(identical(other.strictIngredients, strictIngredients) || other.strictIngredients == strictIngredients)&&const DeepCollectionEquality().equals(other._recipes, _recipes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RecipeSession&&(identical(other.id, id) || other.id == id)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other._cuisines, _cuisines)&&const DeepCollectionEquality().equals(other._ingredients, _ingredients)&&(identical(other.strictIngredients, strictIngredients) || other.strictIngredients == strictIngredients)&&const DeepCollectionEquality().equals(other._recipes, _recipes)&&const DeepCollectionEquality().equals(other._recipeTypes, _recipeTypes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,createdAt,const DeepCollectionEquality().hash(_cuisines),const DeepCollectionEquality().hash(_ingredients),strictIngredients,const DeepCollectionEquality().hash(_recipes));
+int get hashCode => Object.hash(runtimeType,id,createdAt,const DeepCollectionEquality().hash(_cuisines),const DeepCollectionEquality().hash(_ingredients),strictIngredients,const DeepCollectionEquality().hash(_recipes),const DeepCollectionEquality().hash(_recipeTypes));
 
 @override
 String toString() {
-  return 'RecipeSession(id: $id, createdAt: $createdAt, cuisines: $cuisines, ingredients: $ingredients, strictIngredients: $strictIngredients, recipes: $recipes)';
+  return 'RecipeSession(id: $id, createdAt: $createdAt, cuisines: $cuisines, ingredients: $ingredients, strictIngredients: $strictIngredients, recipes: $recipes, recipeTypes: $recipeTypes)';
 }
 
 
@@ -275,7 +283,7 @@ abstract mixin class _$RecipeSessionCopyWith<$Res> implements $RecipeSessionCopy
   factory _$RecipeSessionCopyWith(_RecipeSession value, $Res Function(_RecipeSession) _then) = __$RecipeSessionCopyWithImpl;
 @override @useResult
 $Res call({
- String id, DateTime createdAt, List<String> cuisines, List<String> ingredients, bool strictIngredients, List<Recipe> recipes
+ String id, DateTime createdAt, List<String> cuisines, List<String> ingredients, bool strictIngredients, List<Recipe> recipes, List<String> recipeTypes
 });
 
 
@@ -292,7 +300,7 @@ class __$RecipeSessionCopyWithImpl<$Res>
 
 /// Create a copy of RecipeSession
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? createdAt = null,Object? cuisines = null,Object? ingredients = null,Object? strictIngredients = null,Object? recipes = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? createdAt = null,Object? cuisines = null,Object? ingredients = null,Object? strictIngredients = null,Object? recipes = null,Object? recipeTypes = null,}) {
   return _then(_RecipeSession(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
@@ -300,7 +308,8 @@ as DateTime,cuisines: null == cuisines ? _self._cuisines : cuisines // ignore: c
 as List<String>,ingredients: null == ingredients ? _self._ingredients : ingredients // ignore: cast_nullable_to_non_nullable
 as List<String>,strictIngredients: null == strictIngredients ? _self.strictIngredients : strictIngredients // ignore: cast_nullable_to_non_nullable
 as bool,recipes: null == recipes ? _self._recipes : recipes // ignore: cast_nullable_to_non_nullable
-as List<Recipe>,
+as List<Recipe>,recipeTypes: null == recipeTypes ? _self._recipeTypes : recipeTypes // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 

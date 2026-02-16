@@ -17,6 +17,11 @@ _RecipeState _$RecipeStateFromJson(Map<String, dynamic> json) => _RecipeState(
           ?.map((e) => e as String)
           .toList() ??
       const [],
+  selectedRecipeTypes:
+      (json['selectedRecipeTypes'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList() ??
+      const [],
   customCuisines:
       (json['customCuisines'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -24,6 +29,11 @@ _RecipeState _$RecipeStateFromJson(Map<String, dynamic> json) => _RecipeState(
       const [],
   customIngredients:
       (json['customIngredients'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList() ??
+      const [],
+  customRecipeTypes:
+      (json['customRecipeTypes'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList() ??
       const [],
@@ -38,6 +48,16 @@ _RecipeState _$RecipeStateFromJson(Map<String, dynamic> json) => _RecipeState(
           .toList() ??
       const [],
   strictIngredients: json['strictIngredients'] as bool? ?? false,
+  recipeImagePaths:
+      (json['recipeImagePaths'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ) ??
+      const {},
+  recipeImageLoadingStates:
+      (json['recipeImageLoadingStates'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, $enumDecode(_$ImageLoadingStateEnumMap, e)),
+      ) ??
+      const {},
   suggestionsLoadingState:
       $enumDecodeNullable(
         _$RecipeLoadingStateEnumMap,
@@ -51,15 +71,27 @@ Map<String, dynamic> _$RecipeStateToJson(_RecipeState instance) =>
     <String, dynamic>{
       'selectedCuisines': instance.selectedCuisines,
       'selectedIngredients': instance.selectedIngredients,
+      'selectedRecipeTypes': instance.selectedRecipeTypes,
       'customCuisines': instance.customCuisines,
       'customIngredients': instance.customIngredients,
+      'customRecipeTypes': instance.customRecipeTypes,
       'recipeSessions': instance.recipeSessions,
       'favoriteRecipes': instance.favoriteRecipes,
       'strictIngredients': instance.strictIngredients,
+      'recipeImagePaths': instance.recipeImagePaths,
+      'recipeImageLoadingStates': instance.recipeImageLoadingStates.map(
+        (k, e) => MapEntry(k, _$ImageLoadingStateEnumMap[e]!),
+      ),
       'suggestionsLoadingState':
           _$RecipeLoadingStateEnumMap[instance.suggestionsLoadingState]!,
       'suggestionsErrorMessage': instance.suggestionsErrorMessage,
     };
+
+const _$ImageLoadingStateEnumMap = {
+  ImageLoadingState.loading: 'loading',
+  ImageLoadingState.success: 'success',
+  ImageLoadingState.failure: 'failure',
+};
 
 const _$RecipeLoadingStateEnumMap = {
   RecipeLoadingState.init: 'init',

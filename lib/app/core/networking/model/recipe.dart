@@ -28,7 +28,6 @@ abstract class Recipe with _$Recipe {
     required List<String> instructions,
     required int servings,
     String? imageUrl,
-    @Default(false) bool isFavorite,
   }) = _Recipe;
 
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);

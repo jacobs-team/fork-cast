@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fork_cast/app/core/core.dart';
 import 'package:fork_cast/app/core/dependencies/dependencies.dart';
 import 'package:fork_cast/app/feature/recipes/bloc/recipe_bloc.dart';
+import 'package:fork_cast/app/feature/recipes/widgets/widgets.dart';
 
 /// {@template recipe_detail_view}
 /// A stateless widget that displays full recipe details including
@@ -24,32 +25,35 @@ class RecipeDetailView extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return BlocBuilder<RecipeBloc, RecipeState>(
+    final imageKey = '${recipe.cuisine}-${recipe.name}'.toLowerCase();
+
+    return BlocSelector<
+      RecipeBloc,
+      RecipeState,
+      ({bool isFavorite, String? imagePath})
+    >(
       bloc: recipeBloc,
-      builder: (context, state) {
-        var currentRecipe = recipe;
-        for (final session in state.recipeSessions) {
-          final found = session.recipes.where((r) => r == recipe).firstOrNull;
-          if (found != null) {
-            currentRecipe = found;
-            break;
-          }
-        }
+      selector: (state) => (
+        isFavorite: state.favoriteRecipes.contains(recipe),
+        imagePath: state.recipeImagePaths[imageKey],
+      ),
+      builder: (context, data) {
+        final isFavorite = data.isFavorite;
+        final imagePath = data.imagePath;
+        final hasImage = imagePath != null && imagePath.isNotEmpty;
 
         return Scaffold(
           appBar: AppBar(
-            title: Text(currentRecipe.name),
+            title: Text(recipe.name),
             actions: [
               IconButton(
                 icon: Icon(
-                  currentRecipe.isFavorite
-                      ? Icons.favorite
-                      : Icons.favorite_border,
-                  color: currentRecipe.isFavorite ? Colors.red : null,
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: isFavorite ? Colors.red : null,
                 ),
                 onPressed: () {
                   recipeBloc.add(
-                    RecipeEvent.toggleFavoriteRecipe(currentRecipe),
+                    RecipeEvent.toggleFavoriteRecipe(recipe),
                   );
                 },
               ),
@@ -60,10 +64,11 @@ class RecipeDetailView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                if (hasImage) RecipeImage(recipe: recipe, imageUrl: imagePath),
                 Row(
                   children: [
                     Chip(
-                      label: Text(currentRecipe.cuisine),
+                      label: Text(recipe.cuisine),
                       backgroundColor: colorScheme.secondaryContainer,
                       labelStyle: TextStyle(
                         color: colorScheme.onSecondaryContainer,
@@ -71,9 +76,9 @@ class RecipeDetailView extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Chip(
-                      label: Text(currentRecipe.difficulty),
+                      label: Text(recipe.difficulty),
                       backgroundColor: _getDifficultyColor(
-                        currentRecipe.difficulty,
+                        recipe.difficulty,
                       ),
                     ),
                   ],
@@ -84,11 +89,11 @@ class RecipeDetailView extends StatelessWidget {
                   children: [
                     const Icon(Icons.access_time, size: 20),
                     const SizedBox(width: 4),
-                    Text(currentRecipe.prepTime),
+                    Text(recipe.prepTime),
                     const SizedBox(width: 24),
                     const Icon(Icons.people, size: 20),
                     const SizedBox(width: 4),
-                    Text('${currentRecipe.servings} servings'),
+                    Text('${recipe.servings} servings'),
                   ],
                 ),
                 const SizedBox(height: 24),
@@ -101,7 +106,7 @@ class RecipeDetailView extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  currentRecipe.description,
+                  recipe.description,
                   style: theme.textTheme.bodyLarge,
                 ),
                 const SizedBox(height: 24),
@@ -118,7 +123,7 @@ class RecipeDetailView extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: currentRecipe.ingredients.map((ingredient) {
+                      children: recipe.ingredients.map((ingredient) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 6),
                           child: Row(
@@ -156,7 +161,7 @@ class RecipeDetailView extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (currentRecipe.ingredients.any((i) => i.isMainIngredient))
+                if (recipe.ingredients.any((i) => i.isMainIngredient))
                   Padding(
                     padding: const EdgeInsets.only(top: 8, left: 8),
                     child: Row(
@@ -186,7 +191,7 @@ class RecipeDetailView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                ...currentRecipe.instructions.asMap().entries.map((entry) {
+                ...recipe.instructions.asMap().entries.map((entry) {
                   final index = entry.key;
                   final instruction = entry.value;
                   return Padding(

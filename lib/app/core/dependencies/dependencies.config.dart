@@ -56,14 +56,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i915.CoffeeRepository>(
       () => _i915.CoffeeRepository(gh<_i68.CoffeeApi>()),
     );
+    gh.singleton<_i436.RecipeRepository>(
+      () => _i436.RecipeRepository(
+        gh<_i68.RecipeApi>(),
+        gh<_i68.FileCacheService>(),
+      ),
+    );
     gh.singleton<_i995.CoffeeBloc>(
       () => _i995.CoffeeBloc(
         gh<_i915.CoffeeRepository>(),
         gh<_i903.FileCacheService>(),
       ),
-    );
-    gh.singleton<_i436.RecipeRepository>(
-      () => _i436.RecipeRepository(gh<_i68.RecipeApi>()),
     );
     gh.singleton<_i84.RecipeBloc>(
       () => _i84.RecipeBloc(gh<_i609.RecipeRepository>()),

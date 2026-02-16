@@ -17,6 +17,7 @@ abstract class RecipeSession with _$RecipeSession {
     required List<String> ingredients,
     required bool strictIngredients,
     required List<Recipe> recipes,
+    @Default([]) List<String> recipeTypes,
   }) = _RecipeSession;
 
   /// Creates a [RecipeSession] from JSON.

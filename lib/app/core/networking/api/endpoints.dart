@@ -27,4 +27,7 @@ final class RecipeRoutes {
 
   /// Path: /v1/chat/completions (OpenAI API endpoint)
   String get suggestions => '/v1/chat/completions';
+
+  /// Path: /v1/images/generations (DALL-E image generation)
+  String get imageGeneration => '/v1/images/generations';
 }

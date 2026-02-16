@@ -37,7 +37,6 @@ _Recipe _$RecipeFromJson(Map<String, dynamic> json) => _Recipe(
       .toList(),
   servings: (json['servings'] as num).toInt(),
   imageUrl: json['imageUrl'] as String?,
-  isFavorite: json['isFavorite'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$RecipeToJson(_Recipe instance) => <String, dynamic>{
@@ -51,5 +50,4 @@ Map<String, dynamic> _$RecipeToJson(_Recipe instance) => <String, dynamic>{
   'instructions': instance.instructions,
   'servings': instance.servings,
   'imageUrl': instance.imageUrl,
-  'isFavorite': instance.isFavorite,
 };

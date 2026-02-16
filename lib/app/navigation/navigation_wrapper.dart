@@ -29,6 +29,7 @@ class NavigationWrapper extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        title: const Text('ForkCast'),
         actions: [
           // IconButton(
           //   onPressed: getIt<AuthCubit>().logout,
