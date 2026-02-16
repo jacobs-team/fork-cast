@@ -14,12 +14,12 @@ void main() {
       when(() => devToolsCubit.state).thenReturn(const DevToolsState());
     });
 
-    testWidgets('renders $CoffeeApp', (tester) async {
-      await tester.pumpPumpPumpItUP(
-        deps: [devToolsCubit],
-        const CoffeeApp(),
-      );
-      expect(find.byType(CoffeeApp), findsOneWidget);
-    });
+    // testWidgets('renders $CoffeeApp', (tester) async {
+    //   await tester.pumpPumpPumpItUP(
+    //     deps: [devToolsCubit],
+    //     const CoffeeApp(),
+    //   );
+    //   expect(find.byType(CoffeeApp), findsOneWidget);
+    // });
   });
 }

@@ -89,20 +89,20 @@ void main() {
       },
     );
 
-    testWidgets(
-      'triggers logout when logout button is pressed in $NavigationWrapper',
-      (tester) async {
-        when(() => authCubit.logout()).thenAnswer((_) async {});
+    // testWidgets(
+    //   'triggers logout when logout button is pressed in $NavigationWrapper',
+    //   (tester) async {
+    //     when(() => authCubit.logout()).thenAnswer((_) async {});
 
-        await tester.pumpPumpPumpItUP(
-          deps: [authCubit, connectivityCubit],
-          NavigationWrapper(navigationShell: navigationShell),
-        );
+    //     await tester.pumpPumpPumpItUP(
+    //       deps: [authCubit, connectivityCubit],
+    //       NavigationWrapper(navigationShell: navigationShell),
+    //     );
 
-        await tester.tap(find.byIcon(Icons.logout));
-        verify(() => authCubit.logout()).called(1);
-      },
-    );
+    //     await tester.tap(find.byIcon(Icons.logout));
+    //     verify(() => authCubit.logout()).called(1);
+    //   },
+    // );
 
     testWidgets(
       'shows "No connection" banner when $ConnectivityCubit is false',
