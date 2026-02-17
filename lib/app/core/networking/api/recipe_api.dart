@@ -63,6 +63,7 @@ class RecipeApi {
     required String recipeName,
     required String cuisine,
     required List<String> mainIngredients,
+    required List<String> instructions,
   }) async {
     return _client.post(
       Endpoints.recipe.imageGeneration,
@@ -72,6 +73,7 @@ class RecipeApi {
           recipeName,
           cuisine,
           mainIngredients,
+          instructions,
         ),
         'n': 1,
         'size': '1024x1024',
@@ -87,13 +89,19 @@ class RecipeApi {
     String recipeName,
     String cuisine,
     List<String> mainIngredients,
+    List<String> instructions,
   ) {
-    final ingredientsText = mainIngredients.take(4).join(', ');
+    final ingredientsText = mainIngredients.join(', ');
+    final stepsText = instructions.join('. ');
     return 'A professional, appetizing food photography '
         'shot of "$recipeName", a $cuisine dish featuring '
-        '$ingredientsText. Beautifully plated on a clean '
-        'surface with natural lighting. '
-        'No text or labels.';
+        '$ingredientsText. The dish is prepared as follows: '
+        '$stepsText. Show the finished plated result. '
+        'Beautifully plated on a clean surface with '
+        'natural lighting. No text or labels. Only depict the '
+        'ingredients listed in the form they would be in given the '
+        'instructions, For example dont show whole mangos if '
+        'the mangos were instructed to be blended.';
   }
 
   String _buildPrompt(

@@ -1,96 +1,29 @@
 // coverage:ignore-file
 
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fork_cast/app/core/networking/model/recipe.dart';
+import 'package:fork_cast/app/core/core.dart';
 import 'package:fork_cast/app/feature/feature.dart';
-import 'package:fork_cast/app/feature/recipes/view/recipe_detail_view.dart';
-import 'package:fork_cast/app/feature/recipes/view/recipe_favorites_view.dart';
-import 'package:fork_cast/app/feature/recipes/view/recipe_history_view.dart';
-import 'package:fork_cast/app/feature/recipes/view/select_preferences_view.dart';
 import 'package:fork_cast/app/navigation/navigation_wrapper.dart';
 import 'package:fork_cast/app/navigation/routes.dart';
 import 'package:fork_cast/l10n/l10n.dart';
 import 'package:go_router/go_router.dart';
 
+part 'app_router.g.dart';
+
 /// {@template app_router}
-/// Central navigation configuration using [GoRouter].
-///
-/// Defines the application's routing structure, including [StatefulShellRoute]
-/// for bottom and rail navigation, route guards via redirect, and UI
-/// destinations.
+/// Central navigation configuration using [GoRouter] and type-safe routes.
 /// {@endtemplate}
 class AppRouter {
-  /// The list of top-level and nested Routes.
-  static final List<RouteBase> routes = [
-    StatefulShellRoute.indexedStack(
-      branches: [
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.preferences,
-              pageBuilder: (context, state) {
-                return const NoTransitionPage(
-                  child: SelectPreferencesView(),
-                );
-              },
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.recipes,
-              pageBuilder: (context, state) {
-                return const NoTransitionPage(child: RecipesView());
-              },
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.favorites,
-              pageBuilder: (context, state) {
-                return const NoTransitionPage(child: RecipeFavoritesView());
-              },
-            ),
-          ],
-        ),
-      ],
-      builder: (context, state, navigationShell) =>
-          NavigationWrapper(navigationShell: navigationShell),
-    ),
-    GoRoute(
-      path: Routes.recipeDetail,
-      pageBuilder: (context, state) {
-        final recipe = state.extra! as Recipe;
-        return NoTransitionPage(
-          child: RecipeDetailView(recipe: recipe),
-        );
-      },
-    ),
-    // GoRoute(
-    //   path: Routes.recipeSuggestions,
-    //   pageBuilder: (context, state) {
-    //     final sessionId = state.extra! as String;
-    //     return NoTransitionPage(
-    //       child: RecipeBrowseView(
-    //         sessionId: sessionId,
-    //       ),
-    //     );
-    //   },
-    // ),
-    if (kDebugMode)
-      GoRoute(
-        path: Routes.devTools,
-        pageBuilder: (context, state) {
-          return const NoTransitionPage(child: DevToolsView());
-        },
-      ),
-  ];
+  /// The global [GoRouter] instance.
+  static final router = GoRouter(
+    initialLocation: Routes.preferences,
+    debugLogDiagnostics: kDebugMode,
+    routes: $appRoutes,
+  );
 
-  /// Data for rendering navigation bars or rails.
   static List<NavigationDestination> destinations(AppLocalizations l10n) => [
     NavigationDestination(
       icon: const Icon(Icons.tune_outlined),
@@ -100,7 +33,7 @@ class AppRouter {
     NavigationDestination(
       icon: const Icon(Icons.dinner_dining_outlined),
       selectedIcon: const Icon(Icons.dinner_dining),
-      label: l10n.results,
+      label: l10n.recipes,
     ),
     NavigationDestination(
       icon: const Icon(Icons.favorite_outline),
@@ -108,27 +41,84 @@ class AppRouter {
       label: l10n.favorites,
     ),
   ];
+}
 
-  /// The global [GoRouter] instance used by the application.
-  static GoRouter router = GoRouter(
-    initialLocation: Routes.preferences,
-    // refreshListenable: getIt<AuthCubit>(),
-    redirect: (context, state) {
-      // final signedIn = getIt<AuthCubit>().state.signedIn;
-      // final isSigningIn = state.uri.path.startsWith(Routes.signIn);
+@TypedStatefulShellRoute<AppShellRouteData>(
+  branches: [
+    TypedStatefulShellBranch<PreferencesBranchData>(
+      routes: [
+        TypedGoRoute<SelectPreferencesRoute>(path: Routes.preferences),
+      ],
+    ),
+    TypedStatefulShellBranch<RecipesBranchData>(
+      routes: [
+        TypedGoRoute<RecipesRoute>(
+          path: Routes.recipes,
+          routes: [
+            TypedGoRoute<RecipeDetailRoute>(path: ':recipe'),
+          ],
+        ),
+      ],
+    ),
+    TypedStatefulShellBranch<FavoritesBranchData>(
+      routes: [
+        TypedGoRoute<RecipeFavoritesRoute>(path: Routes.favorites),
+      ],
+    ),
+  ],
+)
+class AppShellRouteData extends StatefulShellRouteData {
+  const AppShellRouteData();
 
-      // // If not signedIn and trying to access a protected route - Force signIn.
-      // if (!signedIn && !isSigningIn) {
-      //   return Routes.signIn;
-      // }
+  @override
+  Widget builder(
+    BuildContext context,
+    GoRouterState state,
+    StatefulNavigationShell navigationShell,
+  ) {
+    return NavigationWrapper(navigationShell: navigationShell);
+  }
+}
 
-      // // If signedIn and trying to access signIn -> Force coffee.
-      // if (signedIn && isSigningIn) {
-      //   return Routes.coffee;
-      // }
+class PreferencesBranchData extends StatefulShellBranchData {
+  const PreferencesBranchData();
+}
 
-      return null;
-    },
-    routes: routes,
-  );
+class RecipesBranchData extends StatefulShellBranchData {
+  const RecipesBranchData();
+}
+
+class FavoritesBranchData extends StatefulShellBranchData {
+  const FavoritesBranchData();
+}
+
+class SelectPreferencesRoute extends GoRouteData with $SelectPreferencesRoute {
+  const SelectPreferencesRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const SelectPreferencesView();
+}
+
+class RecipesRoute extends GoRouteData with $RecipesRoute {
+  const RecipesRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const RecipesView();
+}
+
+class RecipeFavoritesRoute extends GoRouteData with $RecipeFavoritesRoute {
+  const RecipeFavoritesRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const RecipeFavoritesView();
+}
+
+class RecipeDetailRoute extends GoRouteData with $RecipeDetailRoute {
+  const RecipeDetailRoute({required this.recipe});
+
+  final Recipe recipe;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      RecipeDetailView(recipe: recipe);
 }

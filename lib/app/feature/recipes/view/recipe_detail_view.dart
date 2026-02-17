@@ -64,7 +64,12 @@ class RecipeDetailView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (hasImage) RecipeImage(recipe: recipe, imageUrl: imagePath),
+                if (hasImage)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: RecipeImage(imageUrl: imagePath),
+                  ),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     Chip(

@@ -36,8 +36,8 @@
     "@preferences": {
         "description": "Label for the preferences/settings navigation tab"
     },
-    "results": "Results",
-    "@results": {
-        "description": "Label for the recipe results navigation tab"
+    "recipes": "Recipes",
+    "@recipes": {
+        "description": "Label for the recipe recipes navigation tab"
     }
 }

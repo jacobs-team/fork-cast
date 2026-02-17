@@ -1,49 +1,26 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:fork_cast/app/app.dart';
 import 'package:fork_cast/app/core/dependencies/dependencies.dart';
+import 'package:fork_cast/app/core/service/file_cache_service.dart';
 
-class RecipeImage extends StatefulWidget {
+/// {@template recipe_image}
+/// Displays a recipe image from cache, downloading if needed.
+/// {@endtemplate}
+class RecipeImage extends StatelessWidget {
+  /// {@macro recipe_image}
   const RecipeImage({
-    required this.recipe,
     required this.imageUrl,
     super.key,
   });
 
-  final Recipe recipe;
+  /// The network URL of the image.
   final String imageUrl;
-
-  @override
-  State<RecipeImage> createState() => _RecipeImageState();
-}
-
-class _RecipeImageState extends State<RecipeImage> {
-  // late Future<List<int>> _imageBytesFuture;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _loadBytes();
-  // }
-
-  // void _loadBytes() {
-  //   setState(() {
-  //     _imageBytesFuture = getIt<FileCacheService>()
-  //         .getFile(widget.imageUrl)
-  //         .then((file) => file.readAsBytes());
-  //   });
-  // }
-
-  // void _handleRetry() {
-  //   getIt<RecipeBloc>().add(LoadRecipeImages([widget.recipe]));
-  //   _loadBytes();
-  // }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<File?>(
-      future: getIt<FileCacheService>().getFile(widget.imageUrl),
+      future: getIt<FileCacheService>().getFile(imageUrl),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const SizedBox(
@@ -66,7 +43,7 @@ class _RecipeImageState extends State<RecipeImage> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Failed to load',
+                  'Failed to load image',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],

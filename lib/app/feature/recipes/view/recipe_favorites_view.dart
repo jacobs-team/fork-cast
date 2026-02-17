@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fork_cast/app/core/dependencies/dependencies.dart';
 import 'package:fork_cast/app/feature/recipes/bloc/recipe_bloc.dart';
 import 'package:fork_cast/app/feature/recipes/widgets/recipe_card.dart';
+import 'package:fork_cast/app/navigation/app_router.dart';
 import 'package:fork_cast/app/navigation/routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -61,10 +62,7 @@ class RecipeFavoritesView extends StatelessWidget {
                             .recipeImagePaths['${recipe.cuisine}-${recipe.name}'
                             .toLowerCase()],
                     onTap: () {
-                      context.go(
-                        Routes.recipeDetail,
-                        extra: recipe,
-                      );
+                      RecipeDetailRoute(recipe: recipe).go(context);
                     },
                     onFavorite: () {
                       recipeBloc.add(

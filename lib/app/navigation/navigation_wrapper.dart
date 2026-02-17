@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fork_cast/app/core/core.dart';
 import 'package:fork_cast/app/core/dependencies/dependencies.dart';
 import 'package:fork_cast/app/navigation/navigation.dart';
+import 'package:fork_cast/app/navigation/routes.dart';
 import 'package:fork_cast/app/widgets/layout.dart';
 import 'package:fork_cast/l10n/l10n.dart';
 import 'package:go_router/go_router.dart';

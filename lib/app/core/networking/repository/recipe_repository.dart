@@ -9,10 +9,9 @@ import 'package:injectable/injectable.dart';
 @singleton
 class RecipeRepository {
   /// {@macro recipe_repository}
-  RecipeRepository(this._recipeApi, this._fileCacheService);
+  RecipeRepository(this._recipeApi);
 
   final RecipeApi _recipeApi;
-  final FileCacheService _fileCacheService;
 
   /// Fetches recipe suggestions based on user-selected categories and ingredients.
   Future<List<Recipe>> getRecipeSuggestions({
@@ -34,27 +33,27 @@ class RecipeRepository {
     return mapJsonList(jsonData['recipes'], Recipe.fromJson);
   }
 
-  /// Generates an image for a recipe and caches it locally.
+  /// Generates an image for a recipe via DALL-E.
   ///
-  /// Returns the local file path of the cached image.
+  /// Returns the network URL of the generated image.
   Future<String> generateRecipeImage({
     required String recipeName,
     required String cuisine,
     required List<String> mainIngredients,
+    required List<String> instructions,
   }) async {
     final response = await _recipeApi.generateRecipeImage(
       recipeName: recipeName,
       cuisine: cuisine,
       mainIngredients: mainIngredients,
+      instructions: instructions,
     );
 
     final dalleResponse = mapJson(
       response.data,
       DalleResponse.fromJson,
     );
-    final imageUrl = dalleResponse.data.first.url;
-
-    final cachedFile = await _fileCacheService.getFile(imageUrl);
-    return cachedFile.path;
+    return dalleResponse.data.first.url;
   }
+
 }

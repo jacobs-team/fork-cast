@@ -73,10 +73,7 @@ class SelectPreferencesView extends StatelessWidget {
           current.suggestionsLoadingState == RecipeLoadingState.success,
       listener: (context, state) {
         if (state.recipeSessions.isNotEmpty) {
-          context.go(
-            Routes.recipes,
-            extra: state.recipeSessions.first.id,
-          );
+          context.go(Routes.recipes);
         }
       },
       child: Scaffold(
@@ -186,7 +183,7 @@ class SelectPreferencesView extends StatelessWidget {
                     dialogLabelText: 'Recipe type',
                     dialogHintText: 'e.g., Brunch, Smoothie',
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),

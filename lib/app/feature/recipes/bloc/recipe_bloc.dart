@@ -258,16 +258,17 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
             },
           ),
         );
-        final path = await _recipeRepository.generateRecipeImage(
+        final url = await _recipeRepository.generateRecipeImage(
           recipeName: recipe.name,
           cuisine: recipe.cuisine,
           mainIngredients: recipe.mainIngredients,
+          instructions: recipe.instructions,
         );
         emit(
           state.copyWith(
             recipeImagePaths: {
               ...state.recipeImagePaths,
-              key: path,
+              key: url,
             },
             recipeImageLoadingStates: {
               ...state.recipeImageLoadingStates,
