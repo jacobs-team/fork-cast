@@ -11,6 +11,9 @@ abstract final class Endpoints {
 
   /// Endpoints related to recipe AI services.
   static const recipe = RecipeRoutes._();
+
+  /// Endpoints related to pantry AI services.
+  static const pantry = PantryRoutes._();
 }
 
 /// Namespace for Coffee endpoints.
@@ -30,4 +33,12 @@ final class RecipeRoutes {
 
   /// Path: /v1/images/generations (DALL-E image generation)
   String get imageGeneration => '/v1/images/generations';
+}
+
+/// Namespace for Pantry AI endpoints.
+final class PantryRoutes {
+  const PantryRoutes._();
+
+  /// Path: /v1/chat/completions (OpenAI API endpoint for item extraction)
+  String get extractItems => '/v1/chat/completions';
 }

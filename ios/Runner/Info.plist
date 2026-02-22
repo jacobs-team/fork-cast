@@ -52,5 +52,13 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to scan receipts and pantry items</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used to select photos of receipts and pantry items</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Used for voice input to add pantry items</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Used to transcribe voice input for pantry items</string>
 </dict>
 </plist>

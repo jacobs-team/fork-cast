@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fork_cast/app/core/core.dart';
+import 'package:fork_cast/app/core/dependencies/dependencies.dart';
 import 'package:fork_cast/app/feature/feature.dart';
 import 'package:fork_cast/app/navigation/navigation_wrapper.dart';
 import 'package:fork_cast/app/navigation/routes.dart';
@@ -21,8 +22,16 @@ class AppRouter {
   static final router = GoRouter(
     initialLocation: Routes.preferences,
     debugLogDiagnostics: kDebugMode,
-    routes: $appRoutes,
+    routes: [...$appRoutes, $stockPantryRoute],
+    redirect: _redirect,
   );
+
+  static String? _redirect(BuildContext context, GoRouterState state) {
+    final isPantryEmpty = getIt<PantryBloc>().state.pantryItems.isEmpty;
+    final isGoingToPantry = state.matchedLocation == Routes.pantry;
+    if (isPantryEmpty && !isGoingToPantry) return Routes.pantry;
+    return null;
+  }
 
   static List<NavigationDestination> destinations(AppLocalizations l10n) => [
     NavigationDestination(
@@ -45,12 +54,12 @@ class AppRouter {
 
 @TypedStatefulShellRoute<AppShellRouteData>(
   branches: [
-    TypedStatefulShellBranch<PreferencesBranchData>(
+    TypedStatefulShellBranch<StatefulShellBranchData>(
       routes: [
         TypedGoRoute<SelectPreferencesRoute>(path: Routes.preferences),
       ],
     ),
-    TypedStatefulShellBranch<RecipesBranchData>(
+    TypedStatefulShellBranch<StatefulShellBranchData>(
       routes: [
         TypedGoRoute<RecipesRoute>(
           path: Routes.recipes,
@@ -60,7 +69,7 @@ class AppRouter {
         ),
       ],
     ),
-    TypedStatefulShellBranch<FavoritesBranchData>(
+    TypedStatefulShellBranch<StatefulShellBranchData>(
       routes: [
         TypedGoRoute<RecipeFavoritesRoute>(path: Routes.favorites),
       ],
@@ -78,18 +87,6 @@ class AppShellRouteData extends StatefulShellRouteData {
   ) {
     return NavigationWrapper(navigationShell: navigationShell);
   }
-}
-
-class PreferencesBranchData extends StatefulShellBranchData {
-  const PreferencesBranchData();
-}
-
-class RecipesBranchData extends StatefulShellBranchData {
-  const RecipesBranchData();
-}
-
-class FavoritesBranchData extends StatefulShellBranchData {
-  const FavoritesBranchData();
 }
 
 class SelectPreferencesRoute extends GoRouteData with $SelectPreferencesRoute {
@@ -121,4 +118,13 @@ class RecipeDetailRoute extends GoRouteData with $RecipeDetailRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       RecipeDetailView(recipe: recipe);
+}
+
+@TypedGoRoute<StockPantryRoute>(path: Routes.pantry)
+class StockPantryRoute extends GoRouteData with $StockPantryRoute {
+  const StockPantryRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const StockPantryView();
 }

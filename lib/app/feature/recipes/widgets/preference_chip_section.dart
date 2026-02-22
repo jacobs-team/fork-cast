@@ -18,6 +18,7 @@ class PreferenceChipSection extends StatelessWidget {
     required this.onClear,
     required this.onAddCustom,
     required this.onRemoveCustom,
+    required this.onRemoveDefault,
     required this.dialogTitle,
     required this.dialogLabelText,
     required this.dialogHintText,
@@ -30,11 +31,9 @@ class PreferenceChipSection extends StatelessWidget {
   /// The preset items to always show.
   final List<String> defaultItems;
 
-  /// Selects the relevant selected/custom lists from state.
-  final ({List<String> selected, List<String> custom}) Function(
-    RecipeState state,
-  )
-  selector;
+  /// Selects the relevant selected/custom/hidden lists from state.
+  final ({List<String> selected, List<String> custom, List<String> hidden})
+      Function(RecipeState state) selector;
 
   /// Called when a chip is toggled.
   final ValueChanged<String> onToggle;
@@ -47,6 +46,9 @@ class PreferenceChipSection extends StatelessWidget {
 
   /// Called when a custom chip is deleted.
   final ValueChanged<String> onRemoveCustom;
+
+  /// Called when a default chip is deleted.
+  final ValueChanged<String> onRemoveDefault;
 
   /// Title for the add-custom dialog.
   final String dialogTitle;
@@ -75,7 +77,7 @@ class PreferenceChipSection extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: onClear,
-                  icon: const Icon(Icons.clear_all),
+                  icon: const Icon(Icons.deselect),
                   tooltip: 'Clear all $title',
                 ),
                 IconButton.filled(
@@ -100,14 +102,17 @@ class PreferenceChipSection extends StatelessWidget {
         BlocSelector<
           RecipeBloc,
           RecipeState,
-          ({List<String> selected, List<String> custom})
+          ({List<String> selected, List<String> custom, List<String> hidden})
         >(
           bloc: recipeBloc,
           selector: selector,
           builder: (context, data) {
             final noneSelected = data.selected.isEmpty;
+            final visibleDefaults = defaultItems
+                .where((item) => !data.hidden.contains(item))
+                .toList();
             final allItems = [
-              ...defaultItems,
+              ...visibleDefaults,
               ...data.custom,
             ];
             return Wrap(
@@ -126,13 +131,10 @@ class PreferenceChipSection extends StatelessWidget {
                     label: Text(item),
                     selected: isSelected,
                     onSelected: (_) => onToggle(item),
-                    deleteIcon: isCustom
-                        ? const Icon(
-                            Icons.close,
-                            size: 18,
-                          )
-                        : null,
-                    onDeleted: isCustom ? () => onRemoveCustom(item) : null,
+                    deleteIcon: const Icon(Icons.close, size: 18),
+                    onDeleted: isCustom
+                        ? () => onRemoveCustom(item)
+                        : () => onRemoveDefault(item),
                   );
                 }),
               ],

@@ -237,7 +237,7 @@ class MyView extends StatelessWidget {
 - Use `BlocSelector` for optimized rebuilds on specific state fields
 - Use `BlocListener` for side effects (snackbars, navigation, etc.)
 - Always handle loading, error, and success states
-- prefer `BlocSelector` where possible to avoid unnecessary reloads
+- Prefer `BlocSelector` over `BlocBuilder` with `buildWhen`. When selecting multiple fields, use a Dart record as the selector return type (e.g., `({List<Item> items, bool isLoading})`)
 
 **Responsive Design using Layout Widget:**
 

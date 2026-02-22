@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fork_cast/app/core/core.dart';
 import 'package:fork_cast/app/core/dependencies/dependencies.dart';
+import 'package:fork_cast/app/feature/pantry/pantry.dart';
 import 'package:fork_cast/app/feature/recipes/bloc/recipe_bloc.dart';
 import 'package:fork_cast/app/feature/recipes/widgets/add_custom_item_dialog.dart';
 import 'package:fork_cast/app/feature/recipes/widgets/preference_chip_section.dart';
+import 'package:fork_cast/app/navigation/app_router.dart';
 import 'package:fork_cast/app/navigation/routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,24 +33,6 @@ class SelectPreferencesView extends StatelessWidget {
     'Spanish',
     'Middle Eastern',
     'Caribbean',
-  ];
-
-  static const _popularIngredients = [
-    'Chicken',
-    'Beef',
-    'Pork',
-    'Salmon',
-    'Shrimp',
-    'Tofu',
-    'Pasta',
-    'Rice',
-    'Potatoes',
-    'Tomatoes',
-    'Mushrooms',
-    'Cheese',
-    'Eggs',
-    'Beans',
-    'Avocado',
   ];
 
   static const _recipeTypes = [
@@ -84,36 +69,13 @@ class SelectPreferencesView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BlocSelector<RecipeBloc, RecipeState, bool>(
-                    bloc: recipeBloc,
-                    selector: (state) => state.strictIngredients,
-                    builder: (context, strictIngredients) {
-                      return Card(
-                        child: SwitchListTile(
-                          title: const Text('Strict Ingredients Only'),
-                          subtitle: Text(
-                            strictIngredients
-                                ? 'Recipes will only use selected ingredients'
-                                : 'Recipes will use selected '
-                                      'ingredients as a base',
-                          ),
-                          value: strictIngredients,
-                          onChanged: (_) {
-                            recipeBloc.add(
-                              const RecipeEvent.toggleStrictIngredients(),
-                            );
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 16),
                   PreferenceChipSection(
                     title: 'Cuisines',
                     defaultItems: _foodCategories,
                     selector: (state) => (
                       selected: state.selectedCuisines,
                       custom: state.customCuisines,
+                      hidden: state.hiddenCuisines,
                     ),
                     onToggle: (item) => recipeBloc.add(
                       RecipeEvent.toggleCategory(item),
@@ -127,43 +89,22 @@ class SelectPreferencesView extends StatelessWidget {
                     onRemoveCustom: (item) => recipeBloc.add(
                       RecipeEvent.removeCustomCuisine(item),
                     ),
+                    onRemoveDefault: (item) => recipeBloc.add(
+                      RecipeEvent.hideCuisine(item),
+                    ),
                     dialogTitle: 'Add Custom Cuisine',
                     dialogLabelText: 'Cuisine name',
                     dialogHintText: 'e.g., Brazilian, Ethiopian',
                   ),
                   const SizedBox(height: 16),
-                  PreferenceChipSection(
-                    title: 'Ingredients',
-                    defaultItems: _popularIngredients,
-                    selector: (state) => (
-                      selected: state.selectedIngredients,
-                      custom: state.customIngredients,
-                    ),
-                    onToggle: (item) => recipeBloc.add(
-                      RecipeEvent.toggleIngredient(item),
-                    ),
-                    onClear: () => recipeBloc.add(
-                      const RecipeEvent.clearIngredients(),
-                    ),
-                    onAddCustom: (item) => recipeBloc.add(
-                      RecipeEvent.addCustomIngredient(item),
-                    ),
-                    onRemoveCustom: (item) => recipeBloc.add(
-                      RecipeEvent.removeCustomIngredient(
-                        item,
-                      ),
-                    ),
-                    dialogTitle: 'Add Custom Ingredient',
-                    dialogLabelText: 'Ingredient name',
-                    dialogHintText: 'e.g., Quinoa, Kale',
-                  ),
-                  const SizedBox(height: 16),
+
                   PreferenceChipSection(
                     title: 'Recipe Types',
                     defaultItems: _recipeTypes,
                     selector: (state) => (
                       selected: state.selectedRecipeTypes,
                       custom: state.customRecipeTypes,
+                      hidden: state.hiddenRecipeTypes,
                     ),
                     onToggle: (item) => recipeBloc.add(
                       RecipeEvent.toggleRecipeType(item),
@@ -175,13 +116,18 @@ class SelectPreferencesView extends StatelessWidget {
                       RecipeEvent.addCustomRecipeType(item),
                     ),
                     onRemoveCustom: (item) => recipeBloc.add(
-                      RecipeEvent.removeCustomRecipeType(
-                        item,
-                      ),
+                      RecipeEvent.removeCustomRecipeType(item),
+                    ),
+                    onRemoveDefault: (item) => recipeBloc.add(
+                      RecipeEvent.hideRecipeType(item),
                     ),
                     dialogTitle: 'Add Custom Recipe Type',
                     dialogLabelText: 'Recipe type',
                     dialogHintText: 'e.g., Brunch, Smoothie',
+                  ),
+                  const SizedBox(height: 16),
+                  _PantrySummary(
+                    onManage: () => const StockPantryRoute().go(context),
                   ),
                   const SizedBox(height: 16),
                 ],
@@ -252,5 +198,175 @@ class SelectPreferencesView extends StatelessWidget {
     );
     if (items == null) return;
     items.forEach(onAdd);
+  }
+}
+
+class _PantrySummary extends StatelessWidget {
+  const _PantrySummary({required this.onManage});
+
+  final VoidCallback onManage;
+
+  @override
+  Widget build(BuildContext context) {
+    final pantryBloc = getIt<PantryBloc>();
+    final recipeBloc = getIt<RecipeBloc>();
+
+    return BlocSelector<PantryBloc, PantryState, List<PantryItem>>(
+      bloc: pantryBloc,
+      selector: (state) => state.pantryItems,
+      builder: (context, pantryItems) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Pantry (${pantryItems.length})',
+                  style: Theme.of(context).textTheme.headlineLarge,
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () => recipeBloc.add(
+                        const RecipeEvent.clearPantrySelection(),
+                      ),
+                      icon: const Icon(Icons.deselect),
+                      tooltip: 'Clear pantry selection',
+                    ),
+                    IconButton.filled(
+                      onPressed: onManage,
+                      icon: const Icon(Icons.edit),
+                      tooltip: 'Manage pantry',
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            if (pantryItems.isEmpty)
+              Text(
+                'No items yet. Tap edit to stock your pantry.',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.outline,
+                ),
+              )
+            else
+              BlocSelector<RecipeBloc, RecipeState, List<String>>(
+                bloc: recipeBloc,
+                selector: (state) => state.selectedPantryItems,
+                builder: (context, selectedItems) {
+                  final noneSelected = selectedItems.isEmpty;
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BlocSelector<RecipeBloc, RecipeState, bool>(
+                        bloc: recipeBloc,
+                        selector: (state) => state.strictIngredients,
+                        builder: (context, strict) {
+                          return Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  strict
+                                      ? 'Only use these ingredients'
+                                      : 'Use as a base',
+                                  style: Theme.of(context).textTheme.bodyMedium
+                                      ?.copyWith(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.outline,
+                                      ),
+                                ),
+                              ),
+                              Switch(
+                                value: strict,
+                                onChanged: (_) => recipeBloc.add(
+                                  const RecipeEvent.toggleStrictIngredients(),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              noneSelected
+                                  ? 'Using all items. Select to narrow down.'
+                                  : '${selectedItems.length} of '
+                                        '${pantryItems.length} selected',
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.outline,
+                                  ),
+                            ),
+                          ),
+                          FilterChip(
+                            label: const Text('All'),
+                            selected: noneSelected,
+                            onSelected: (_) => recipeBloc.add(
+                              const RecipeEvent.clearPantrySelection(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      ..._buildCategoryGroups(
+                        pantryItems,
+                        selectedItems,
+                        recipeBloc,
+                        context,
+                      ),
+                    ],
+                  );
+                },
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  List<Widget> _buildCategoryGroups(
+    List<PantryItem> items,
+    List<String> selectedItems,
+    RecipeBloc recipeBloc,
+    BuildContext context,
+  ) {
+    final grouped = <PantryCategory, List<PantryItem>>{};
+    for (final item in items) {
+      grouped.putIfAbsent(item.category, () => []).add(item);
+    }
+    final sortedCategories = grouped.keys.toList()
+      ..sort((a, b) => a.index.compareTo(b.index));
+
+    return [
+      for (final category in sortedCategories) ...[
+        Text(
+          category.displayName,
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+        const SizedBox(height: 4),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: grouped[category]!.map((item) {
+            final isSelected = selectedItems.contains(item.name);
+            return FilterChip(
+              label: Text(item.name),
+              selected: isSelected,
+              onSelected: (_) => recipeBloc.add(
+                RecipeEvent.togglePantryItem(item.name),
+              ),
+            );
+          }).toList(),
+        ),
+        const SizedBox(height: 12),
+      ],
+    ];
   }
 }

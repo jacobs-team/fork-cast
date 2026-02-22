@@ -16,13 +16,14 @@ part 'recipe_bloc.g.dart';
 @singleton
 class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
   /// {@macro recipe_bloc}
-  RecipeBloc(this._recipeRepository) : super(const RecipeState()) {
+  RecipeBloc(this._recipeRepository, this._pantryBloc, this._fileCacheService)
+      : super(const RecipeState()) {
     on<RecipeEvent>(
       (recipeEvent, emit) => recipeEvent.map(
         toggleCategory: (value) => _toggleCategory(value, emit),
-        toggleIngredient: (value) => _toggleIngredient(value, emit),
         toggleRecipeType: (value) => _toggleRecipeType(value, emit),
-        fetchRecipeSuggestions: (value) => _fetchRecipeSuggestions(value, emit),
+        fetchRecipeSuggestions: (value) =>
+            _fetchRecipeSuggestions(value, emit),
         loadRecipeImages: (value) => _loadRecipeImages(value, emit),
         toggleFavoriteRecipe: (value) => _toggleFavoriteRecipe(value, emit),
         toggleStrictIngredients: (value) => emit(
@@ -30,18 +31,24 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
         ),
         addCustomCuisine: (value) => _addCustomCuisine(value, emit),
         removeCustomCuisine: (value) => _removeCustomCuisine(value, emit),
-        addCustomIngredient: (value) => _addCustomIngredient(value, emit),
-        removeCustomIngredient: (value) => _removeCustomIngredient(value, emit),
         addCustomRecipeType: (value) => _addCustomRecipeType(value, emit),
-        removeCustomRecipeType: (value) => _removeCustomRecipeType(value, emit),
+        removeCustomRecipeType: (value) =>
+            _removeCustomRecipeType(value, emit),
+        hideCuisine: (value) => _hideCuisine(value, emit),
+        hideRecipeType: (value) => _hideRecipeType(value, emit),
+        togglePantryItem: (value) => _togglePantryItem(value, emit),
+        clearPantrySelection: (_) =>
+            emit(state.copyWith(selectedPantryItems: [])),
         clearCuisines: (_) => emit(state.copyWith(selectedCuisines: [])),
-        clearIngredients: (_) => emit(state.copyWith(selectedIngredients: [])),
-        clearRecipeTypes: (_) => emit(state.copyWith(selectedRecipeTypes: [])),
+        clearRecipeTypes: (_) =>
+            emit(state.copyWith(selectedRecipeTypes: [])),
       ),
     );
   }
 
   final RecipeRepository _recipeRepository;
+  final PantryBloc _pantryBloc;
+  final FileCacheService _fileCacheService;
 
   void _toggleCategory(
     ToggleCategory event,
@@ -58,21 +65,6 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
     emit(state.copyWith(selectedCuisines: updatedCuisines));
   }
 
-  void _toggleIngredient(
-    ToggleIngredient event,
-    Emitter<RecipeState> emit,
-  ) {
-    final updatedIngredients = List<String>.from(state.selectedIngredients);
-
-    if (updatedIngredients.contains(event.ingredient)) {
-      updatedIngredients.remove(event.ingredient);
-    } else {
-      updatedIngredients.add(event.ingredient);
-    }
-
-    emit(state.copyWith(selectedIngredients: updatedIngredients));
-  }
-
   Future<void> _fetchRecipeSuggestions(
     FetchRecipeSuggestions event,
     Emitter<RecipeState> emit,
@@ -85,9 +77,14 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
         ),
       );
 
+      final allNames =
+          _pantryBloc.state.pantryItems.map((i) => i.name).toList();
+      final ingredients = state.selectedPantryItems.isEmpty
+          ? allNames
+          : state.selectedPantryItems;
       final recipes = await _recipeRepository.getRecipeSuggestions(
         cuisines: state.selectedCuisines,
-        ingredients: state.selectedIngredients,
+        ingredients: ingredients,
         recipeTypes: state.selectedRecipeTypes,
         strictIngredients: state.strictIngredients,
       );
@@ -96,7 +93,7 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
         id: const Uuid().v4(),
         createdAt: DateTime.now(),
         cuisines: List.from(state.selectedCuisines),
-        ingredients: List.from(state.selectedIngredients),
+        ingredients: List.from(ingredients),
         recipeTypes: List.from(state.selectedRecipeTypes),
         strictIngredients: state.strictIngredients,
         recipes: recipes,
@@ -156,41 +153,6 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
     );
   }
 
-  void _addCustomIngredient(
-    AddCustomIngredient event,
-    Emitter<RecipeState> emit,
-  ) {
-    final trimmedIngredient = event.ingredient.trim();
-    if (trimmedIngredient.isEmpty ||
-        state.customIngredients.contains(trimmedIngredient)) {
-      return;
-    }
-    final updatedCustomIngredients = [
-      ...state.customIngredients,
-      trimmedIngredient,
-    ];
-    emit(state.copyWith(customIngredients: updatedCustomIngredients));
-  }
-
-  void _removeCustomIngredient(
-    RemoveCustomIngredient event,
-    Emitter<RecipeState> emit,
-  ) {
-    final updatedCustomIngredients = List<String>.from(state.customIngredients)
-      ..remove(event.ingredient);
-
-    final updatedSelectedIngredients = List<String>.from(
-      state.selectedIngredients,
-    )..remove(event.ingredient);
-
-    emit(
-      state.copyWith(
-        customIngredients: updatedCustomIngredients,
-        selectedIngredients: updatedSelectedIngredients,
-      ),
-    );
-  }
-
   void _toggleRecipeType(
     ToggleRecipeType event,
     Emitter<RecipeState> emit,
@@ -240,6 +202,45 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
     );
   }
 
+  void _togglePantryItem(
+    TogglePantryItem event,
+    Emitter<RecipeState> emit,
+  ) {
+    final updated = List<String>.from(state.selectedPantryItems);
+    if (updated.contains(event.item)) {
+      updated.remove(event.item);
+    } else {
+      updated.add(event.item);
+    }
+    emit(state.copyWith(selectedPantryItems: updated));
+  }
+
+  void _hideCuisine(
+    HideCuisine event,
+    Emitter<RecipeState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        hiddenCuisines: [...state.hiddenCuisines, event.cuisine],
+        selectedCuisines: List<String>.from(state.selectedCuisines)
+          ..remove(event.cuisine),
+      ),
+    );
+  }
+
+  void _hideRecipeType(
+    HideRecipeType event,
+    Emitter<RecipeState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        hiddenRecipeTypes: [...state.hiddenRecipeTypes, event.recipeType],
+        selectedRecipeTypes: List<String>.from(state.selectedRecipeTypes)
+          ..remove(event.recipeType),
+      ),
+    );
+  }
+
   Future<void> _loadRecipeImages(
     LoadRecipeImages event,
     Emitter<RecipeState> emit,
@@ -264,11 +265,15 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
           mainIngredients: recipe.mainIngredients,
           instructions: recipe.instructions,
         );
+        final localPath = await _fileCacheService.downloadAndSave(
+          url,
+          '$key.png',
+        );
         emit(
           state.copyWith(
             recipeImagePaths: {
               ...state.recipeImagePaths,
-              key: url,
+              key: localPath,
             },
             recipeImageLoadingStates: {
               ...state.recipeImageLoadingStates,
@@ -323,8 +328,6 @@ class RecipeBloc extends HydratedBloc<RecipeEvent, RecipeState> {
 @Freezed()
 abstract class RecipeEvent with _$RecipeEvent {
   const factory RecipeEvent.toggleCategory(String category) = ToggleCategory;
-  const factory RecipeEvent.toggleIngredient(String ingredient) =
-      ToggleIngredient;
   const factory RecipeEvent.toggleRecipeType(String recipeType) =
       ToggleRecipeType;
   const factory RecipeEvent.fetchRecipeSuggestions() = FetchRecipeSuggestions;
@@ -336,16 +339,15 @@ abstract class RecipeEvent with _$RecipeEvent {
   const factory RecipeEvent.addCustomCuisine(String cuisine) = AddCustomCuisine;
   const factory RecipeEvent.removeCustomCuisine(String cuisine) =
       RemoveCustomCuisine;
-  const factory RecipeEvent.addCustomIngredient(String ingredient) =
-      AddCustomIngredient;
-  const factory RecipeEvent.removeCustomIngredient(String ingredient) =
-      RemoveCustomIngredient;
   const factory RecipeEvent.addCustomRecipeType(String recipeType) =
       AddCustomRecipeType;
   const factory RecipeEvent.removeCustomRecipeType(String recipeType) =
       RemoveCustomRecipeType;
+  const factory RecipeEvent.togglePantryItem(String item) = TogglePantryItem;
+  const factory RecipeEvent.clearPantrySelection() = ClearPantrySelection;
+  const factory RecipeEvent.hideCuisine(String cuisine) = HideCuisine;
+  const factory RecipeEvent.hideRecipeType(String recipeType) = HideRecipeType;
   const factory RecipeEvent.clearCuisines() = ClearCuisines;
-  const factory RecipeEvent.clearIngredients() = ClearIngredients;
   const factory RecipeEvent.clearRecipeTypes() = ClearRecipeTypes;
 }
 
@@ -353,11 +355,12 @@ abstract class RecipeEvent with _$RecipeEvent {
 abstract class RecipeState with _$RecipeState {
   const factory RecipeState({
     @Default([]) List<String> selectedCuisines,
-    @Default([]) List<String> selectedIngredients,
     @Default([]) List<String> selectedRecipeTypes,
     @Default([]) List<String> customCuisines,
-    @Default([]) List<String> customIngredients,
     @Default([]) List<String> customRecipeTypes,
+    @Default([]) List<String> selectedPantryItems,
+    @Default([]) List<String> hiddenCuisines,
+    @Default([]) List<String> hiddenRecipeTypes,
     @Default([]) List<RecipeSession> recipeSessions,
     @Default([]) List<Recipe> favoriteRecipes,
     @Default(false) bool strictIngredients,
@@ -376,58 +379,3 @@ abstract class RecipeState with _$RecipeState {
 enum RecipeLoadingState { init, loading, success, failure }
 
 enum ImageLoadingState { loading, success, failure }
-
-
-
-  // Future<void> _fetchAdditionalRecipes(
-  //   FetchAdditionalRecipes event,
-  //   Emitter<RecipeState> emit,
-  // ) async {
-  //   final sessionIndex = state.recipeSessions.indexWhere(
-  //     (s) => s.id == event.sessionId,
-  //   );
-  //   if (sessionIndex == -1) return;
-
-  //   final session = state.recipeSessions[sessionIndex];
-  //   if (session.recipes.length >= event.targetCount) {
-  //     return;
-  //   }
-
-  //   try {
-  //     final recipe =
-  //         await _recipeRepository.getAdditionalRecipeSuggestion(
-  //       cuisines: session.cuisines,
-  //       ingredients: session.ingredients,
-  //       recipeTypes: session.recipeTypes,
-  //       strictIngredients: session.strictIngredients,
-  //       excludeRecipeNames:
-  //           session.recipes.map((r) => r.name).toList(),
-  //     );
-
-  //     final updatedRecipes = [...session.recipes, recipe];
-  //     final updatedSession =
-  //         session.copyWith(recipes: updatedRecipes);
-  //     final updatedSessions =
-  //         List<RecipeSession>.from(state.recipeSessions);
-  //     updatedSessions[sessionIndex] = updatedSession;
-
-  //     emit(
-  //       state.copyWith(recipeSessions: updatedSessions),
-  //     );
-
-  //     add(LoadRecipeImages([recipe]));
-
-  //     if (updatedRecipes.length < event.targetCount) {
-  //       add(
-  //         RecipeEvent.fetchAdditionalRecipes(
-  //           sessionId: event.sessionId,
-  //           targetCount: event.targetCount,
-  //         ),
-  //       );
-  //     }
-  //   } catch (e, s) {
-  //     print(e);
-  //     print(s);
-  //     log(e.toString());
-  //   }
-  // }

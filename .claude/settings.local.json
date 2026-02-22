@@ -3,7 +3,9 @@
     "allow": [
       "Bash(fvm flutter gen-l10n:*)",
       "WebFetch(domain:pub.dev)",
-      "Bash(tasklist:*)"
+      "Bash(tasklist:*)",
+      "Bash(fvm flutter pub:*)",
+      "Bash(fvm flutter analyze:*)"
     ]
   }
 }

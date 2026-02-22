@@ -67,7 +67,7 @@ class RecipeDetailView extends StatelessWidget {
                 if (hasImage)
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: RecipeImage(imageUrl: imagePath),
+                    child: RecipeImage(imagePath: imagePath),
                   ),
                 const SizedBox(height: 16),
                 Row(

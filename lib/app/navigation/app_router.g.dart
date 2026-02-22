@@ -6,7 +6,7 @@ part of 'app_router.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$appShellRouteData];
+List<RouteBase> get $appRoutes => [$appShellRouteData, $stockPantryRoute];
 
 RouteBase get $appShellRouteData => StatefulShellRouteData.$route(
   factory: $AppShellRouteDataExtension._fromState,
@@ -124,6 +124,30 @@ mixin $RecipeFavoritesRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/favorites');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $stockPantryRoute =>
+    GoRouteData.$route(path: '/pantry', factory: $StockPantryRoute._fromState);
+
+mixin $StockPantryRoute on GoRouteData {
+  static StockPantryRoute _fromState(GoRouterState state) =>
+      const StockPantryRoute();
+
+  @override
+  String get location => GoRouteData.$location('/pantry');
 
   @override
   void go(BuildContext context) => context.go(location);

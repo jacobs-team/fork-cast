@@ -55,25 +55,25 @@ extension RecipeEventPatterns on RecipeEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ToggleCategory value)?  toggleCategory,TResult Function( ToggleIngredient value)?  toggleIngredient,TResult Function( ToggleRecipeType value)?  toggleRecipeType,TResult Function( FetchRecipeSuggestions value)?  fetchRecipeSuggestions,TResult Function( LoadRecipeImages value)?  loadRecipeImages,TResult Function( ToggleFavoriteRecipe value)?  toggleFavoriteRecipe,TResult Function( ToggleStrictIngredients value)?  toggleStrictIngredients,TResult Function( AddCustomCuisine value)?  addCustomCuisine,TResult Function( RemoveCustomCuisine value)?  removeCustomCuisine,TResult Function( AddCustomIngredient value)?  addCustomIngredient,TResult Function( RemoveCustomIngredient value)?  removeCustomIngredient,TResult Function( AddCustomRecipeType value)?  addCustomRecipeType,TResult Function( RemoveCustomRecipeType value)?  removeCustomRecipeType,TResult Function( ClearCuisines value)?  clearCuisines,TResult Function( ClearIngredients value)?  clearIngredients,TResult Function( ClearRecipeTypes value)?  clearRecipeTypes,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ToggleCategory value)?  toggleCategory,TResult Function( ToggleRecipeType value)?  toggleRecipeType,TResult Function( FetchRecipeSuggestions value)?  fetchRecipeSuggestions,TResult Function( LoadRecipeImages value)?  loadRecipeImages,TResult Function( ToggleFavoriteRecipe value)?  toggleFavoriteRecipe,TResult Function( ToggleStrictIngredients value)?  toggleStrictIngredients,TResult Function( AddCustomCuisine value)?  addCustomCuisine,TResult Function( RemoveCustomCuisine value)?  removeCustomCuisine,TResult Function( AddCustomRecipeType value)?  addCustomRecipeType,TResult Function( RemoveCustomRecipeType value)?  removeCustomRecipeType,TResult Function( TogglePantryItem value)?  togglePantryItem,TResult Function( ClearPantrySelection value)?  clearPantrySelection,TResult Function( HideCuisine value)?  hideCuisine,TResult Function( HideRecipeType value)?  hideRecipeType,TResult Function( ClearCuisines value)?  clearCuisines,TResult Function( ClearRecipeTypes value)?  clearRecipeTypes,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ToggleCategory() when toggleCategory != null:
-return toggleCategory(_that);case ToggleIngredient() when toggleIngredient != null:
-return toggleIngredient(_that);case ToggleRecipeType() when toggleRecipeType != null:
+return toggleCategory(_that);case ToggleRecipeType() when toggleRecipeType != null:
 return toggleRecipeType(_that);case FetchRecipeSuggestions() when fetchRecipeSuggestions != null:
 return fetchRecipeSuggestions(_that);case LoadRecipeImages() when loadRecipeImages != null:
 return loadRecipeImages(_that);case ToggleFavoriteRecipe() when toggleFavoriteRecipe != null:
 return toggleFavoriteRecipe(_that);case ToggleStrictIngredients() when toggleStrictIngredients != null:
 return toggleStrictIngredients(_that);case AddCustomCuisine() when addCustomCuisine != null:
 return addCustomCuisine(_that);case RemoveCustomCuisine() when removeCustomCuisine != null:
-return removeCustomCuisine(_that);case AddCustomIngredient() when addCustomIngredient != null:
-return addCustomIngredient(_that);case RemoveCustomIngredient() when removeCustomIngredient != null:
-return removeCustomIngredient(_that);case AddCustomRecipeType() when addCustomRecipeType != null:
+return removeCustomCuisine(_that);case AddCustomRecipeType() when addCustomRecipeType != null:
 return addCustomRecipeType(_that);case RemoveCustomRecipeType() when removeCustomRecipeType != null:
-return removeCustomRecipeType(_that);case ClearCuisines() when clearCuisines != null:
-return clearCuisines(_that);case ClearIngredients() when clearIngredients != null:
-return clearIngredients(_that);case ClearRecipeTypes() when clearRecipeTypes != null:
+return removeCustomRecipeType(_that);case TogglePantryItem() when togglePantryItem != null:
+return togglePantryItem(_that);case ClearPantrySelection() when clearPantrySelection != null:
+return clearPantrySelection(_that);case HideCuisine() when hideCuisine != null:
+return hideCuisine(_that);case HideRecipeType() when hideRecipeType != null:
+return hideRecipeType(_that);case ClearCuisines() when clearCuisines != null:
+return clearCuisines(_that);case ClearRecipeTypes() when clearRecipeTypes != null:
 return clearRecipeTypes(_that);case _:
   return orElse();
 
@@ -92,25 +92,25 @@ return clearRecipeTypes(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ToggleCategory value)  toggleCategory,required TResult Function( ToggleIngredient value)  toggleIngredient,required TResult Function( ToggleRecipeType value)  toggleRecipeType,required TResult Function( FetchRecipeSuggestions value)  fetchRecipeSuggestions,required TResult Function( LoadRecipeImages value)  loadRecipeImages,required TResult Function( ToggleFavoriteRecipe value)  toggleFavoriteRecipe,required TResult Function( ToggleStrictIngredients value)  toggleStrictIngredients,required TResult Function( AddCustomCuisine value)  addCustomCuisine,required TResult Function( RemoveCustomCuisine value)  removeCustomCuisine,required TResult Function( AddCustomIngredient value)  addCustomIngredient,required TResult Function( RemoveCustomIngredient value)  removeCustomIngredient,required TResult Function( AddCustomRecipeType value)  addCustomRecipeType,required TResult Function( RemoveCustomRecipeType value)  removeCustomRecipeType,required TResult Function( ClearCuisines value)  clearCuisines,required TResult Function( ClearIngredients value)  clearIngredients,required TResult Function( ClearRecipeTypes value)  clearRecipeTypes,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ToggleCategory value)  toggleCategory,required TResult Function( ToggleRecipeType value)  toggleRecipeType,required TResult Function( FetchRecipeSuggestions value)  fetchRecipeSuggestions,required TResult Function( LoadRecipeImages value)  loadRecipeImages,required TResult Function( ToggleFavoriteRecipe value)  toggleFavoriteRecipe,required TResult Function( ToggleStrictIngredients value)  toggleStrictIngredients,required TResult Function( AddCustomCuisine value)  addCustomCuisine,required TResult Function( RemoveCustomCuisine value)  removeCustomCuisine,required TResult Function( AddCustomRecipeType value)  addCustomRecipeType,required TResult Function( RemoveCustomRecipeType value)  removeCustomRecipeType,required TResult Function( TogglePantryItem value)  togglePantryItem,required TResult Function( ClearPantrySelection value)  clearPantrySelection,required TResult Function( HideCuisine value)  hideCuisine,required TResult Function( HideRecipeType value)  hideRecipeType,required TResult Function( ClearCuisines value)  clearCuisines,required TResult Function( ClearRecipeTypes value)  clearRecipeTypes,}){
 final _that = this;
 switch (_that) {
 case ToggleCategory():
-return toggleCategory(_that);case ToggleIngredient():
-return toggleIngredient(_that);case ToggleRecipeType():
+return toggleCategory(_that);case ToggleRecipeType():
 return toggleRecipeType(_that);case FetchRecipeSuggestions():
 return fetchRecipeSuggestions(_that);case LoadRecipeImages():
 return loadRecipeImages(_that);case ToggleFavoriteRecipe():
 return toggleFavoriteRecipe(_that);case ToggleStrictIngredients():
 return toggleStrictIngredients(_that);case AddCustomCuisine():
 return addCustomCuisine(_that);case RemoveCustomCuisine():
-return removeCustomCuisine(_that);case AddCustomIngredient():
-return addCustomIngredient(_that);case RemoveCustomIngredient():
-return removeCustomIngredient(_that);case AddCustomRecipeType():
+return removeCustomCuisine(_that);case AddCustomRecipeType():
 return addCustomRecipeType(_that);case RemoveCustomRecipeType():
-return removeCustomRecipeType(_that);case ClearCuisines():
-return clearCuisines(_that);case ClearIngredients():
-return clearIngredients(_that);case ClearRecipeTypes():
+return removeCustomRecipeType(_that);case TogglePantryItem():
+return togglePantryItem(_that);case ClearPantrySelection():
+return clearPantrySelection(_that);case HideCuisine():
+return hideCuisine(_that);case HideRecipeType():
+return hideRecipeType(_that);case ClearCuisines():
+return clearCuisines(_that);case ClearRecipeTypes():
 return clearRecipeTypes(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -128,25 +128,25 @@ return clearRecipeTypes(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ToggleCategory value)?  toggleCategory,TResult? Function( ToggleIngredient value)?  toggleIngredient,TResult? Function( ToggleRecipeType value)?  toggleRecipeType,TResult? Function( FetchRecipeSuggestions value)?  fetchRecipeSuggestions,TResult? Function( LoadRecipeImages value)?  loadRecipeImages,TResult? Function( ToggleFavoriteRecipe value)?  toggleFavoriteRecipe,TResult? Function( ToggleStrictIngredients value)?  toggleStrictIngredients,TResult? Function( AddCustomCuisine value)?  addCustomCuisine,TResult? Function( RemoveCustomCuisine value)?  removeCustomCuisine,TResult? Function( AddCustomIngredient value)?  addCustomIngredient,TResult? Function( RemoveCustomIngredient value)?  removeCustomIngredient,TResult? Function( AddCustomRecipeType value)?  addCustomRecipeType,TResult? Function( RemoveCustomRecipeType value)?  removeCustomRecipeType,TResult? Function( ClearCuisines value)?  clearCuisines,TResult? Function( ClearIngredients value)?  clearIngredients,TResult? Function( ClearRecipeTypes value)?  clearRecipeTypes,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ToggleCategory value)?  toggleCategory,TResult? Function( ToggleRecipeType value)?  toggleRecipeType,TResult? Function( FetchRecipeSuggestions value)?  fetchRecipeSuggestions,TResult? Function( LoadRecipeImages value)?  loadRecipeImages,TResult? Function( ToggleFavoriteRecipe value)?  toggleFavoriteRecipe,TResult? Function( ToggleStrictIngredients value)?  toggleStrictIngredients,TResult? Function( AddCustomCuisine value)?  addCustomCuisine,TResult? Function( RemoveCustomCuisine value)?  removeCustomCuisine,TResult? Function( AddCustomRecipeType value)?  addCustomRecipeType,TResult? Function( RemoveCustomRecipeType value)?  removeCustomRecipeType,TResult? Function( TogglePantryItem value)?  togglePantryItem,TResult? Function( ClearPantrySelection value)?  clearPantrySelection,TResult? Function( HideCuisine value)?  hideCuisine,TResult? Function( HideRecipeType value)?  hideRecipeType,TResult? Function( ClearCuisines value)?  clearCuisines,TResult? Function( ClearRecipeTypes value)?  clearRecipeTypes,}){
 final _that = this;
 switch (_that) {
 case ToggleCategory() when toggleCategory != null:
-return toggleCategory(_that);case ToggleIngredient() when toggleIngredient != null:
-return toggleIngredient(_that);case ToggleRecipeType() when toggleRecipeType != null:
+return toggleCategory(_that);case ToggleRecipeType() when toggleRecipeType != null:
 return toggleRecipeType(_that);case FetchRecipeSuggestions() when fetchRecipeSuggestions != null:
 return fetchRecipeSuggestions(_that);case LoadRecipeImages() when loadRecipeImages != null:
 return loadRecipeImages(_that);case ToggleFavoriteRecipe() when toggleFavoriteRecipe != null:
 return toggleFavoriteRecipe(_that);case ToggleStrictIngredients() when toggleStrictIngredients != null:
 return toggleStrictIngredients(_that);case AddCustomCuisine() when addCustomCuisine != null:
 return addCustomCuisine(_that);case RemoveCustomCuisine() when removeCustomCuisine != null:
-return removeCustomCuisine(_that);case AddCustomIngredient() when addCustomIngredient != null:
-return addCustomIngredient(_that);case RemoveCustomIngredient() when removeCustomIngredient != null:
-return removeCustomIngredient(_that);case AddCustomRecipeType() when addCustomRecipeType != null:
+return removeCustomCuisine(_that);case AddCustomRecipeType() when addCustomRecipeType != null:
 return addCustomRecipeType(_that);case RemoveCustomRecipeType() when removeCustomRecipeType != null:
-return removeCustomRecipeType(_that);case ClearCuisines() when clearCuisines != null:
-return clearCuisines(_that);case ClearIngredients() when clearIngredients != null:
-return clearIngredients(_that);case ClearRecipeTypes() when clearRecipeTypes != null:
+return removeCustomRecipeType(_that);case TogglePantryItem() when togglePantryItem != null:
+return togglePantryItem(_that);case ClearPantrySelection() when clearPantrySelection != null:
+return clearPantrySelection(_that);case HideCuisine() when hideCuisine != null:
+return hideCuisine(_that);case HideRecipeType() when hideRecipeType != null:
+return hideRecipeType(_that);case ClearCuisines() when clearCuisines != null:
+return clearCuisines(_that);case ClearRecipeTypes() when clearRecipeTypes != null:
 return clearRecipeTypes(_that);case _:
   return null;
 
@@ -164,24 +164,24 @@ return clearRecipeTypes(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String category)?  toggleCategory,TResult Function( String ingredient)?  toggleIngredient,TResult Function( String recipeType)?  toggleRecipeType,TResult Function()?  fetchRecipeSuggestions,TResult Function( List<Recipe> recipes)?  loadRecipeImages,TResult Function( Recipe recipe)?  toggleFavoriteRecipe,TResult Function()?  toggleStrictIngredients,TResult Function( String cuisine)?  addCustomCuisine,TResult Function( String cuisine)?  removeCustomCuisine,TResult Function( String ingredient)?  addCustomIngredient,TResult Function( String ingredient)?  removeCustomIngredient,TResult Function( String recipeType)?  addCustomRecipeType,TResult Function( String recipeType)?  removeCustomRecipeType,TResult Function()?  clearCuisines,TResult Function()?  clearIngredients,TResult Function()?  clearRecipeTypes,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String category)?  toggleCategory,TResult Function( String recipeType)?  toggleRecipeType,TResult Function()?  fetchRecipeSuggestions,TResult Function( List<Recipe> recipes)?  loadRecipeImages,TResult Function( Recipe recipe)?  toggleFavoriteRecipe,TResult Function()?  toggleStrictIngredients,TResult Function( String cuisine)?  addCustomCuisine,TResult Function( String cuisine)?  removeCustomCuisine,TResult Function( String recipeType)?  addCustomRecipeType,TResult Function( String recipeType)?  removeCustomRecipeType,TResult Function( String item)?  togglePantryItem,TResult Function()?  clearPantrySelection,TResult Function( String cuisine)?  hideCuisine,TResult Function( String recipeType)?  hideRecipeType,TResult Function()?  clearCuisines,TResult Function()?  clearRecipeTypes,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ToggleCategory() when toggleCategory != null:
-return toggleCategory(_that.category);case ToggleIngredient() when toggleIngredient != null:
-return toggleIngredient(_that.ingredient);case ToggleRecipeType() when toggleRecipeType != null:
+return toggleCategory(_that.category);case ToggleRecipeType() when toggleRecipeType != null:
 return toggleRecipeType(_that.recipeType);case FetchRecipeSuggestions() when fetchRecipeSuggestions != null:
 return fetchRecipeSuggestions();case LoadRecipeImages() when loadRecipeImages != null:
 return loadRecipeImages(_that.recipes);case ToggleFavoriteRecipe() when toggleFavoriteRecipe != null:
 return toggleFavoriteRecipe(_that.recipe);case ToggleStrictIngredients() when toggleStrictIngredients != null:
 return toggleStrictIngredients();case AddCustomCuisine() when addCustomCuisine != null:
 return addCustomCuisine(_that.cuisine);case RemoveCustomCuisine() when removeCustomCuisine != null:
-return removeCustomCuisine(_that.cuisine);case AddCustomIngredient() when addCustomIngredient != null:
-return addCustomIngredient(_that.ingredient);case RemoveCustomIngredient() when removeCustomIngredient != null:
-return removeCustomIngredient(_that.ingredient);case AddCustomRecipeType() when addCustomRecipeType != null:
+return removeCustomCuisine(_that.cuisine);case AddCustomRecipeType() when addCustomRecipeType != null:
 return addCustomRecipeType(_that.recipeType);case RemoveCustomRecipeType() when removeCustomRecipeType != null:
-return removeCustomRecipeType(_that.recipeType);case ClearCuisines() when clearCuisines != null:
-return clearCuisines();case ClearIngredients() when clearIngredients != null:
-return clearIngredients();case ClearRecipeTypes() when clearRecipeTypes != null:
+return removeCustomRecipeType(_that.recipeType);case TogglePantryItem() when togglePantryItem != null:
+return togglePantryItem(_that.item);case ClearPantrySelection() when clearPantrySelection != null:
+return clearPantrySelection();case HideCuisine() when hideCuisine != null:
+return hideCuisine(_that.cuisine);case HideRecipeType() when hideRecipeType != null:
+return hideRecipeType(_that.recipeType);case ClearCuisines() when clearCuisines != null:
+return clearCuisines();case ClearRecipeTypes() when clearRecipeTypes != null:
 return clearRecipeTypes();case _:
   return orElse();
 
@@ -200,24 +200,24 @@ return clearRecipeTypes();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String category)  toggleCategory,required TResult Function( String ingredient)  toggleIngredient,required TResult Function( String recipeType)  toggleRecipeType,required TResult Function()  fetchRecipeSuggestions,required TResult Function( List<Recipe> recipes)  loadRecipeImages,required TResult Function( Recipe recipe)  toggleFavoriteRecipe,required TResult Function()  toggleStrictIngredients,required TResult Function( String cuisine)  addCustomCuisine,required TResult Function( String cuisine)  removeCustomCuisine,required TResult Function( String ingredient)  addCustomIngredient,required TResult Function( String ingredient)  removeCustomIngredient,required TResult Function( String recipeType)  addCustomRecipeType,required TResult Function( String recipeType)  removeCustomRecipeType,required TResult Function()  clearCuisines,required TResult Function()  clearIngredients,required TResult Function()  clearRecipeTypes,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String category)  toggleCategory,required TResult Function( String recipeType)  toggleRecipeType,required TResult Function()  fetchRecipeSuggestions,required TResult Function( List<Recipe> recipes)  loadRecipeImages,required TResult Function( Recipe recipe)  toggleFavoriteRecipe,required TResult Function()  toggleStrictIngredients,required TResult Function( String cuisine)  addCustomCuisine,required TResult Function( String cuisine)  removeCustomCuisine,required TResult Function( String recipeType)  addCustomRecipeType,required TResult Function( String recipeType)  removeCustomRecipeType,required TResult Function( String item)  togglePantryItem,required TResult Function()  clearPantrySelection,required TResult Function( String cuisine)  hideCuisine,required TResult Function( String recipeType)  hideRecipeType,required TResult Function()  clearCuisines,required TResult Function()  clearRecipeTypes,}) {final _that = this;
 switch (_that) {
 case ToggleCategory():
-return toggleCategory(_that.category);case ToggleIngredient():
-return toggleIngredient(_that.ingredient);case ToggleRecipeType():
+return toggleCategory(_that.category);case ToggleRecipeType():
 return toggleRecipeType(_that.recipeType);case FetchRecipeSuggestions():
 return fetchRecipeSuggestions();case LoadRecipeImages():
 return loadRecipeImages(_that.recipes);case ToggleFavoriteRecipe():
 return toggleFavoriteRecipe(_that.recipe);case ToggleStrictIngredients():
 return toggleStrictIngredients();case AddCustomCuisine():
 return addCustomCuisine(_that.cuisine);case RemoveCustomCuisine():
-return removeCustomCuisine(_that.cuisine);case AddCustomIngredient():
-return addCustomIngredient(_that.ingredient);case RemoveCustomIngredient():
-return removeCustomIngredient(_that.ingredient);case AddCustomRecipeType():
+return removeCustomCuisine(_that.cuisine);case AddCustomRecipeType():
 return addCustomRecipeType(_that.recipeType);case RemoveCustomRecipeType():
-return removeCustomRecipeType(_that.recipeType);case ClearCuisines():
-return clearCuisines();case ClearIngredients():
-return clearIngredients();case ClearRecipeTypes():
+return removeCustomRecipeType(_that.recipeType);case TogglePantryItem():
+return togglePantryItem(_that.item);case ClearPantrySelection():
+return clearPantrySelection();case HideCuisine():
+return hideCuisine(_that.cuisine);case HideRecipeType():
+return hideRecipeType(_that.recipeType);case ClearCuisines():
+return clearCuisines();case ClearRecipeTypes():
 return clearRecipeTypes();case _:
   throw StateError('Unexpected subclass');
 
@@ -235,24 +235,24 @@ return clearRecipeTypes();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String category)?  toggleCategory,TResult? Function( String ingredient)?  toggleIngredient,TResult? Function( String recipeType)?  toggleRecipeType,TResult? Function()?  fetchRecipeSuggestions,TResult? Function( List<Recipe> recipes)?  loadRecipeImages,TResult? Function( Recipe recipe)?  toggleFavoriteRecipe,TResult? Function()?  toggleStrictIngredients,TResult? Function( String cuisine)?  addCustomCuisine,TResult? Function( String cuisine)?  removeCustomCuisine,TResult? Function( String ingredient)?  addCustomIngredient,TResult? Function( String ingredient)?  removeCustomIngredient,TResult? Function( String recipeType)?  addCustomRecipeType,TResult? Function( String recipeType)?  removeCustomRecipeType,TResult? Function()?  clearCuisines,TResult? Function()?  clearIngredients,TResult? Function()?  clearRecipeTypes,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String category)?  toggleCategory,TResult? Function( String recipeType)?  toggleRecipeType,TResult? Function()?  fetchRecipeSuggestions,TResult? Function( List<Recipe> recipes)?  loadRecipeImages,TResult? Function( Recipe recipe)?  toggleFavoriteRecipe,TResult? Function()?  toggleStrictIngredients,TResult? Function( String cuisine)?  addCustomCuisine,TResult? Function( String cuisine)?  removeCustomCuisine,TResult? Function( String recipeType)?  addCustomRecipeType,TResult? Function( String recipeType)?  removeCustomRecipeType,TResult? Function( String item)?  togglePantryItem,TResult? Function()?  clearPantrySelection,TResult? Function( String cuisine)?  hideCuisine,TResult? Function( String recipeType)?  hideRecipeType,TResult? Function()?  clearCuisines,TResult? Function()?  clearRecipeTypes,}) {final _that = this;
 switch (_that) {
 case ToggleCategory() when toggleCategory != null:
-return toggleCategory(_that.category);case ToggleIngredient() when toggleIngredient != null:
-return toggleIngredient(_that.ingredient);case ToggleRecipeType() when toggleRecipeType != null:
+return toggleCategory(_that.category);case ToggleRecipeType() when toggleRecipeType != null:
 return toggleRecipeType(_that.recipeType);case FetchRecipeSuggestions() when fetchRecipeSuggestions != null:
 return fetchRecipeSuggestions();case LoadRecipeImages() when loadRecipeImages != null:
 return loadRecipeImages(_that.recipes);case ToggleFavoriteRecipe() when toggleFavoriteRecipe != null:
 return toggleFavoriteRecipe(_that.recipe);case ToggleStrictIngredients() when toggleStrictIngredients != null:
 return toggleStrictIngredients();case AddCustomCuisine() when addCustomCuisine != null:
 return addCustomCuisine(_that.cuisine);case RemoveCustomCuisine() when removeCustomCuisine != null:
-return removeCustomCuisine(_that.cuisine);case AddCustomIngredient() when addCustomIngredient != null:
-return addCustomIngredient(_that.ingredient);case RemoveCustomIngredient() when removeCustomIngredient != null:
-return removeCustomIngredient(_that.ingredient);case AddCustomRecipeType() when addCustomRecipeType != null:
+return removeCustomCuisine(_that.cuisine);case AddCustomRecipeType() when addCustomRecipeType != null:
 return addCustomRecipeType(_that.recipeType);case RemoveCustomRecipeType() when removeCustomRecipeType != null:
-return removeCustomRecipeType(_that.recipeType);case ClearCuisines() when clearCuisines != null:
-return clearCuisines();case ClearIngredients() when clearIngredients != null:
-return clearIngredients();case ClearRecipeTypes() when clearRecipeTypes != null:
+return removeCustomRecipeType(_that.recipeType);case TogglePantryItem() when togglePantryItem != null:
+return togglePantryItem(_that.item);case ClearPantrySelection() when clearPantrySelection != null:
+return clearPantrySelection();case HideCuisine() when hideCuisine != null:
+return hideCuisine(_that.cuisine);case HideRecipeType() when hideRecipeType != null:
+return hideRecipeType(_that.recipeType);case ClearCuisines() when clearCuisines != null:
+return clearCuisines();case ClearRecipeTypes() when clearRecipeTypes != null:
 return clearRecipeTypes();case _:
   return null;
 
@@ -320,72 +320,6 @@ class _$ToggleCategoryCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? category = null,}) {
   return _then(ToggleCategory(
 null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class ToggleIngredient implements RecipeEvent {
-  const ToggleIngredient(this.ingredient);
-  
-
- final  String ingredient;
-
-/// Create a copy of RecipeEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$ToggleIngredientCopyWith<ToggleIngredient> get copyWith => _$ToggleIngredientCopyWithImpl<ToggleIngredient>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToggleIngredient&&(identical(other.ingredient, ingredient) || other.ingredient == ingredient));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,ingredient);
-
-@override
-String toString() {
-  return 'RecipeEvent.toggleIngredient(ingredient: $ingredient)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $ToggleIngredientCopyWith<$Res> implements $RecipeEventCopyWith<$Res> {
-  factory $ToggleIngredientCopyWith(ToggleIngredient value, $Res Function(ToggleIngredient) _then) = _$ToggleIngredientCopyWithImpl;
-@useResult
-$Res call({
- String ingredient
-});
-
-
-
-
-}
-/// @nodoc
-class _$ToggleIngredientCopyWithImpl<$Res>
-    implements $ToggleIngredientCopyWith<$Res> {
-  _$ToggleIngredientCopyWithImpl(this._self, this._then);
-
-  final ToggleIngredient _self;
-  final $Res Function(ToggleIngredient) _then;
-
-/// Create a copy of RecipeEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? ingredient = null,}) {
-  return _then(ToggleIngredient(
-null == ingredient ? _self.ingredient : ingredient // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -805,138 +739,6 @@ as String,
 /// @nodoc
 
 
-class AddCustomIngredient implements RecipeEvent {
-  const AddCustomIngredient(this.ingredient);
-  
-
- final  String ingredient;
-
-/// Create a copy of RecipeEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$AddCustomIngredientCopyWith<AddCustomIngredient> get copyWith => _$AddCustomIngredientCopyWithImpl<AddCustomIngredient>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddCustomIngredient&&(identical(other.ingredient, ingredient) || other.ingredient == ingredient));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,ingredient);
-
-@override
-String toString() {
-  return 'RecipeEvent.addCustomIngredient(ingredient: $ingredient)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $AddCustomIngredientCopyWith<$Res> implements $RecipeEventCopyWith<$Res> {
-  factory $AddCustomIngredientCopyWith(AddCustomIngredient value, $Res Function(AddCustomIngredient) _then) = _$AddCustomIngredientCopyWithImpl;
-@useResult
-$Res call({
- String ingredient
-});
-
-
-
-
-}
-/// @nodoc
-class _$AddCustomIngredientCopyWithImpl<$Res>
-    implements $AddCustomIngredientCopyWith<$Res> {
-  _$AddCustomIngredientCopyWithImpl(this._self, this._then);
-
-  final AddCustomIngredient _self;
-  final $Res Function(AddCustomIngredient) _then;
-
-/// Create a copy of RecipeEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? ingredient = null,}) {
-  return _then(AddCustomIngredient(
-null == ingredient ? _self.ingredient : ingredient // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class RemoveCustomIngredient implements RecipeEvent {
-  const RemoveCustomIngredient(this.ingredient);
-  
-
- final  String ingredient;
-
-/// Create a copy of RecipeEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$RemoveCustomIngredientCopyWith<RemoveCustomIngredient> get copyWith => _$RemoveCustomIngredientCopyWithImpl<RemoveCustomIngredient>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RemoveCustomIngredient&&(identical(other.ingredient, ingredient) || other.ingredient == ingredient));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,ingredient);
-
-@override
-String toString() {
-  return 'RecipeEvent.removeCustomIngredient(ingredient: $ingredient)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $RemoveCustomIngredientCopyWith<$Res> implements $RecipeEventCopyWith<$Res> {
-  factory $RemoveCustomIngredientCopyWith(RemoveCustomIngredient value, $Res Function(RemoveCustomIngredient) _then) = _$RemoveCustomIngredientCopyWithImpl;
-@useResult
-$Res call({
- String ingredient
-});
-
-
-
-
-}
-/// @nodoc
-class _$RemoveCustomIngredientCopyWithImpl<$Res>
-    implements $RemoveCustomIngredientCopyWith<$Res> {
-  _$RemoveCustomIngredientCopyWithImpl(this._self, this._then);
-
-  final RemoveCustomIngredient _self;
-  final $Res Function(RemoveCustomIngredient) _then;
-
-/// Create a copy of RecipeEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? ingredient = null,}) {
-  return _then(RemoveCustomIngredient(
-null == ingredient ? _self.ingredient : ingredient // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
 class AddCustomRecipeType implements RecipeEvent {
   const AddCustomRecipeType(this.recipeType);
   
@@ -1069,6 +871,236 @@ as String,
 /// @nodoc
 
 
+class TogglePantryItem implements RecipeEvent {
+  const TogglePantryItem(this.item);
+  
+
+ final  String item;
+
+/// Create a copy of RecipeEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TogglePantryItemCopyWith<TogglePantryItem> get copyWith => _$TogglePantryItemCopyWithImpl<TogglePantryItem>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TogglePantryItem&&(identical(other.item, item) || other.item == item));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,item);
+
+@override
+String toString() {
+  return 'RecipeEvent.togglePantryItem(item: $item)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $TogglePantryItemCopyWith<$Res> implements $RecipeEventCopyWith<$Res> {
+  factory $TogglePantryItemCopyWith(TogglePantryItem value, $Res Function(TogglePantryItem) _then) = _$TogglePantryItemCopyWithImpl;
+@useResult
+$Res call({
+ String item
+});
+
+
+
+
+}
+/// @nodoc
+class _$TogglePantryItemCopyWithImpl<$Res>
+    implements $TogglePantryItemCopyWith<$Res> {
+  _$TogglePantryItemCopyWithImpl(this._self, this._then);
+
+  final TogglePantryItem _self;
+  final $Res Function(TogglePantryItem) _then;
+
+/// Create a copy of RecipeEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? item = null,}) {
+  return _then(TogglePantryItem(
+null == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ClearPantrySelection implements RecipeEvent {
+  const ClearPantrySelection();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClearPantrySelection);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'RecipeEvent.clearPantrySelection()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class HideCuisine implements RecipeEvent {
+  const HideCuisine(this.cuisine);
+  
+
+ final  String cuisine;
+
+/// Create a copy of RecipeEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$HideCuisineCopyWith<HideCuisine> get copyWith => _$HideCuisineCopyWithImpl<HideCuisine>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HideCuisine&&(identical(other.cuisine, cuisine) || other.cuisine == cuisine));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,cuisine);
+
+@override
+String toString() {
+  return 'RecipeEvent.hideCuisine(cuisine: $cuisine)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $HideCuisineCopyWith<$Res> implements $RecipeEventCopyWith<$Res> {
+  factory $HideCuisineCopyWith(HideCuisine value, $Res Function(HideCuisine) _then) = _$HideCuisineCopyWithImpl;
+@useResult
+$Res call({
+ String cuisine
+});
+
+
+
+
+}
+/// @nodoc
+class _$HideCuisineCopyWithImpl<$Res>
+    implements $HideCuisineCopyWith<$Res> {
+  _$HideCuisineCopyWithImpl(this._self, this._then);
+
+  final HideCuisine _self;
+  final $Res Function(HideCuisine) _then;
+
+/// Create a copy of RecipeEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? cuisine = null,}) {
+  return _then(HideCuisine(
+null == cuisine ? _self.cuisine : cuisine // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class HideRecipeType implements RecipeEvent {
+  const HideRecipeType(this.recipeType);
+  
+
+ final  String recipeType;
+
+/// Create a copy of RecipeEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$HideRecipeTypeCopyWith<HideRecipeType> get copyWith => _$HideRecipeTypeCopyWithImpl<HideRecipeType>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HideRecipeType&&(identical(other.recipeType, recipeType) || other.recipeType == recipeType));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,recipeType);
+
+@override
+String toString() {
+  return 'RecipeEvent.hideRecipeType(recipeType: $recipeType)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $HideRecipeTypeCopyWith<$Res> implements $RecipeEventCopyWith<$Res> {
+  factory $HideRecipeTypeCopyWith(HideRecipeType value, $Res Function(HideRecipeType) _then) = _$HideRecipeTypeCopyWithImpl;
+@useResult
+$Res call({
+ String recipeType
+});
+
+
+
+
+}
+/// @nodoc
+class _$HideRecipeTypeCopyWithImpl<$Res>
+    implements $HideRecipeTypeCopyWith<$Res> {
+  _$HideRecipeTypeCopyWithImpl(this._self, this._then);
+
+  final HideRecipeType _self;
+  final $Res Function(HideRecipeType) _then;
+
+/// Create a copy of RecipeEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? recipeType = null,}) {
+  return _then(HideRecipeType(
+null == recipeType ? _self.recipeType : recipeType // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
 class ClearCuisines implements RecipeEvent {
   const ClearCuisines();
   
@@ -1090,38 +1122,6 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'RecipeEvent.clearCuisines()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class ClearIngredients implements RecipeEvent {
-  const ClearIngredients();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClearIngredients);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'RecipeEvent.clearIngredients()';
 }
 
 
@@ -1166,7 +1166,7 @@ String toString() {
 /// @nodoc
 mixin _$RecipeState {
 
- List<String> get selectedCuisines; List<String> get selectedIngredients; List<String> get selectedRecipeTypes; List<String> get customCuisines; List<String> get customIngredients; List<String> get customRecipeTypes; List<RecipeSession> get recipeSessions; List<Recipe> get favoriteRecipes; bool get strictIngredients; Map<String, String> get recipeImagePaths; Map<String, ImageLoadingState> get recipeImageLoadingStates; RecipeLoadingState get suggestionsLoadingState; String? get suggestionsErrorMessage;
+ List<String> get selectedCuisines; List<String> get selectedRecipeTypes; List<String> get customCuisines; List<String> get customRecipeTypes; List<String> get selectedPantryItems; List<String> get hiddenCuisines; List<String> get hiddenRecipeTypes; List<RecipeSession> get recipeSessions; List<Recipe> get favoriteRecipes; bool get strictIngredients; Map<String, String> get recipeImagePaths; Map<String, ImageLoadingState> get recipeImageLoadingStates; RecipeLoadingState get suggestionsLoadingState; String? get suggestionsErrorMessage;
 /// Create a copy of RecipeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1179,16 +1179,16 @@ $RecipeStateCopyWith<RecipeState> get copyWith => _$RecipeStateCopyWithImpl<Reci
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RecipeState&&const DeepCollectionEquality().equals(other.selectedCuisines, selectedCuisines)&&const DeepCollectionEquality().equals(other.selectedIngredients, selectedIngredients)&&const DeepCollectionEquality().equals(other.selectedRecipeTypes, selectedRecipeTypes)&&const DeepCollectionEquality().equals(other.customCuisines, customCuisines)&&const DeepCollectionEquality().equals(other.customIngredients, customIngredients)&&const DeepCollectionEquality().equals(other.customRecipeTypes, customRecipeTypes)&&const DeepCollectionEquality().equals(other.recipeSessions, recipeSessions)&&const DeepCollectionEquality().equals(other.favoriteRecipes, favoriteRecipes)&&(identical(other.strictIngredients, strictIngredients) || other.strictIngredients == strictIngredients)&&const DeepCollectionEquality().equals(other.recipeImagePaths, recipeImagePaths)&&const DeepCollectionEquality().equals(other.recipeImageLoadingStates, recipeImageLoadingStates)&&(identical(other.suggestionsLoadingState, suggestionsLoadingState) || other.suggestionsLoadingState == suggestionsLoadingState)&&(identical(other.suggestionsErrorMessage, suggestionsErrorMessage) || other.suggestionsErrorMessage == suggestionsErrorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RecipeState&&const DeepCollectionEquality().equals(other.selectedCuisines, selectedCuisines)&&const DeepCollectionEquality().equals(other.selectedRecipeTypes, selectedRecipeTypes)&&const DeepCollectionEquality().equals(other.customCuisines, customCuisines)&&const DeepCollectionEquality().equals(other.customRecipeTypes, customRecipeTypes)&&const DeepCollectionEquality().equals(other.selectedPantryItems, selectedPantryItems)&&const DeepCollectionEquality().equals(other.hiddenCuisines, hiddenCuisines)&&const DeepCollectionEquality().equals(other.hiddenRecipeTypes, hiddenRecipeTypes)&&const DeepCollectionEquality().equals(other.recipeSessions, recipeSessions)&&const DeepCollectionEquality().equals(other.favoriteRecipes, favoriteRecipes)&&(identical(other.strictIngredients, strictIngredients) || other.strictIngredients == strictIngredients)&&const DeepCollectionEquality().equals(other.recipeImagePaths, recipeImagePaths)&&const DeepCollectionEquality().equals(other.recipeImageLoadingStates, recipeImageLoadingStates)&&(identical(other.suggestionsLoadingState, suggestionsLoadingState) || other.suggestionsLoadingState == suggestionsLoadingState)&&(identical(other.suggestionsErrorMessage, suggestionsErrorMessage) || other.suggestionsErrorMessage == suggestionsErrorMessage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(selectedCuisines),const DeepCollectionEquality().hash(selectedIngredients),const DeepCollectionEquality().hash(selectedRecipeTypes),const DeepCollectionEquality().hash(customCuisines),const DeepCollectionEquality().hash(customIngredients),const DeepCollectionEquality().hash(customRecipeTypes),const DeepCollectionEquality().hash(recipeSessions),const DeepCollectionEquality().hash(favoriteRecipes),strictIngredients,const DeepCollectionEquality().hash(recipeImagePaths),const DeepCollectionEquality().hash(recipeImageLoadingStates),suggestionsLoadingState,suggestionsErrorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(selectedCuisines),const DeepCollectionEquality().hash(selectedRecipeTypes),const DeepCollectionEquality().hash(customCuisines),const DeepCollectionEquality().hash(customRecipeTypes),const DeepCollectionEquality().hash(selectedPantryItems),const DeepCollectionEquality().hash(hiddenCuisines),const DeepCollectionEquality().hash(hiddenRecipeTypes),const DeepCollectionEquality().hash(recipeSessions),const DeepCollectionEquality().hash(favoriteRecipes),strictIngredients,const DeepCollectionEquality().hash(recipeImagePaths),const DeepCollectionEquality().hash(recipeImageLoadingStates),suggestionsLoadingState,suggestionsErrorMessage);
 
 @override
 String toString() {
-  return 'RecipeState(selectedCuisines: $selectedCuisines, selectedIngredients: $selectedIngredients, selectedRecipeTypes: $selectedRecipeTypes, customCuisines: $customCuisines, customIngredients: $customIngredients, customRecipeTypes: $customRecipeTypes, recipeSessions: $recipeSessions, favoriteRecipes: $favoriteRecipes, strictIngredients: $strictIngredients, recipeImagePaths: $recipeImagePaths, recipeImageLoadingStates: $recipeImageLoadingStates, suggestionsLoadingState: $suggestionsLoadingState, suggestionsErrorMessage: $suggestionsErrorMessage)';
+  return 'RecipeState(selectedCuisines: $selectedCuisines, selectedRecipeTypes: $selectedRecipeTypes, customCuisines: $customCuisines, customRecipeTypes: $customRecipeTypes, selectedPantryItems: $selectedPantryItems, hiddenCuisines: $hiddenCuisines, hiddenRecipeTypes: $hiddenRecipeTypes, recipeSessions: $recipeSessions, favoriteRecipes: $favoriteRecipes, strictIngredients: $strictIngredients, recipeImagePaths: $recipeImagePaths, recipeImageLoadingStates: $recipeImageLoadingStates, suggestionsLoadingState: $suggestionsLoadingState, suggestionsErrorMessage: $suggestionsErrorMessage)';
 }
 
 
@@ -1199,7 +1199,7 @@ abstract mixin class $RecipeStateCopyWith<$Res>  {
   factory $RecipeStateCopyWith(RecipeState value, $Res Function(RecipeState) _then) = _$RecipeStateCopyWithImpl;
 @useResult
 $Res call({
- List<String> selectedCuisines, List<String> selectedIngredients, List<String> selectedRecipeTypes, List<String> customCuisines, List<String> customIngredients, List<String> customRecipeTypes, List<RecipeSession> recipeSessions, List<Recipe> favoriteRecipes, bool strictIngredients, Map<String, String> recipeImagePaths, Map<String, ImageLoadingState> recipeImageLoadingStates, RecipeLoadingState suggestionsLoadingState, String? suggestionsErrorMessage
+ List<String> selectedCuisines, List<String> selectedRecipeTypes, List<String> customCuisines, List<String> customRecipeTypes, List<String> selectedPantryItems, List<String> hiddenCuisines, List<String> hiddenRecipeTypes, List<RecipeSession> recipeSessions, List<Recipe> favoriteRecipes, bool strictIngredients, Map<String, String> recipeImagePaths, Map<String, ImageLoadingState> recipeImageLoadingStates, RecipeLoadingState suggestionsLoadingState, String? suggestionsErrorMessage
 });
 
 
@@ -1216,14 +1216,15 @@ class _$RecipeStateCopyWithImpl<$Res>
 
 /// Create a copy of RecipeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? selectedCuisines = null,Object? selectedIngredients = null,Object? selectedRecipeTypes = null,Object? customCuisines = null,Object? customIngredients = null,Object? customRecipeTypes = null,Object? recipeSessions = null,Object? favoriteRecipes = null,Object? strictIngredients = null,Object? recipeImagePaths = null,Object? recipeImageLoadingStates = null,Object? suggestionsLoadingState = null,Object? suggestionsErrorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? selectedCuisines = null,Object? selectedRecipeTypes = null,Object? customCuisines = null,Object? customRecipeTypes = null,Object? selectedPantryItems = null,Object? hiddenCuisines = null,Object? hiddenRecipeTypes = null,Object? recipeSessions = null,Object? favoriteRecipes = null,Object? strictIngredients = null,Object? recipeImagePaths = null,Object? recipeImageLoadingStates = null,Object? suggestionsLoadingState = null,Object? suggestionsErrorMessage = freezed,}) {
   return _then(_self.copyWith(
 selectedCuisines: null == selectedCuisines ? _self.selectedCuisines : selectedCuisines // ignore: cast_nullable_to_non_nullable
-as List<String>,selectedIngredients: null == selectedIngredients ? _self.selectedIngredients : selectedIngredients // ignore: cast_nullable_to_non_nullable
 as List<String>,selectedRecipeTypes: null == selectedRecipeTypes ? _self.selectedRecipeTypes : selectedRecipeTypes // ignore: cast_nullable_to_non_nullable
 as List<String>,customCuisines: null == customCuisines ? _self.customCuisines : customCuisines // ignore: cast_nullable_to_non_nullable
-as List<String>,customIngredients: null == customIngredients ? _self.customIngredients : customIngredients // ignore: cast_nullable_to_non_nullable
 as List<String>,customRecipeTypes: null == customRecipeTypes ? _self.customRecipeTypes : customRecipeTypes // ignore: cast_nullable_to_non_nullable
+as List<String>,selectedPantryItems: null == selectedPantryItems ? _self.selectedPantryItems : selectedPantryItems // ignore: cast_nullable_to_non_nullable
+as List<String>,hiddenCuisines: null == hiddenCuisines ? _self.hiddenCuisines : hiddenCuisines // ignore: cast_nullable_to_non_nullable
+as List<String>,hiddenRecipeTypes: null == hiddenRecipeTypes ? _self.hiddenRecipeTypes : hiddenRecipeTypes // ignore: cast_nullable_to_non_nullable
 as List<String>,recipeSessions: null == recipeSessions ? _self.recipeSessions : recipeSessions // ignore: cast_nullable_to_non_nullable
 as List<RecipeSession>,favoriteRecipes: null == favoriteRecipes ? _self.favoriteRecipes : favoriteRecipes // ignore: cast_nullable_to_non_nullable
 as List<Recipe>,strictIngredients: null == strictIngredients ? _self.strictIngredients : strictIngredients // ignore: cast_nullable_to_non_nullable
@@ -1316,10 +1317,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<String> selectedCuisines,  List<String> selectedIngredients,  List<String> selectedRecipeTypes,  List<String> customCuisines,  List<String> customIngredients,  List<String> customRecipeTypes,  List<RecipeSession> recipeSessions,  List<Recipe> favoriteRecipes,  bool strictIngredients,  Map<String, String> recipeImagePaths,  Map<String, ImageLoadingState> recipeImageLoadingStates,  RecipeLoadingState suggestionsLoadingState,  String? suggestionsErrorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<String> selectedCuisines,  List<String> selectedRecipeTypes,  List<String> customCuisines,  List<String> customRecipeTypes,  List<String> selectedPantryItems,  List<String> hiddenCuisines,  List<String> hiddenRecipeTypes,  List<RecipeSession> recipeSessions,  List<Recipe> favoriteRecipes,  bool strictIngredients,  Map<String, String> recipeImagePaths,  Map<String, ImageLoadingState> recipeImageLoadingStates,  RecipeLoadingState suggestionsLoadingState,  String? suggestionsErrorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RecipeState() when $default != null:
-return $default(_that.selectedCuisines,_that.selectedIngredients,_that.selectedRecipeTypes,_that.customCuisines,_that.customIngredients,_that.customRecipeTypes,_that.recipeSessions,_that.favoriteRecipes,_that.strictIngredients,_that.recipeImagePaths,_that.recipeImageLoadingStates,_that.suggestionsLoadingState,_that.suggestionsErrorMessage);case _:
+return $default(_that.selectedCuisines,_that.selectedRecipeTypes,_that.customCuisines,_that.customRecipeTypes,_that.selectedPantryItems,_that.hiddenCuisines,_that.hiddenRecipeTypes,_that.recipeSessions,_that.favoriteRecipes,_that.strictIngredients,_that.recipeImagePaths,_that.recipeImageLoadingStates,_that.suggestionsLoadingState,_that.suggestionsErrorMessage);case _:
   return orElse();
 
 }
@@ -1337,10 +1338,10 @@ return $default(_that.selectedCuisines,_that.selectedIngredients,_that.selectedR
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<String> selectedCuisines,  List<String> selectedIngredients,  List<String> selectedRecipeTypes,  List<String> customCuisines,  List<String> customIngredients,  List<String> customRecipeTypes,  List<RecipeSession> recipeSessions,  List<Recipe> favoriteRecipes,  bool strictIngredients,  Map<String, String> recipeImagePaths,  Map<String, ImageLoadingState> recipeImageLoadingStates,  RecipeLoadingState suggestionsLoadingState,  String? suggestionsErrorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<String> selectedCuisines,  List<String> selectedRecipeTypes,  List<String> customCuisines,  List<String> customRecipeTypes,  List<String> selectedPantryItems,  List<String> hiddenCuisines,  List<String> hiddenRecipeTypes,  List<RecipeSession> recipeSessions,  List<Recipe> favoriteRecipes,  bool strictIngredients,  Map<String, String> recipeImagePaths,  Map<String, ImageLoadingState> recipeImageLoadingStates,  RecipeLoadingState suggestionsLoadingState,  String? suggestionsErrorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _RecipeState():
-return $default(_that.selectedCuisines,_that.selectedIngredients,_that.selectedRecipeTypes,_that.customCuisines,_that.customIngredients,_that.customRecipeTypes,_that.recipeSessions,_that.favoriteRecipes,_that.strictIngredients,_that.recipeImagePaths,_that.recipeImageLoadingStates,_that.suggestionsLoadingState,_that.suggestionsErrorMessage);case _:
+return $default(_that.selectedCuisines,_that.selectedRecipeTypes,_that.customCuisines,_that.customRecipeTypes,_that.selectedPantryItems,_that.hiddenCuisines,_that.hiddenRecipeTypes,_that.recipeSessions,_that.favoriteRecipes,_that.strictIngredients,_that.recipeImagePaths,_that.recipeImageLoadingStates,_that.suggestionsLoadingState,_that.suggestionsErrorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1357,10 +1358,10 @@ return $default(_that.selectedCuisines,_that.selectedIngredients,_that.selectedR
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<String> selectedCuisines,  List<String> selectedIngredients,  List<String> selectedRecipeTypes,  List<String> customCuisines,  List<String> customIngredients,  List<String> customRecipeTypes,  List<RecipeSession> recipeSessions,  List<Recipe> favoriteRecipes,  bool strictIngredients,  Map<String, String> recipeImagePaths,  Map<String, ImageLoadingState> recipeImageLoadingStates,  RecipeLoadingState suggestionsLoadingState,  String? suggestionsErrorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<String> selectedCuisines,  List<String> selectedRecipeTypes,  List<String> customCuisines,  List<String> customRecipeTypes,  List<String> selectedPantryItems,  List<String> hiddenCuisines,  List<String> hiddenRecipeTypes,  List<RecipeSession> recipeSessions,  List<Recipe> favoriteRecipes,  bool strictIngredients,  Map<String, String> recipeImagePaths,  Map<String, ImageLoadingState> recipeImageLoadingStates,  RecipeLoadingState suggestionsLoadingState,  String? suggestionsErrorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _RecipeState() when $default != null:
-return $default(_that.selectedCuisines,_that.selectedIngredients,_that.selectedRecipeTypes,_that.customCuisines,_that.customIngredients,_that.customRecipeTypes,_that.recipeSessions,_that.favoriteRecipes,_that.strictIngredients,_that.recipeImagePaths,_that.recipeImageLoadingStates,_that.suggestionsLoadingState,_that.suggestionsErrorMessage);case _:
+return $default(_that.selectedCuisines,_that.selectedRecipeTypes,_that.customCuisines,_that.customRecipeTypes,_that.selectedPantryItems,_that.hiddenCuisines,_that.hiddenRecipeTypes,_that.recipeSessions,_that.favoriteRecipes,_that.strictIngredients,_that.recipeImagePaths,_that.recipeImageLoadingStates,_that.suggestionsLoadingState,_that.suggestionsErrorMessage);case _:
   return null;
 
 }
@@ -1372,7 +1373,7 @@ return $default(_that.selectedCuisines,_that.selectedIngredients,_that.selectedR
 @JsonSerializable()
 
 class _RecipeState implements RecipeState {
-  const _RecipeState({final  List<String> selectedCuisines = const [], final  List<String> selectedIngredients = const [], final  List<String> selectedRecipeTypes = const [], final  List<String> customCuisines = const [], final  List<String> customIngredients = const [], final  List<String> customRecipeTypes = const [], final  List<RecipeSession> recipeSessions = const [], final  List<Recipe> favoriteRecipes = const [], this.strictIngredients = false, final  Map<String, String> recipeImagePaths = const {}, final  Map<String, ImageLoadingState> recipeImageLoadingStates = const {}, this.suggestionsLoadingState = RecipeLoadingState.init, this.suggestionsErrorMessage}): _selectedCuisines = selectedCuisines,_selectedIngredients = selectedIngredients,_selectedRecipeTypes = selectedRecipeTypes,_customCuisines = customCuisines,_customIngredients = customIngredients,_customRecipeTypes = customRecipeTypes,_recipeSessions = recipeSessions,_favoriteRecipes = favoriteRecipes,_recipeImagePaths = recipeImagePaths,_recipeImageLoadingStates = recipeImageLoadingStates;
+  const _RecipeState({final  List<String> selectedCuisines = const [], final  List<String> selectedRecipeTypes = const [], final  List<String> customCuisines = const [], final  List<String> customRecipeTypes = const [], final  List<String> selectedPantryItems = const [], final  List<String> hiddenCuisines = const [], final  List<String> hiddenRecipeTypes = const [], final  List<RecipeSession> recipeSessions = const [], final  List<Recipe> favoriteRecipes = const [], this.strictIngredients = false, final  Map<String, String> recipeImagePaths = const {}, final  Map<String, ImageLoadingState> recipeImageLoadingStates = const {}, this.suggestionsLoadingState = RecipeLoadingState.init, this.suggestionsErrorMessage}): _selectedCuisines = selectedCuisines,_selectedRecipeTypes = selectedRecipeTypes,_customCuisines = customCuisines,_customRecipeTypes = customRecipeTypes,_selectedPantryItems = selectedPantryItems,_hiddenCuisines = hiddenCuisines,_hiddenRecipeTypes = hiddenRecipeTypes,_recipeSessions = recipeSessions,_favoriteRecipes = favoriteRecipes,_recipeImagePaths = recipeImagePaths,_recipeImageLoadingStates = recipeImageLoadingStates;
   factory _RecipeState.fromJson(Map<String, dynamic> json) => _$RecipeStateFromJson(json);
 
  final  List<String> _selectedCuisines;
@@ -1380,13 +1381,6 @@ class _RecipeState implements RecipeState {
   if (_selectedCuisines is EqualUnmodifiableListView) return _selectedCuisines;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_selectedCuisines);
-}
-
- final  List<String> _selectedIngredients;
-@override@JsonKey() List<String> get selectedIngredients {
-  if (_selectedIngredients is EqualUnmodifiableListView) return _selectedIngredients;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_selectedIngredients);
 }
 
  final  List<String> _selectedRecipeTypes;
@@ -1403,18 +1397,32 @@ class _RecipeState implements RecipeState {
   return EqualUnmodifiableListView(_customCuisines);
 }
 
- final  List<String> _customIngredients;
-@override@JsonKey() List<String> get customIngredients {
-  if (_customIngredients is EqualUnmodifiableListView) return _customIngredients;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_customIngredients);
-}
-
  final  List<String> _customRecipeTypes;
 @override@JsonKey() List<String> get customRecipeTypes {
   if (_customRecipeTypes is EqualUnmodifiableListView) return _customRecipeTypes;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_customRecipeTypes);
+}
+
+ final  List<String> _selectedPantryItems;
+@override@JsonKey() List<String> get selectedPantryItems {
+  if (_selectedPantryItems is EqualUnmodifiableListView) return _selectedPantryItems;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_selectedPantryItems);
+}
+
+ final  List<String> _hiddenCuisines;
+@override@JsonKey() List<String> get hiddenCuisines {
+  if (_hiddenCuisines is EqualUnmodifiableListView) return _hiddenCuisines;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_hiddenCuisines);
+}
+
+ final  List<String> _hiddenRecipeTypes;
+@override@JsonKey() List<String> get hiddenRecipeTypes {
+  if (_hiddenRecipeTypes is EqualUnmodifiableListView) return _hiddenRecipeTypes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_hiddenRecipeTypes);
 }
 
  final  List<RecipeSession> _recipeSessions;
@@ -1462,16 +1470,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RecipeState&&const DeepCollectionEquality().equals(other._selectedCuisines, _selectedCuisines)&&const DeepCollectionEquality().equals(other._selectedIngredients, _selectedIngredients)&&const DeepCollectionEquality().equals(other._selectedRecipeTypes, _selectedRecipeTypes)&&const DeepCollectionEquality().equals(other._customCuisines, _customCuisines)&&const DeepCollectionEquality().equals(other._customIngredients, _customIngredients)&&const DeepCollectionEquality().equals(other._customRecipeTypes, _customRecipeTypes)&&const DeepCollectionEquality().equals(other._recipeSessions, _recipeSessions)&&const DeepCollectionEquality().equals(other._favoriteRecipes, _favoriteRecipes)&&(identical(other.strictIngredients, strictIngredients) || other.strictIngredients == strictIngredients)&&const DeepCollectionEquality().equals(other._recipeImagePaths, _recipeImagePaths)&&const DeepCollectionEquality().equals(other._recipeImageLoadingStates, _recipeImageLoadingStates)&&(identical(other.suggestionsLoadingState, suggestionsLoadingState) || other.suggestionsLoadingState == suggestionsLoadingState)&&(identical(other.suggestionsErrorMessage, suggestionsErrorMessage) || other.suggestionsErrorMessage == suggestionsErrorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RecipeState&&const DeepCollectionEquality().equals(other._selectedCuisines, _selectedCuisines)&&const DeepCollectionEquality().equals(other._selectedRecipeTypes, _selectedRecipeTypes)&&const DeepCollectionEquality().equals(other._customCuisines, _customCuisines)&&const DeepCollectionEquality().equals(other._customRecipeTypes, _customRecipeTypes)&&const DeepCollectionEquality().equals(other._selectedPantryItems, _selectedPantryItems)&&const DeepCollectionEquality().equals(other._hiddenCuisines, _hiddenCuisines)&&const DeepCollectionEquality().equals(other._hiddenRecipeTypes, _hiddenRecipeTypes)&&const DeepCollectionEquality().equals(other._recipeSessions, _recipeSessions)&&const DeepCollectionEquality().equals(other._favoriteRecipes, _favoriteRecipes)&&(identical(other.strictIngredients, strictIngredients) || other.strictIngredients == strictIngredients)&&const DeepCollectionEquality().equals(other._recipeImagePaths, _recipeImagePaths)&&const DeepCollectionEquality().equals(other._recipeImageLoadingStates, _recipeImageLoadingStates)&&(identical(other.suggestionsLoadingState, suggestionsLoadingState) || other.suggestionsLoadingState == suggestionsLoadingState)&&(identical(other.suggestionsErrorMessage, suggestionsErrorMessage) || other.suggestionsErrorMessage == suggestionsErrorMessage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_selectedCuisines),const DeepCollectionEquality().hash(_selectedIngredients),const DeepCollectionEquality().hash(_selectedRecipeTypes),const DeepCollectionEquality().hash(_customCuisines),const DeepCollectionEquality().hash(_customIngredients),const DeepCollectionEquality().hash(_customRecipeTypes),const DeepCollectionEquality().hash(_recipeSessions),const DeepCollectionEquality().hash(_favoriteRecipes),strictIngredients,const DeepCollectionEquality().hash(_recipeImagePaths),const DeepCollectionEquality().hash(_recipeImageLoadingStates),suggestionsLoadingState,suggestionsErrorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_selectedCuisines),const DeepCollectionEquality().hash(_selectedRecipeTypes),const DeepCollectionEquality().hash(_customCuisines),const DeepCollectionEquality().hash(_customRecipeTypes),const DeepCollectionEquality().hash(_selectedPantryItems),const DeepCollectionEquality().hash(_hiddenCuisines),const DeepCollectionEquality().hash(_hiddenRecipeTypes),const DeepCollectionEquality().hash(_recipeSessions),const DeepCollectionEquality().hash(_favoriteRecipes),strictIngredients,const DeepCollectionEquality().hash(_recipeImagePaths),const DeepCollectionEquality().hash(_recipeImageLoadingStates),suggestionsLoadingState,suggestionsErrorMessage);
 
 @override
 String toString() {
-  return 'RecipeState(selectedCuisines: $selectedCuisines, selectedIngredients: $selectedIngredients, selectedRecipeTypes: $selectedRecipeTypes, customCuisines: $customCuisines, customIngredients: $customIngredients, customRecipeTypes: $customRecipeTypes, recipeSessions: $recipeSessions, favoriteRecipes: $favoriteRecipes, strictIngredients: $strictIngredients, recipeImagePaths: $recipeImagePaths, recipeImageLoadingStates: $recipeImageLoadingStates, suggestionsLoadingState: $suggestionsLoadingState, suggestionsErrorMessage: $suggestionsErrorMessage)';
+  return 'RecipeState(selectedCuisines: $selectedCuisines, selectedRecipeTypes: $selectedRecipeTypes, customCuisines: $customCuisines, customRecipeTypes: $customRecipeTypes, selectedPantryItems: $selectedPantryItems, hiddenCuisines: $hiddenCuisines, hiddenRecipeTypes: $hiddenRecipeTypes, recipeSessions: $recipeSessions, favoriteRecipes: $favoriteRecipes, strictIngredients: $strictIngredients, recipeImagePaths: $recipeImagePaths, recipeImageLoadingStates: $recipeImageLoadingStates, suggestionsLoadingState: $suggestionsLoadingState, suggestionsErrorMessage: $suggestionsErrorMessage)';
 }
 
 
@@ -1482,7 +1490,7 @@ abstract mixin class _$RecipeStateCopyWith<$Res> implements $RecipeStateCopyWith
   factory _$RecipeStateCopyWith(_RecipeState value, $Res Function(_RecipeState) _then) = __$RecipeStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<String> selectedCuisines, List<String> selectedIngredients, List<String> selectedRecipeTypes, List<String> customCuisines, List<String> customIngredients, List<String> customRecipeTypes, List<RecipeSession> recipeSessions, List<Recipe> favoriteRecipes, bool strictIngredients, Map<String, String> recipeImagePaths, Map<String, ImageLoadingState> recipeImageLoadingStates, RecipeLoadingState suggestionsLoadingState, String? suggestionsErrorMessage
+ List<String> selectedCuisines, List<String> selectedRecipeTypes, List<String> customCuisines, List<String> customRecipeTypes, List<String> selectedPantryItems, List<String> hiddenCuisines, List<String> hiddenRecipeTypes, List<RecipeSession> recipeSessions, List<Recipe> favoriteRecipes, bool strictIngredients, Map<String, String> recipeImagePaths, Map<String, ImageLoadingState> recipeImageLoadingStates, RecipeLoadingState suggestionsLoadingState, String? suggestionsErrorMessage
 });
 
 
@@ -1499,14 +1507,15 @@ class __$RecipeStateCopyWithImpl<$Res>
 
 /// Create a copy of RecipeState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? selectedCuisines = null,Object? selectedIngredients = null,Object? selectedRecipeTypes = null,Object? customCuisines = null,Object? customIngredients = null,Object? customRecipeTypes = null,Object? recipeSessions = null,Object? favoriteRecipes = null,Object? strictIngredients = null,Object? recipeImagePaths = null,Object? recipeImageLoadingStates = null,Object? suggestionsLoadingState = null,Object? suggestionsErrorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? selectedCuisines = null,Object? selectedRecipeTypes = null,Object? customCuisines = null,Object? customRecipeTypes = null,Object? selectedPantryItems = null,Object? hiddenCuisines = null,Object? hiddenRecipeTypes = null,Object? recipeSessions = null,Object? favoriteRecipes = null,Object? strictIngredients = null,Object? recipeImagePaths = null,Object? recipeImageLoadingStates = null,Object? suggestionsLoadingState = null,Object? suggestionsErrorMessage = freezed,}) {
   return _then(_RecipeState(
 selectedCuisines: null == selectedCuisines ? _self._selectedCuisines : selectedCuisines // ignore: cast_nullable_to_non_nullable
-as List<String>,selectedIngredients: null == selectedIngredients ? _self._selectedIngredients : selectedIngredients // ignore: cast_nullable_to_non_nullable
 as List<String>,selectedRecipeTypes: null == selectedRecipeTypes ? _self._selectedRecipeTypes : selectedRecipeTypes // ignore: cast_nullable_to_non_nullable
 as List<String>,customCuisines: null == customCuisines ? _self._customCuisines : customCuisines // ignore: cast_nullable_to_non_nullable
-as List<String>,customIngredients: null == customIngredients ? _self._customIngredients : customIngredients // ignore: cast_nullable_to_non_nullable
 as List<String>,customRecipeTypes: null == customRecipeTypes ? _self._customRecipeTypes : customRecipeTypes // ignore: cast_nullable_to_non_nullable
+as List<String>,selectedPantryItems: null == selectedPantryItems ? _self._selectedPantryItems : selectedPantryItems // ignore: cast_nullable_to_non_nullable
+as List<String>,hiddenCuisines: null == hiddenCuisines ? _self._hiddenCuisines : hiddenCuisines // ignore: cast_nullable_to_non_nullable
+as List<String>,hiddenRecipeTypes: null == hiddenRecipeTypes ? _self._hiddenRecipeTypes : hiddenRecipeTypes // ignore: cast_nullable_to_non_nullable
 as List<String>,recipeSessions: null == recipeSessions ? _self._recipeSessions : recipeSessions // ignore: cast_nullable_to_non_nullable
 as List<RecipeSession>,favoriteRecipes: null == favoriteRecipes ? _self._favoriteRecipes : favoriteRecipes // ignore: cast_nullable_to_non_nullable
 as List<Recipe>,strictIngredients: null == strictIngredients ? _self.strictIngredients : strictIngredients // ignore: cast_nullable_to_non_nullable

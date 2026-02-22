@@ -116,17 +116,13 @@ class _SessionTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
               ],
-              if (session.ingredients.isNotEmpty)
+              if (session.recipeTypes.isNotEmpty)
                 Wrap(
                   spacing: 4,
-                  children: session.ingredients
+                  children: session.recipeTypes
                       .map(
-                        (ingredient) => Chip(
-                          label: Text(ingredient),
-                          avatar: const Icon(
-                            Icons.food_bank,
-                            size: 16,
-                          ),
+                        (type) => Chip(
+                          label: Text(type),
                           visualDensity: VisualDensity.compact,
                         ),
                       )

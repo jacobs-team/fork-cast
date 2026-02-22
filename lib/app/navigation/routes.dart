@@ -17,4 +17,5 @@ abstract class Routes {
   // static const String recipeSuggestions = '/recipe-suggestions';
   static const String recipeDetail = '/recipe-detail';
   static const String devTools = '/dev-tools';
+  static const String pantry = '/pantry';
 }

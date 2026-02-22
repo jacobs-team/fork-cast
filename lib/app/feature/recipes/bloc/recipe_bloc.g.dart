@@ -12,11 +12,6 @@ _RecipeState _$RecipeStateFromJson(Map<String, dynamic> json) => _RecipeState(
           ?.map((e) => e as String)
           .toList() ??
       const [],
-  selectedIngredients:
-      (json['selectedIngredients'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList() ??
-      const [],
   selectedRecipeTypes:
       (json['selectedRecipeTypes'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -27,13 +22,23 @@ _RecipeState _$RecipeStateFromJson(Map<String, dynamic> json) => _RecipeState(
           ?.map((e) => e as String)
           .toList() ??
       const [],
-  customIngredients:
-      (json['customIngredients'] as List<dynamic>?)
+  customRecipeTypes:
+      (json['customRecipeTypes'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList() ??
       const [],
-  customRecipeTypes:
-      (json['customRecipeTypes'] as List<dynamic>?)
+  selectedPantryItems:
+      (json['selectedPantryItems'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList() ??
+      const [],
+  hiddenCuisines:
+      (json['hiddenCuisines'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList() ??
+      const [],
+  hiddenRecipeTypes:
+      (json['hiddenRecipeTypes'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList() ??
       const [],
@@ -70,11 +75,12 @@ _RecipeState _$RecipeStateFromJson(Map<String, dynamic> json) => _RecipeState(
 Map<String, dynamic> _$RecipeStateToJson(_RecipeState instance) =>
     <String, dynamic>{
       'selectedCuisines': instance.selectedCuisines,
-      'selectedIngredients': instance.selectedIngredients,
       'selectedRecipeTypes': instance.selectedRecipeTypes,
       'customCuisines': instance.customCuisines,
-      'customIngredients': instance.customIngredients,
       'customRecipeTypes': instance.customRecipeTypes,
+      'selectedPantryItems': instance.selectedPantryItems,
+      'hiddenCuisines': instance.hiddenCuisines,
+      'hiddenRecipeTypes': instance.hiddenRecipeTypes,
       'recipeSessions': instance.recipeSessions,
       'favoriteRecipes': instance.favoriteRecipes,
       'strictIngredients': instance.strictIngredients,

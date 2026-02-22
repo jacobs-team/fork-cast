@@ -46,7 +46,7 @@ class RecipeCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (_hasImage)
-              RecipeImage(imageUrl: imagePath!),
+              RecipeImage(imagePath: imagePath!),
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
