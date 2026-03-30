@@ -73,7 +73,7 @@ jobs:
         shell: bash
 
       - name: Update Coverage Badge Gist
-        uses: schneegans/dynamic-badges-action@v1.7.0
+        uses: schneegans/dynamic-badges-action@v1.8.0
         with:
           auth: ${{ secrets.GIST_TOKEN }}
           gistID: 7641fab8ee287397da7464864366f32d
